@@ -1,0 +1,61 @@
+================================================================================
+PROJECT ARCHITECTURE & FEATURE IMPLEMENTATION LOG: COMPLETE PLATFORM ENGINE
+================================================================================
+
+EXECUTIVE OVERVIEW & DEVELOPER WORKFLOW (IBM BOB)
+--------------------------------------------------------------------------------
+This document details the complete technical architecture, security protocols, 
+and prompt-driven execution workflows engineered for the "Detective Agentic AI 
+& RAG Profiling System".
+
+The codebase and system architecture documented below are executed and maintained 
+via "IBM Bob" (IBM SkillsBuild / PBEL AI Assistant). Development follows a structured 
+prompt-driven pattern: architectural prompt blocks and bug-fix specifications 
+are provided directly to IBM Bob, who handles code generation, Streamlit state management, 
+module refactoring, and project implementation.
+
+
+CORE FEATURES IMPLEMENTED BY IBM BOB
+--------------------------------------------------------------------------------
+
+1. B2B Lead Scraping & Cold Email Outreach Pipeline:
+   Engineered the four-stage discovery waterfall (OpenStreetMap, DuckDuckGo, Wikipedia, 
+   and Seed fallback) in `agent/outreach.py` and integrated `yagmail` for automated 
+   cold email campaigns featuring pre-and-post payment feature comparisons and trial quotas.
+
+2. Interactive Suspect Profiling & State Management Module:
+   Built the suspect risk and tendency scoring engine while resolving persistent UI 
+   freezing and stagnant numbering bugs using dynamic session-state key assignments 
+   (`key=f"suspect_{counter}"`) and reset workflows.
+
+3. Role-Based Access Control (RBAC) Admin Portal:
+   Implemented the secure sidebar authentication gate requiring the master password `-----` 
+   to dynamically reveal administrative tabs ("📢 B2B Agency Acquisition" and "🛠️ Admin Payment Approvals").
+
+4. ChromaDB RAG Precedent Retrieval:
+   Integrated persistent vector database matching using ChromaDB to query input criminal 
+   behaviors and MOs against historical legal case records and surface top relevant precedents.
+
+5. Dynamic Dossier & PDF Export:
+   Programmed automated report generation logic using `fpdf2` to output downloadable 
+   executive summary dossiers containing risk metrics, suspect profiles, and matched precedents.
+
+6. Dynamic UPI Payment Gateway & UTR Verification:
+   Developed the real-time UPI QR code generator (`qrcode`) and local JSON persistence 
+   system (`data/payments.json`) to handle manual transaction UTR submissions and tier-based 
+   evaluation quota releases.
+
+
+EXPOSED MODULE FUNCTIONS & FILE STRUCTURE
+--------------------------------------------------------------------------------
+  * `frontend/app.py`          -> Main Streamlit application entry point and tab manager.
+  * `agent/profiler.py`        -> RAG precedent engine, suspect profiling, and PDF report generator.
+  * `agent/outreach.py`:
+      - `scrape_leads_sync(keyword, location, max_results)` -> Synchronous lead discovery API.
+      - `send_cold_emails(leads, app_password, ...)`         -> Automated yagmail campaign engine.
+      - `load_leads()` / `save_leads(leads)`                 -> Persistence handlers for `data/leads.json`.
+      - `COLD_EMAIL_SUBJECT` / `COLD_EMAIL_BODY`             -> Default email pitch templates.
+
+================================================================================
+END OF FILE
+================================================================================
