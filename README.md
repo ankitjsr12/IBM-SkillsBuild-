@@ -2,7 +2,6 @@
 
 > AI-powered suspect profiling, behavioural risk scoring, ChromaDB precedent retrieval, and B2B agency outreach — built for detective agencies, law enforcement, and legal professionals.
 
-**Live Demo:** [https://skilluphackathon2026-crvfgw9pkgzk3bzrmhwmfq.streamlit.app](https://skilluphackathon2026-crvfgw9pkgzk3bzrmhwmfq.streamlit.app)
 
 ---
 
