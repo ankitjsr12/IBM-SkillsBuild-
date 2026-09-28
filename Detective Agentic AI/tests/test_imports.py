@@ -22,6 +22,13 @@ def test_import_agent_analyzer():
     import agent.analyzer  # noqa: F401
 
 
+def test_import_agent_profiler():
+    import agent.profiler  # noqa: F401
+    from agent.profiler import DetectiveAgent
+    assert callable(DetectiveAgent)
+
+
+
 def test_import_rag_retriever():
     import rag.retriever  # noqa: F401
 
@@ -66,3 +73,84 @@ def test_retriever_constants_present():
     assert 0.0 <= SIMILARITY_THRESHOLD <= 1.0
     assert isinstance(RESULT_SOURCE_LABEL, str)
     assert isinstance(NO_MATCH_SENTINEL, str)
+
+
+def test_import_utils():
+    import utils.logging_utils
+    import utils.text_utils
+    import utils.validators
+    import utils.pdf_utils
+    from utils.pdf_utils import generate_pdf_report, generate_investigation_dossier_pdf
+    assert callable(generate_pdf_report)
+    assert callable(generate_investigation_dossier_pdf)
+
+
+def test_import_database_and_case_engine():
+    import database.models
+    import database.connection
+    import database.repository
+    import agent.case_engine
+    from database.models import Case, CaseStatus, CasePriority
+    from database.repository import CaseRepository
+    from agent.case_engine import CaseEngine
+    assert callable(CaseRepository)
+    assert callable(CaseEngine)
+
+
+def test_import_suspect_and_evidence_engines():
+    import agent.suspect_engine
+    import agent.evidence_engine
+    from database.repository import SuspectRepository, EvidenceRepository
+    from agent.suspect_engine import SuspectEngine
+    from agent.evidence_engine import EvidenceEngine
+    assert callable(SuspectRepository)
+    assert callable(EvidenceRepository)
+    assert callable(SuspectEngine)
+    assert callable(EvidenceEngine)
+
+
+def test_import_timeline_and_rag_engines():
+    import agent.timeline_engine
+    import agent.rag_engine
+    from database.repository import TimelineRepository
+    from agent.timeline_engine import TimelineEngine
+    from agent.rag_engine import RAGEngine
+    assert callable(TimelineRepository)
+    assert callable(TimelineEngine)
+    assert callable(RAGEngine)
+
+
+def test_import_explainability_anomaly_and_graph_engines():
+    import agent.explainability_engine
+    import agent.anomaly_engine
+    import agent.graph_engine
+    from agent.explainability_engine import ExplainabilityEngine
+    from agent.anomaly_engine import AnomalyEngine
+    from agent.graph_engine import RelationshipGraphEngine
+    assert callable(ExplainabilityEngine)
+    assert callable(AnomalyEngine)
+    assert callable(RelationshipGraphEngine)
+
+
+def test_import_analytics_and_document_engines():
+    import agent.analytics_engine
+    import agent.document_engine
+    from agent.analytics_engine import AnalyticsEngine
+    from agent.document_engine import DocumentEngine
+    assert callable(AnalyticsEngine)
+    assert callable(DocumentEngine)
+
+
+def test_import_auth_and_audit_services():
+    import services.auth_service
+    import services.audit_service
+    from services.auth_service import AuthService
+    from services.audit_service import AuditService
+    assert callable(AuthService)
+    assert callable(AuditService)
+
+
+
+
+
+

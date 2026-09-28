@@ -1,29 +1,61 @@
 {
-  "case_id": "CASE-UK-1975-004",
-  "title": "The Yorkshire Ripper Murders",
+  "case_id": "CASE-IND-1976-004",
+  "title": "Rajendra Jakkal & Ors. v. State of Maharashtra (Joshi-Abhyankar Serial Murders)",
   "status": "Solved",
-  "crime_type": "Serial Murder / Sexual Violence",
-  "location": "Yorkshire / England, United Kingdom",
-  "timestamp": "1975-10-30T00:00:00Z",
+  "crime_type": "Serial Home-Invasion Robbery / Homicide",
+  "court_or_authority": "Supreme Court of India / High Court of Bombay / Sessions Court Pune",
+  "legal_citation": "AIR 1982 SC 1596; 1982 SCC (Cri) 700; 1982 CriLJ 1722",
+  "judgment_date": "1982-10-29",
+  "source": "Supreme Court of India Official Judgment & Indian Kanoon (doc/1446210)",
+  "source_url": "https://indiankanoon.org/doc/1446210/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 392 IPC (Robbery)",
+    "Section 394 IPC (Voluntarily causing hurt in robbery)",
+    "Section 397 IPC (Robbery with deadly weapon)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 201 IPC (Disappearance of evidence)"
+  ],
+  "location": "Pune & suburban Maharashtra, India",
+  "timestamp": "1976-10-31T00:00:00Z",
   "suspects": [
-    { "name": "Peter Sutcliffe", "alias": "The Yorkshire Ripper", "role": "Primary Operator" }
+    {
+      "name": "Rajendra Jakkal",
+      "alias": "Lead Conspirator",
+      "role": "Convicted Offender"
+    },
+    {
+      "name": "Dilip Sutar",
+      "alias": "Commercial Art Student",
+      "role": "Convicted Offender"
+    },
+    {
+      "name": "Shantaram Jagtap",
+      "alias": "Accomplice",
+      "role": "Convicted Offender"
+    },
+    {
+      "name": "Munawar Shah",
+      "alias": "Accomplice",
+      "role": "Convicted Offender"
+    }
   ],
   "evidence": [
-    "Physical evidence linked Sutcliffe to multiple attacks",
-    "Police investigation connected him to thirteen murders and several attempted murders",
-    "Sutcliffe made admissions concerning the killings",
-    "Multiple psychiatrists examined him and diagnosed paranoid schizophrenia"
+    "Recovery of stolen antique jewelry, silverware, and cash buried in tin boxes at suspects' studios",
+    "Nylon ropes and chemical dismemberment agents recovered from art workshop premises",
+    "Fingerprints matching suspects found on cupboards, door frames, and telephone receivers in Joshi and Abhyankar residences",
+    "Detailed testimony of approver Kiran Soni explaining the conspiracy, planning, and weapon acquisition",
+    "Handwriting analysis on pawn shop pledge tickets signed by accused under pseudonyms"
   ],
-  "modus_operandi": "Sutcliffe attacked women, frequently approaching victims in public places before striking them with weapons. He used hammers, knives, and other weapons and repeatedly attacked women over a period of several years.",
-  "personality_disorder": "Paranoid schizophrenia was diagnosed by multiple psychiatrists during the 1981 trial and subsequently confirmed during his psychiatric treatment. This is a psychotic disorder rather than a personality disorder. The trial jury nevertheless rejected his diminished-responsibility defense and convicted him of murder.",
+  "modus_operandi": "Group of college students gained entry into homes of affluent families by posing as couriers, college acquaintances, or visitors. Subdued occupants using nylon ropes, administered alcohol and sedatives, strangled victims systematically, looted valuables, and wiped down crime scenes to eliminate traces.",
+  "personality_disorder": "Psychological analysis presented at trial: Group-induced sociopathy, hedonistic material obsession, moral desensitization, and sensation-seeking behavior among educated youth without prior criminal records.",
   "common_traits": [
-    "Delusional beliefs",
-    "Auditory hallucination claims",
-    "Religious or persecutory themes",
-    "Repeated predatory attacks",
-    "Escalating violence",
-    "Targeting of women",
-    "Persistent violent behavior"
+    "Targeting middle-class and affluent households",
+    "Entry under deception / pretext of delivery",
+    "Simultaneous binding and gagging of multiple family members",
+    "Systematic ligature strangulation using nylon cords",
+    "Disposal of victims' bodies in gunny sacks or iron barrels",
+    "Financial looting to fund lavish lifestyle"
   ],
-  "summary": "British serial killer responsible for murdering thirteen women and attempting to murder several others. Unlike many serial-killer cases characterized primarily by antisocial or psychopathic traits, Sutcliffe's case involved documented severe psychotic illness, with multiple psychiatrists diagnosing paranoid schizophrenia."
+  "summary": "Infamous Pune serial murders of ten individuals between January 1976 and March 1977 carried out by four commercial art students. The Supreme Court affirmed death sentences for all four principal accused, highlighting the cold deliberation and absence of remorse."
 }

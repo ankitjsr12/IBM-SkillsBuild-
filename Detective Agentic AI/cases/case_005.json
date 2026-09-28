@@ -1,29 +1,50 @@
 {
-  "case_id": "CASE-USA-1989-005",
-  "title": "The Aileen Wuornos Serial Murders",
+  "case_id": "CASE-IND-1976-005",
+  "title": "State of Maharashtra v. Charles Gurmukh Sobhraj (The Bikini Killer)",
   "status": "Solved",
-  "crime_type": "Serial Murder / Robbery",
-  "location": "Florida / United States",
-  "timestamp": "1989-11-30T00:00:00Z",
+  "crime_type": "Serial Poisoning / Drugging / International Tourist Fraud",
+  "court_or_authority": "Supreme Court of India / High Court of Delhi / Sessions Court Delhi",
+  "legal_citation": "1978 AIR 1514; (1978) 4 SCC 104; 1978 CriLJ 1534",
+  "judgment_date": "1978-08-18",
+  "source": "Supreme Court of India Official Judgment & Indian Kanoon (doc/1770281)",
+  "source_url": "https://indiankanoon.org/doc/1770281/",
+  "ipc_sections": [
+    "Section 328 IPC (Administering stupefying drug with intent to commit offence)",
+    "Section 302 IPC (Murder)",
+    "Section 379 IPC (Theft)",
+    "Section 420 IPC (Cheating)",
+    "Section 468 IPC (Forgery for purpose of cheating)",
+    "Section 12 Passport Act 1967"
+  ],
+  "location": "Ashoka Hotel & Hotel Vikram, New Delhi, India",
+  "timestamp": "1976-07-01T00:00:00Z",
   "suspects": [
-    { "name": "Aileen Wuornos", "alias": null, "role": "Primary Operator" }
+    {
+      "name": "Charles Gurmukh Sobhraj",
+      "alias": "The Serpent / Alain Gautier",
+      "role": "Primary Operator / Convicted Offender"
+    },
+    {
+      "name": "Marie-Andrée Leclerc",
+      "alias": "Monique",
+      "role": "Accomplice"
+    }
   ],
   "evidence": [
-    "Victims' vehicles and personal property were recovered",
-    "Items belonging to victims were pawned or disposed of by Wuornos",
-    "Ballistic evidence connected the murders to Wuornos",
-    "Wuornos was convicted of multiple first-degree murders"
+    "Recovery of chemical sedatives, Mogadon (Nitrazepam), and Largactil pills in hotel suites occupied by accused",
+    "Recovery of forged French, British, and Canadian passports with substituted photographs",
+    "Medical toxicology reports establishing acute poisoning of French engineering student tour group at Hotel Vikram",
+    "Stolen international traveler cheques and pawn records recovered from bank lockers",
+    "Eyewitness identification by survivors and hotel receptionists during judicial identification parade"
   ],
-  "modus_operandi": "Wuornos encountered male victims while working as a sex worker, entered their vehicles or traveled with them, and shot them. Victims' property and vehicles were subsequently taken, pawned, or disposed of.",
-  "personality_disorder": "Forensic assessments documented Borderline Personality Disorder and Antisocial Personality Disorder. A later forensic study involving a clinical evaluation also found a high level of psychopathy, with a reported PCL-R score of 32.",
+  "modus_operandi": "Approached Western backpackers and tourists along the Hippie Trail by posing as a gem merchant, cultural guide, or luxury traveler. Gained confidence, offered medicated drinks or dysentery pills laced with debilitating tranquilizers (Nitrazepam/Largactil), robbed travel funds and original passports, and in multiple instances strangled or set fire to incapacitated victims to avoid identification.",
+  "personality_disorder": "Clinical diagnosis documented across international penal institutions: Severe Narcissistic Personality Disorder with Antisocial features, extraordinary superficial charm, pathological grandiosity, con artistry, and high-functioning manipulation.",
   "common_traits": [
-    "Antisocial behavior",
-    "Impulsivity",
-    "Interpersonal instability",
-    "Aggression",
-    "Financial exploitation",
-    "History of trauma and instability",
-    "Predatory violence"
+    "Targeting foreign backpackers and isolated tourists",
+    "Charming chameleon persona and false elite status",
+    "Use of pharmaceutical sleeping pills and neuroleptics in drinks",
+    "Theft of identity documents, passports, and traveler checks",
+    "International cross-border mobility to exploit jurisdictional extradition delays"
   ],
-  "summary": "American serial killer convicted of murdering seven men. Her case is important for forensic psychology because clinical and forensic evaluations identified both borderline and antisocial personality pathology, while later research found substantial psychopathic characteristics."
+  "summary": "High-profile international criminal case in which Charles Sobhraj was arrested in New Delhi in July 1976 after drugging an entire tour group of 60 French students. Tried and convicted under Section 328 and 302 IPC, serving over two decades in Tihar Central Jail."
 }

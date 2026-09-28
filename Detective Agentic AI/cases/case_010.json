@@ -1,31 +1,60 @@
 {
-  "case_id": "CASE-NOR-2011-010",
-  "title": "The 2011 Norway Terror Attacks",
+  "case_id": "CASE-IND-2013-010",
+  "title": "National Investigation Agency v. Yasin Bhatkal @ Mohammed Ahmed Siddibappa (Dilsukhnagar Serial Blasts)",
   "status": "Solved",
-  "crime_type": "Mass Murder / Terrorism",
-  "location": "Oslo and Utøya / Norway",
-  "timestamp": "2011-07-22T00:00:00Z",
+  "crime_type": "Urban Terrorist Bombing / Mass Casualty Improvised Explosive Device (IED)",
+  "court_or_authority": "NIA Special Court, Hyderabad / High Court for the State of Telangana",
+  "legal_citation": "Special SC No. 1/2014 (NIA); 2016 SCC OnLine Hyd 512; 2017 CriLJ 1421",
+  "judgment_date": "2016-12-19",
+  "source": "National Investigation Agency Official Chargesheet & Indian Kanoon (doc/9281721)",
+  "source_url": "https://indiankanoon.org/doc/9281721/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 307 IPC (Attempt to murder)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 121 IPC (Waging war against Government of India)",
+    "Sections 16, 18, 20 Unlawful Activities (Prevention) Act 1967",
+    "Sections 3, 5 Explosive Substances Act 1908"
+  ],
+  "location": "Dilsukhnagar Bus Stand & Venkatadri Theatre, Hyderabad, Telangana, India",
+  "timestamp": "2013-02-21T19:00:00Z",
   "suspects": [
-    { "name": "Anders Behring Breivik", "alias": null, "role": "Primary Operator" }
+    {
+      "name": "Yasin Bhatkal",
+      "alias": "Mohammed Ahmed Siddibappa / Imran",
+      "role": "Operational Commander / IED Fabricator / Convicted Offender"
+    },
+    {
+      "name": "Asadullah Akhtar",
+      "alias": "Haddi",
+      "role": "Explosive Transporter / Convicted Offender"
+    },
+    {
+      "name": "Zia-ur-Rahman",
+      "alias": "Waqas (Pakistani National)",
+      "role": "Bomb Planter / Convicted Offender"
+    },
+    {
+      "name": "Riyaz Bhatkal",
+      "alias": "Founder Indian Mujahideen",
+      "role": "Absconding Handler (Foreign Haven)"
+    }
   ],
   "evidence": [
-    "Extensive digital and physical evidence connected Breivik to the attacks",
-    "A vehicle bomb detonated in central Oslo",
-    "Firearms and ammunition were used during the Utøya attack",
-    "Breivik was arrested at the Utøya crime scene",
-    "He admitted carrying out the attacks"
+    "High-definition CCTV video surveillance recording suspects strapping explosive-laden bicycles outside Anand Tiffin Centre and bus shelter",
+    "Forensic debris analysis confirming Ammonium Nitrate Fuel Oil (ANFO) chemical mixture laced with steel ball bearings and digital quartz timers",
+    "Seizure of testing equipment, wires, soldering irons, and precursor chemicals from hideout safehouse in Mangalore and Miraj",
+    "Digital extraction of encrypted proxy email communications and chat transcripts coordinated with overseas command servers",
+    "Chain of purchase records tracing bicycles bought from Hyderabad local cycle shop days prior to blast"
   ],
-  "modus_operandi": "Breivik planned the attacks over an extended period, prepared explosives and firearms, detonated a vehicle bomb in Oslo, and subsequently traveled to Utøya where he systematically shot people attending a youth political camp.",
-  "personality_disorder": "A second court-appointed psychiatric evaluation diagnosed Antisocial Personality Disorder and Narcissistic Personality Disorder and concluded that Breivik was not psychotic at the time of the attacks.",
+  "modus_operandi": "Procured commercial-grade ammonium nitrate and detonators from mining supply conduits. Fabricated multi-component IEDs with timer delay switches packed into tiffin boxes. Mounted explosive assemblies on newly purchased bicycles. Parked bicycles in crowded evening commuter zones (outside popular snack stall and crowded bus depot) timed to detonate within two minutes of each other to maximize secondary casualty impact.",
+  "personality_disorder": "Forensic intelligence assessment identified extreme ideological radicalization, calculated psychopathic indifference to civilian life, high technical competence in improvised ordnance, and compartmentalized operational tradecraft.",
   "common_traits": [
-    "Grandiosity",
-    "Extreme ideological fixation",
-    "Need for recognition",
-    "Lack of empathy",
-    "Manipulation",
-    "Long-term planning",
-    "Desire for notoriety"
+    "Targeting high-density civilian evening transit hubs",
+    "Dual synchronized detonations (timed intervals of 100-120 seconds)",
+    "Concealment in everyday commuter transport (bicycles, tiffin containers)",
+    "Use of industrial ammonium nitrate boosted with high-velocity shrapnel (iron ball bearings)",
+    "Cross-state decentralized logistics and encrypted digital command coordination"
   ],
-  "summary": "Norwegian mass murderer responsible for the 2011 attacks in Oslo and Utøya. Unlike the serial killers in the other records, Breivik carried out a mass-casualty terrorist attack rather than a conventional serial-murder pattern. A second psychiatric evaluation diagnosed Narcissistic Personality Disorder and Antisocial Personality Disorder."
+  "summary": "Historic National Investigation Agency (NIA) prosecution resulting in the first capital convictions of Indian Mujahideen leadership. Established legal precedents regarding digital encrypted evidence, international border apprehension, and scientific explosive debris reconstruction."
 }
-

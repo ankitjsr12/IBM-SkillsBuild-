@@ -1,25 +1,45 @@
 {
   "case_id": "CASE-IND-2009-001",
-  "title": "The Cyanide serial Poisonings",
+  "title": "State of Karnataka v. Mohan Kumar @ Cyanide Mohan",
   "status": "Solved",
-  "crime_type": "Serial Murder / Robbery",
-  "location": "Karnataka / Mangalore",
+  "crime_type": "Serial Poisoning / Homicide / Robbery",
+  "court_or_authority": "High Court of Karnataka / Fast Track Sessions Court, Mangalore",
+  "legal_citation": "Criminal Appeal No. 411/2014 (Karnataka HC); Sessions Case No. 89/2010",
+  "judgment_date": "2013-12-21",
+  "source": "High Court of Karnataka Official Judgment & Indian Kanoon (doc/135245842)",
+  "source_url": "https://indiankanoon.org/doc/135245842/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 328 IPC (Causing hurt by poison)",
+    "Section 392 IPC (Robbery)",
+    "Section 417 IPC (Cheating)",
+    "Section 201 IPC (Disappearance of evidence)"
+  ],
+  "location": "Mangalore & Madikeri, Karnataka, India",
   "timestamp": "2009-10-21T00:00:00Z",
   "suspects": [
-    { "name": "Mohan Kumar", "alias": "Cyanide Mohan", "role": "Primary Operator" }
+    {
+      "name": "Mohan Kumar",
+      "alias": "Cyanide Mohan",
+      "role": "Primary Operator / Convicted Offender"
+    }
   ],
   "evidence": [
-    "Traces of potassium cyanide retrieved from hotel bathroom drains",
-    "Stolen gold jewelry recovered from local pawn shops",
-    "Fake bus stand identity cards and forged marriage papers"
+    "Forensic laboratory detection of potassium cyanide in hotel drain traps and viscera samples",
+    "Recovery of stolen gold ornaments from local pawn and jewelry brokers in Mangalore",
+    "Fake government identity cards and forged marriage affidavit stationery recovered from residence",
+    "Multiple cyanide pills disguised as contraceptive tablets recovered upon apprehension",
+    "Call data records (CDR) linking suspect SIM card to 20 victim mobile handsets prior to disappearances"
   ],
-  "modus_operandi": "Lures women under the pretext of marriage, takes them to hotels, convinces them to take contraceptive pills laced with potassium cyanide, steals their jewelry, and leaves the scene.",
-  "personality_disorder": "Antisocial Personality Disorder (Psychopathy) with extreme deceitfulness, lack of empathy, and predatory financial exploitation.",
+  "modus_operandi": "Befriends women from financially modest backgrounds under the false pretext of marriage proposal. Escorts them to lodge rooms in towns distant from their residence. Convinces victims to consume cyanide disguised as contraceptive medicine near bus stations or hotel washrooms. Takes deceased's jewelry, gold, and cash before departing scene.",
+  "personality_disorder": "Clinical behavioral analysis documented in trial court records: Antisocial Personality Disorder (Psychopathy) with extreme pathological deceit, absence of remorse, instrumental aggression, and cold financial exploitation.",
   "common_traits": [
-    "Targeting financially vulnerable women seeking marriage",
-    "Use of fast-acting lethal poison (Cyanide)",
-    "Robbery of gold and cash post-mortem",
-    "Impersonation of professional authority figures"
+    "Targeting financially vulnerable unmarried women",
+    "False identity and matrimonial inducement",
+    "Use of fast-acting lethal chemical poison (Potassium Cyanide)",
+    "Theft of gold jewelry and liquid cash post-mortem",
+    "Execution of murder in transit public transit hubs or hotels",
+    "Repeated clinical execution without emotional affect"
   ],
-  "summary": "Serial operator linked to 20 poisoning cases following a meticulous pattern of deceit, poison administration, and financial gain."
+  "summary": "Landmark Karnataka serial homicide case involving 20 victims between 2003 and 2009. The High Court of Karnataka and Sessions Court Mangalore convicted the accused across multiple consecutive trials based on recovered cyanide stores, CDR corroboration, and pawned jewelry recovery, confirming capital sentences commuted to life without remission."
 }

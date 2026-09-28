@@ -45,6 +45,7 @@ htmlcov/
 # ChromaDB test artifacts
 test_chroma/
 *.sqlite3
+*.db
 
 # pytest cache
 .pytest_cache/

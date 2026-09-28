@@ -1,28 +1,49 @@
 {
-  "case_id": "CASE-USA-1974-002",
-  "title": "The BTK Serial Murders",
+  "case_id": "CASE-IND-2006-002",
+  "title": "Surinder Koli & Moninder Singh Pandher v. State of UP (Nithari Serial Murders)",
   "status": "Solved",
-  "crime_type": "Serial Murder / Sexual Violence / Kidnapping",
-  "location": "Kansas / Wichita, United States",
-  "timestamp": "1974-01-15T00:00:00Z",
+  "crime_type": "Serial Child Homicide / Abduction / Sexual Assault",
+  "court_or_authority": "Supreme Court of India / Special CBI Court, Ghaziabad",
+  "legal_citation": "(2011) 4 SCC 80; AIR 2011 SC 1172; 2011 CriLJ 1602",
+  "judgment_date": "2011-02-15",
+  "source": "Supreme Court of India Judgment & Indian Kanoon (doc/797079)",
+  "source_url": "https://indiankanoon.org/doc/797079/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 364 IPC (Kidnapping for murder)",
+    "Section 376 IPC (Rape)",
+    "Section 201 IPC (Causing disappearance of evidence)"
+  ],
+  "location": "Nithari Village, Sector 31, Noida, Uttar Pradesh, India",
+  "timestamp": "2006-12-29T00:00:00Z",
   "suspects": [
-    { "name": "Dennis Rader", "alias": "BTK", "role": "Primary Operator" }
+    {
+      "name": "Surinder Koli",
+      "alias": "Domestic Servant at D-5",
+      "role": "Primary Operator / Convicted Offender"
+    },
+    {
+      "name": "Moninder Singh Pandher",
+      "alias": "Property Owner D-5",
+      "role": "Co-Accused / Resident"
+    }
   ],
   "evidence": [
-    "Physical and forensic evidence connected Rader to multiple murder scenes",
-    "Letters sent by the killer to police and media contained information about the crimes",
-    "Digital evidence from a floppy disk helped investigators identify Rader",
-    "Rader's later confession established responsibility for ten murders"
+    "Excavation and forensic retrieval of 19 skeletal remains and skulls from the municipal drainage canal behind bungalow D-5",
+    "Biological DNA matching of recovered bone fragments with parents of missing children",
+    "Section 164 CrPC judicial confession recorded before Metropolitan Magistrate detailing the sequence of luring and strangulation",
+    "Recovery of victim clothing and shoes concealed in residential pantry and attic",
+    "Recovery of cutting implements and saw blades corroborating dismemberment wounds"
   ],
-  "modus_operandi": "Selects victims in the Wichita area, surveils or stalks them, enters or approaches their residences, restrains them, and kills them through strangulation. Rader subsequently communicated with police and media, seeking recognition and attention for his crimes.",
-  "personality_disorder": "Forensic psychologist Robert Mendoza diagnosed Dennis Rader with Narcissistic Personality Disorder, Obsessive-Compulsive Personality Disorder, and Antisocial Personality Disorder. The evaluation described grandiosity, a pathological need for attention and admiration, rigid preoccupation with order, and lack of empathy.",
+  "modus_operandi": "Targeted impoverished children and young women walking near bungalow D-5 in Sector 31 Noida. Lured victims inside with food, sweets, or employment promises. Strangled victims from behind, followed by sexual assault, dismemberment of bodies, and disposal of remains in gunny sacks tossed into the rear drainage channel.",
+  "personality_disorder": "Clinical and psychiatric examinations noted severe paraphilia, necrophilia, sadism, and antisocial personality traits characterized by complete moral dissociation and absence of guilt during judicial confession.",
   "common_traits": [
-    "Grandiosity and desire for recognition",
-    "Need for control and domination",
-    "Manipulation and deception",
-    "Lack of empathy",
-    "Highly organized offending",
-    "Communication with authorities and media for attention"
+    "Targeting marginalized slum neighborhood children",
+    "Opportunistic abduction near residential boundary",
+    "Strangulation by ligature or physical asphyxiation",
+    "Dismemberment to hinder identification and transport remains",
+    "Disposal in subterranean municipal storm drains",
+    "Extreme sadistic violence"
   ],
-  "summary": "American serial killer responsible for ten murders between 1974 and 1991. Rader maintained a concealed double life while presenting himself publicly as a family man and community member. His documented forensic evaluation identified narcissistic, obsessive-compulsive, and antisocial personality disorders."
+  "summary": "Landmark Central Bureau of Investigation (CBI) inquiry into serial disappearances of children in Nithari village between 2005 and 2006. The Supreme Court of India upheld the conviction and capital sentence of Surinder Koli, establishing judicial precedent on circumstantial evidence and judicial confessions under Section 164 CrPC."
 }

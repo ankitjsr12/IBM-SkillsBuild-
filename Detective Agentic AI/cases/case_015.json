@@ -1,32 +1,59 @@
 {
   "case_id": "CASE-IND-1990-015",
-  "title": "The Gavit Sisters Child-Kidnapping Murders",
+  "title": "Renuka @ Rinku & Seema @ Devendra Gavit v. State of Maharashtra",
   "status": "Solved",
-  "crime_type": "Serial Murder / Kidnapping / Child Exploitation",
-  "location": "Maharashtra / Pune and surrounding areas",
-  "timestamp": "1990-01-01T00:00:00Z",
+  "crime_type": "Serial Child Kidnapping / Theft Human Shield / Child Homicide",
+  "court_or_authority": "Supreme Court of India / High Court of Bombay / Sessions Court Kolhapur",
+  "legal_citation": "(2006) 13 SCC 686; AIR 2006 SC 3144; 2006 CriLJ 4668",
+  "judgment_date": "2006-08-31",
+  "source": "Supreme Court of India Official Judgment & Indian Kanoon (doc/1628174)",
+  "source_url": "https://indiankanoon.org/doc/1628174/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 364 IPC (Kidnapping in order to murder)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 201 IPC (Causing disappearance of evidence of offence)",
+    "Section 379 IPC (Theft in crowded public places)"
+  ],
+  "location": "Kolhapur, Pune, Thane & Nashik, Maharashtra, India",
+  "timestamp": "1996-10-18T00:00:00Z",
   "suspects": [
-    { "name": "Renuka Shinde", "alias": null, "role": "Primary Operator" },
-    { "name": "Seema Gavit", "alias": null, "role": "Co-operator" }
+    {
+      "name": "Renuka Shinde",
+      "alias": "Rinku",
+      "role": "Primary Operator / Convicted Offender"
+    },
+    {
+      "name": "Seema Gavit",
+      "alias": "Sister / Accomplice",
+      "role": "Primary Operator / Convicted Offender"
+    },
+    {
+      "name": "Anjanabai Gavit",
+      "alias": "Mother / Mastermind",
+      "role": "Deceased before trial"
+    },
+    {
+      "name": "Kiran Shinde",
+      "alias": "Husband / Driver",
+      "role": "Approver / State Witness"
+    }
   ],
   "evidence": [
-    "Police investigation established a pattern of repeated child kidnappings",
-    "Children were allegedly used to facilitate theft and other crimes",
-    "The investigation connected the sisters to multiple child deaths",
-    "The sisters were convicted of multiple murders and kidnapping offenses",
-    "The Supreme Court upheld their convictions and death sentences"
+    "Recovery of multiple infant remains buried in farm plots and riverbanks across Western Maharashtra based on approver disclosures",
+    "Testimony of Kiran Shinde (accused turned approver) detailing the kidnapping and killing timeline of 13 children",
+    "Positive test identification of the sisters by surviving parents of abducted toddlers from bus stands and temple fairs",
+    "Police arrest memos seizing child clothes and feeding bottles from the traveling gang's vehicle",
+    "Medical autopsy reports confirming fatal skull fractures, blunt trauma against pavement stones, and strangulation"
   ],
-  "modus_operandi": "The sisters kidnapped children from public places and allegedly used them to facilitate theft and other criminal activities. Children who became difficult to control or were considered a liability were subsequently murdered, according to the prosecution case.",
-  "personality_disorder": "No confirmed personality-disorder diagnosis should be assigned without a documented forensic psychiatric assessment. The documented behavioral pattern involved manipulation, exploitation of children, calculated violence, and repeated criminal behavior.",
+  "modus_operandi": "Toured crowded pilgrimage temples, busy bazaars, and state transport bus stands across Western Maharashtra. Snatched infants and toddlers while their parents were distracted. Used the abducted children as 'cover' or 'shields' while pickpocketing crowds (police would not suspect women carrying infants). Whenever a kidnapped child became unruly, cried excessively, or posed risk of detection, the women smashed the infant's head against stones or iron poles, strangled them, and discarded remains in gunny sacks by highways.",
+  "personality_disorder": "Clinical evaluation noted extreme callousness, total lack of maternal empathy, predatory utilitarian exploitation of vulnerable children, and generational criminal grooming by their mother Anjanabai.",
   "common_traits": [
-    "Targeting vulnerable children",
-    "Manipulation",
-    "Exploitation",
-    "Repeated kidnapping",
-    "Calculated violence",
-    "Financial motivation",
-    "Use of accomplices"
+    "Kidnapping infants and toddlers from temple congregations and markets",
+    "Using stolen children as human camouflage during pickpocketing",
+    "Eliminating children once they became inconvenient or cried",
+    "Extreme physical brutality against defenseless toddlers",
+    "Operated as a closed matriarchal family crime syndicate"
   ],
-  "summary": "Sisters Renuka Shinde and Seema Gavit were convicted for kidnapping and murdering children in Maharashtra during the 1990s. Their case is notable for the systematic exploitation of children as instruments for criminal activity and the subsequent murders of children who became liabilities."
+  "summary": "First case in Indian legal history where two female serial offenders were awarded the death penalty, upheld by the Supreme Court of India. Convicted of abducting 13 children and murdering multiple infants between 1990 and 1996, creating foundational jurisprudence on circumstantial approver testimony and aggravated depravity."
 }
-

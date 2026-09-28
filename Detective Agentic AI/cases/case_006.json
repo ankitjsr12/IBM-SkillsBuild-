@@ -1,29 +1,55 @@
 {
-  "case_id": "CASE-USA-1968-006",
-  "title": "The Dating Game Killer Murders",
+  "case_id": "CASE-IND-2019-006",
+  "title": "State of Kerala v. Jolly Joseph (Koodathayi Serial Cyanide Poisonings)",
   "status": "Solved",
-  "crime_type": "Serial Murder / Sexual Violence / Kidnapping",
-  "location": "California / United States",
-  "timestamp": "1968-01-01T00:00:00Z",
+  "crime_type": "Serial Familial Poisoning / Inheritance Homicide / Forgery",
+  "court_or_authority": "High Court of Kerala / Principal District & Sessions Court, Kozhikode",
+  "legal_citation": "Bail Application No. 1544/2020; Sessions Case No. 81/2020 (Kozhikode)",
+  "judgment_date": "2020-03-05",
+  "source": "High Court of Kerala Case Status Records & Indian Kanoon (doc/182573273)",
+  "source_url": "https://indiankanoon.org/doc/182573273/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 328 IPC (Administering poison)",
+    "Section 465 IPC (Forgery)",
+    "Section 468 IPC (Forgery for purpose of cheating)",
+    "Section 471 IPC (Using forged document as genuine)",
+    "Section 120B IPC (Criminal Conspiracy)"
+  ],
+  "location": "Koodathayi, Kozhikode District, Kerala, India",
+  "timestamp": "2019-10-05T00:00:00Z",
   "suspects": [
-    { "name": "Rodney Alcala", "alias": "The Dating Game Killer", "role": "Primary Operator" }
+    {
+      "name": "Jolly Joseph",
+      "alias": "Jollyamma",
+      "role": "Primary Operator / Key Accused"
+    },
+    {
+      "name": "M. S. Mathew",
+      "alias": "Jewelry Shop Employee",
+      "role": "Cyanide Supplier / Co-Accused"
+    },
+    {
+      "name": "Praji Kumar",
+      "alias": "Goldsmith",
+      "role": "Source of Poison / Co-Accused"
+    }
   ],
   "evidence": [
-    "Photographic evidence connected Alcala to victims and unidentified individuals",
-    "DNA evidence linked Alcala to multiple victims",
-    "Victims' property and other physical evidence were recovered",
-    "Alcala was convicted of multiple murders"
+    "Exhumation of six remains from church cemetery vaults across Koodathayi and chemical toxicological identification",
+    "Forensic laboratory confirmation of cyanide trace residue in soil and bone matter of Roy Thomas",
+    "Forged last will and testament of father-in-law Tom Thomas fabricated to divert ancestral estate ownership",
+    "Recovery of cyanide container concealed in cattle shed at suspect's residence based on disclosure statement under Section 27 Evidence Act",
+    "Digital mobile call history and financial transfers between accused and cyanide procurement contacts"
   ],
-  "modus_operandi": "Approaches women and girls by presenting himself as a photographer or through apparently ordinary social interactions, gains their trust, and lures victims to secluded locations where he sexually assaults and murders them.",
-  "personality_disorder": "Alcala was diagnosed with Antisocial Personality Disorder by a military psychiatrist in 1964. Later forensic evaluations and expert opinions also discussed narcissistic and borderline personality features, as well as psychopathy and sexual sadism.",
+  "modus_operandi": "Systematically eliminated six family members across a 14-year span (2002 to 2016) including mother-in-law, father-in-law, husband, maternal uncle, and a two-year-old child. Mixed minute lethal doses of potassium cyanide obtained from a goldsmith into customary food preparations (mutton soup, mushroom curry, water). Fabricated medical narratives of sudden cardiac arrest or choking to avoid autopsy.",
+  "personality_disorder": "Forensic psychiatric evaluations documented high-functioning sociopathic traits, pathological compartmentalization, duplicity (posing as an NIT Calicut lecturer for 14 years), and calculating avarice.",
   "common_traits": [
-    "Superficial charm",
-    "Manipulation",
-    "Deception",
-    "Sexual predation",
-    "Need for control",
-    "Lack of empathy",
-    "Use of photography to establish access to victims"
+    "Targeting close family and marital relatives over extended intervals",
+    "Posing as reputable, devout, and respectable community member",
+    "Use of kitchen food substances as vehicle for chemical cyanide",
+    "Prevention of post-mortem examinations by citing cultural/religious reservations",
+    "Fabrication of property documentation and wills to seize assets"
   ],
-  "summary": "American serial killer and sex offender convicted of murdering multiple women and girls. Alcala used social charm and photography to gain access to victims and maintained an outwardly respectable appearance while committing predatory crimes."
+  "summary": "Extraordinary Kerala serial homicide investigation involving six poisoning deaths between 2002 and 2016 within a single household. Unraveled after the NRI son initiated inquiries into the fraudulent transfer of ancestral estate, leading to exhumation of remains and multi-agency forensic indictment."
 }

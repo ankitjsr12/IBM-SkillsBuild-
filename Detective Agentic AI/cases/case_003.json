@@ -1,29 +1,67 @@
 {
-  "case_id": "CASE-USA-1978-003",
-  "title": "The Jeffrey Dahmer Murders",
+  "case_id": "CASE-IND-2012-003",
+  "title": "Mukesh & Anr. v. State for NCT of Delhi (Nirbhaya Gang Rape & Homicide)",
   "status": "Solved",
-  "crime_type": "Serial Murder / Sexual Violence / Necrophilia",
-  "location": "Wisconsin / Milwaukee, United States",
-  "timestamp": "1978-07-01T00:00:00Z",
+  "crime_type": "Aggravated Gang Rape / Fatal Assault / Robbery",
+  "court_or_authority": "Supreme Court of India / High Court of Delhi / Fast Track Court Saket",
+  "legal_citation": "(2017) 6 SCC 1; AIR 2017 SC 2161; 2017 CriLJ 4365",
+  "judgment_date": "2017-05-05",
+  "source": "Supreme Court of India Official Judgment & Indian Kanoon (doc/144606771)",
+  "source_url": "https://indiankanoon.org/doc/144606771/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 376(2)(g) IPC (Gang Rape)",
+    "Section 365 IPC (Kidnapping)",
+    "Section 397 IPC (Robbery with deadly weapon)",
+    "Section 201 IPC (Destruction of evidence)",
+    "Section 120B IPC (Criminal Conspiracy)"
+  ],
+  "location": "Munirka & Mahipalpur Highway, New Delhi, India",
+  "timestamp": "2012-12-16T21:30:00Z",
   "suspects": [
-    { "name": "Jeffrey Dahmer", "alias": "Milwaukee Cannibal", "role": "Primary Operator" }
+    {
+      "name": "Mukesh Singh",
+      "alias": "Bus Cleaner",
+      "role": "Convicted Offender"
+    },
+    {
+      "name": "Vinay Sharma",
+      "alias": "Gym Assistant",
+      "role": "Convicted Offender"
+    },
+    {
+      "name": "Pawan Gupta",
+      "alias": "Fruit Vendor",
+      "role": "Convicted Offender"
+    },
+    {
+      "name": "Akshay Thakur",
+      "alias": "Bus Helper",
+      "role": "Convicted Offender"
+    },
+    {
+      "name": "Ram Singh",
+      "alias": "Bus Driver",
+      "role": "Principal Accused (Deceased in custody)"
+    }
   ],
   "evidence": [
-    "Human remains were discovered inside Dahmer's apartment",
-    "Photographs documented victims and dismemberment",
-    "Forensic examination identified remains belonging to multiple victims",
-    "Dahmer confessed to numerous killings following his arrest"
+    "Forensic DNA profiling matching blood stains and epithelial tissue retrieved from bus interior to victim and accused with statistical certainty",
+    "Odontology forensic analysis establishing bite mark impressions on victim body corresponding to dentition of accused",
+    "Cellular tower Call Data Records (CDR) mapping the route of the chartered bus (DL 1PC 0149) across South Delhi highways",
+    "Recovery of victim's stolen mobile handset and ATM cards from the possession of accused",
+    "Dying declarations recorded by SDM and judicial magistrate corroborating the sequence of events",
+    "CCTV footage from toll plazas and highway hotels identifying the bus passing at specified timestamps"
   ],
-  "modus_operandi": "Dahmer approached primarily young men, lured or invited them to his residence using offers of money, companionship, photographs, or sexual encounters, incapacitated them with drugs, murdered them, and subsequently engaged in necrophilic and dismemberment-related behavior.",
-  "personality_disorder": "Multiple forensic experts provided differing diagnoses. Documented assessments included Schizotypal Personality Disorder, Borderline Personality Disorder, substance-use disorder, paraphilic disorders, and other severe personality features. One independent forensic psychiatrist described a severe mixed personality disorder including antisocial, obsessive-compulsive, sadistic, fetishistic, borderline, and necrophilic features.",
+  "modus_operandi": "Operated an illegally chartered private bus after hours. Picked up passengers seeking public transit at Munirka bus stand. Isolated victims inside the moving vehicle with darkened windows, overpowered male companion with iron rods, subjected female victim to extreme physical and sexual assault, robbed belongings, and ejected victims onto the roadside.",
+  "personality_disorder": "Forensic behavioral profiling identified collective antisocial behavior, extreme predatory opportunism, absence of empathy, and group escalation of violence under alcohol influence.",
   "common_traits": [
-    "Social manipulation",
-    "Extreme secrecy",
-    "Paraphilic behavior",
-    "Need for control over victims",
-    "Substance use",
-    "Preservation and concealment of victims' remains",
-    "Repetitive and ritualized offending"
+    "Impersonation of legitimate public transit services",
+    "Predatory isolation of stranded night commuters",
+    "Use of blunt metallic weapons (iron wheel-jack rods)",
+    "Collective group assault and coordination",
+    "Ejection of victims on desolate highway strips to evade apprehension",
+    "Attempted destruction of vehicle biological evidence by washing with detergent"
   ],
-  "summary": "American serial killer responsible for the murders of 17 people. His case is particularly significant for forensic psychology because several experts assessed him during his trial and reached different conclusions regarding his personality pathology, psychosis, paraphilia, and legal responsibility."
+  "summary": "Landmark Indian criminal jurisprudence case resulting in unanimous Supreme Court affirmation of capital punishment. Set global forensic standards for multi-parameter biological DNA profiling, forensic odontology, and rapid CCTV route reconstruction in transit-based crimes."
 }

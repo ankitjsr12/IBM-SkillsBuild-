@@ -1,30 +1,53 @@
 {
-  "case_id": "CASE-AUT-1974-008",
-  "title": "The Jack Unterweger Murders",
-  "status": "Solved",
-  "crime_type": "Serial Murder / Sexual Violence",
-  "location": "Austria / United States / Czech Republic",
-  "timestamp": "1974-01-01T00:00:00Z",
+  "case_id": "CASE-IND-2008-008",
+  "title": "Dr. Rajesh Talwar & Smt. Nupur Talwar v. State of UP & CBI (Aarushi-Hemraj Case)",
+  "status": "Acquitted / Unsolved",
+  "crime_type": "Double Homicide / Circumstantial Evidence / Forensic Contamination",
+  "court_or_authority": "High Court of Judicature at Allahabad / Special CBI Court, Ghaziabad",
+  "legal_citation": "Criminal Appeal No. 6147/2013; 2017 SCC OnLine All 2237; 2018 CriLJ 681",
+  "judgment_date": "2017-10-12",
+  "source": "High Court of Judicature at Allahabad Official Judgment & Indian Kanoon (doc/7921382)",
+  "source_url": "https://indiankanoon.org/doc/7921382/",
+  "ipc_sections": [
+    "Section 302 r/w Section 34 IPC (Murder in furtherance of common intention)",
+    "Section 201 r/w Section 34 IPC (Causing disappearance of evidence)",
+    "Section 106 Indian Evidence Act 1872 (Burden of proving fact especially within knowledge)"
+  ],
+  "location": "Jalvayu Vihar, Sector 25, Noida, Uttar Pradesh, India",
+  "timestamp": "2008-05-16T00:00:00Z",
   "suspects": [
-    { "name": "Jack Unterweger", "alias": null, "role": "Primary Operator" }
+    {
+      "name": "Dr. Rajesh Talwar",
+      "alias": "Father / Dental Surgeon",
+      "role": "Accused / Acquitted by Allahabad HC"
+    },
+    {
+      "name": "Dr. Nupur Talwar",
+      "alias": "Mother / Dental Surgeon",
+      "role": "Accused / Acquitted by Allahabad HC"
+    },
+    {
+      "name": "Krishna Thadarai",
+      "alias": "Dental Assistant",
+      "role": "Initial Suspect (Discharged for lack of evidence)"
+    }
   ],
   "evidence": [
-    "Unterweger was convicted of a murder in Austria in 1976",
-    "He was released from prison after being regarded as rehabilitated",
-    "Eleven additional murders were attributed to him in Austria, the United States, and Czechoslovakia",
-    "Forensic psychiatric examination identified severe personality pathology"
+    "Surgical-style throat incised wounds consistent with scalpel or sharp surgical blade",
+    "Blunt force cranial trauma inflicted by golf club (specifically club number 5 recovered from home)",
+    "Rooftop discovery of domestic help Hemraj Banjade's body 24 hours after initial scene processing",
+    "Forensic report typo in DNA typing of purple pillow cover recovered from room of Krishna",
+    "Scene of crime contamination by media and unmonitored visitors during the initial 48 hours",
+    "Internet router log analysis indicating active data connectivity in the master bedroom during nighttime hours"
   ],
-  "modus_operandi": "Unterweger targeted women, particularly prostitutes, establishing contact before attacking them. Victims were strangled, and the murders involved sexual and sadistic elements.",
-  "personality_disorder": "A forensic psychiatric examination identified numerous features of malignant narcissism and antisocial personality pathology, together with pronounced sadistic characteristics.",
+  "modus_operandi": "Perpetrator accessed the locked flat during late hours, struck both victims (14-year-old Aarushi and 45-year-old domestic help Hemraj) on the head with a heavy blunt instrument, carried Hemraj to the roof, slit the throats of both victims with precision, arranged the crime scene, and locked the entrance doors.",
+  "personality_disorder": "No confirmed psychopathology established. The Allahabad High Court noted that the trial court's theory of sudden grave provocation was conjectural and uncorroborated by objective psychiatric or physical evidence.",
   "common_traits": [
-    "Grandiosity",
-    "Manipulation",
-    "Superficial charm",
-    "Need for recognition",
-    "Antisocial behavior",
-    "Sexual sadism",
-    "Exploitation of vulnerable women"
+    "Closed-door residential double homicide",
+    "Combination of blunt force trauma followed by precision sharp-force incision",
+    "Moving and concealing secondary victim's body on locked rooftop",
+    "Severe crime-scene forensic evidence contamination",
+    "Conflicting theories between two successive Central Bureau of Investigation teams"
   ],
-  "summary": "Austrian serial killer and convicted murderer who became a celebrated writer while imprisoned and was released early after being regarded as rehabilitated. Within months of his release, he committed additional murders across Europe and the United States. He was later convicted of 11 murders."
+  "summary": "India's most extensively scrutinized circumstantial homicide case. The Allahabad High Court reversed the trial court's conviction of the parents, ruling that the prosecution failed to establish an unbroken chain of circumstantial evidence beyond reasonable doubt, underscoring critical lessons in forensic preservation and confirmation bias."
 }
-

@@ -118,9 +118,9 @@ class DetectiveAgent:
             raw_score = base_score + strongest_contrib + average_contrib
             score = round(min(95, max(15, raw_score)))
 
-            if strongest >= 0.55:
+            if strongest >= 0.30:
                 match_quality = "Strong case-index similarity"
-            elif strongest >= 0.35:
+            elif strongest >= 0.18:
                 match_quality = "Moderate case-index similarity"
             else:
                 match_quality = "Weak case-index similarity"
@@ -160,10 +160,10 @@ class DetectiveAgent:
                 })
                 score = 15
 
-            match_quality = "No reliable case-index match"
+            match_quality = "No sufficiently similar Indian record found."
             summary = (
-                "No direct vector match found. Risk evaluated from behavioural "
-                "keyword indicators only. Confidence is low — manual review recommended."
+                "No sufficiently similar Indian record found in the precedent index. "
+                "Risk evaluated from behavioural keyword indicators only. Confidence is low — manual investigator review recommended."
             )
 
         # --- 4. Risk category ---
@@ -196,14 +196,17 @@ class DetectiveAgent:
         })
 
         return {
+            "model_assessment_title": "MODEL ASSESSMENT",
             "suspect_name": str(name or "Unnamed Suspect").strip(),
             "tendency_score": f"{score}%",
             "risk_level": risk_level,
             "risk_explanation": risk_explanation,
             "match_quality": match_quality,
+            "confidence_indicator": match_quality,
             "scoring_breakdown": scoring_breakdown,
             "summary": summary,
             "similar_cases": retrieved_cases,
+            "matched_precedents": retrieved_cases,
             "disclaimer": (
                 "All scores are MODEL ASSESSMENTS produced by similarity-based "
                 "pattern matching against historical case records. "

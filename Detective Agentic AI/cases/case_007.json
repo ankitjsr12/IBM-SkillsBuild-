@@ -1,30 +1,49 @@
 {
-  "case_id": "CASE-USSR-1978-007",
-  "title": "The Rostov Ripper Murders",
+  "case_id": "CASE-IND-2020-007",
+  "title": "State of Kerala v. Sooraj S. Kumar (Uthra Snakebite Murder Case)",
   "status": "Solved",
-  "crime_type": "Serial Murder / Sexual Violence",
-  "location": "Rostov Oblast / Soviet Union",
-  "timestamp": "1978-11-22T00:00:00Z",
+  "crime_type": "Homicide using Biological Weapon (Venomous Viper/Cobra) / Dowry Extortion",
+  "court_or_authority": "Sixth Additional Sessions Court, Kollam / High Court of Kerala",
+  "legal_citation": "Sessions Case No. 433/2020; Criminal Appeal No. 71/2022 (Kerala HC)",
+  "judgment_date": "2021-10-13",
+  "source": "District & Sessions Court Kollam Official Judgment & Indian Kanoon (doc/162817291)",
+  "source_url": "https://indiankanoon.org/doc/162817291/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 307 IPC (Attempt to murder)",
+    "Section 328 IPC (Administering poison by venom)",
+    "Section 201 IPC (Causing disappearance of evidence)",
+    "Section 498A IPC (Cruelty by husband and dowry demand)"
+  ],
+  "location": "Anchal, Kollam District, Kerala, India",
+  "timestamp": "2020-05-07T00:00:00Z",
   "suspects": [
-    { "name": "Andrei Chikatilo", "alias": "The Rostov Ripper", "role": "Primary Operator" }
+    {
+      "name": "Sooraj S. Kumar",
+      "alias": "Husband / Bank Employee",
+      "role": "Primary Operator / Convicted Offender"
+    },
+    {
+      "name": "Suresh",
+      "alias": "Snake Catcher",
+      "role": "Approver / Provider of Live Reptiles"
+    }
   ],
   "evidence": [
-    "Physical and forensic evidence connected Chikatilo to multiple victims",
-    "Police investigation linked him to a large series of disappearances and murders",
-    "Chikatilo confessed to numerous killings",
-    "A psychiatric evaluation was conducted at the Serbsky Institute before trial"
+    "Scientific reconstruction experiment conducted by Herpetology Department establishing that a snake cannot naturally inflict bites through closed air-conditioned room windows",
+    "Measurement of fang puncture width (2.5 cm) on victim's arm proving forced induction and compression of snake head by human hand",
+    "Digital extraction of suspect's smartphone search history: extensive YouTube and Google queries regarding venom extraction, cobra bite lethality, and sleep sedatives",
+    "Recovery of live Russell's viper and spectacled cobra containers and transactions with snake handler Suresh",
+    "Chemical forensic identification of sedative drug Clonazepam in the victim's visceral organs"
   ],
-  "modus_operandi": "Chikatilo approached vulnerable women and children, often near transportation hubs, markets, and other public locations. He lured victims to secluded areas where he sexually assaulted and murdered them, frequently inflicting extensive physical injuries.",
-  "personality_disorder": "A psychiatric evaluation conducted at the Serbsky Institute concluded that Chikatilo had Borderline Personality Disorder with sadistic features. The evaluation nevertheless found him competent to stand trial.",
+  "modus_operandi": "Purchased venomous snakes (Russell's viper and Indian Spectacled Cobra) from a snake handler. First attempted murder at his own home using a viper, which left victim hospitalized. Subsequently visited victim at her parents' house, slipped sedatives into fruit juice, and intentionally provoked the cobra by pressing its fangs into the sleeping victim's forearm, attempting to frame the death as accidental natural snakebite.",
+  "personality_disorder": "Forensic psychiatric profiling indicated narcissistic and psychopathic traits: complete affective flattening, meticulous pre-planning of an unconventional biological weapon, and relentless pursuit of victim's gold dowry and financial insurance proceeds.",
   "common_traits": [
-    "Sexual predation",
-    "Sadistic violence",
-    "Targeting vulnerable victims",
-    "Manipulation and luring",
-    "Repetitive offending",
-    "Extreme physical violence",
-    "Difficulty controlling violent impulses"
+    "Using biological agents (venomous reptiles) to disguise premeditated murder as accident",
+    "Administering chemical sedatives to suppress victim defensive reflexes",
+    "Repeated attempts following initial survival",
+    "Digital preparation and lethal methodology searches on internet",
+    "Financial motivation driven by dowry and property appropriation"
   ],
-  "summary": "Soviet serial killer convicted of murdering 52 people. His forensic psychiatric evaluation identified Borderline Personality Disorder with sadistic features while finding him legally competent to stand trial."
+  "summary": "Historic Indian forensic trial where the prosecution proved murder via snakebite through herpetological experiments, fang-mark distance analysis, and smartphone forensic history. The Sessions Court awarded double life imprisonment, hailed as an investigative triumph for circumstantial scientific evidence."
 }
-

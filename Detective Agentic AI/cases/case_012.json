@@ -1,31 +1,56 @@
 {
   "case_id": "CASE-IND-1987-012",
-  "title": "The Auto Shankar Murders",
+  "title": "State of Tamil Nadu v. Gowri Shankar @ Auto Shankar & Ors.",
   "status": "Solved",
-  "crime_type": "Serial Murder / Kidnapping / Organized Crime",
-  "location": "Tamil Nadu / Chennai",
-  "timestamp": "1987-10-01T00:00:00Z",
+  "crime_type": "Serial Kidnapping / Contract Homicide / Wall Concealment",
+  "court_or_authority": "Supreme Court of India / High Court of Madras / Sessions Court Chengalpattu",
+  "legal_citation": "1994 SCC (4) 478; AIR 1994 SC 1349; 1994 CriLJ 3071",
+  "judgment_date": "1994-04-05",
+  "source": "Supreme Court of India Official Judgment & Indian Kanoon (doc/1218204)",
+  "source_url": "https://indiankanoon.org/doc/1218204/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 364 IPC (Kidnapping for murder)",
+    "Section 201 IPC (Disappearance of evidence - concealment behind residential masonry)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 149 IPC (Unlawful Assembly)"
+  ],
+  "location": "Thiruvanmiyur, Chennai, Tamil Nadu, India",
+  "timestamp": "1988-06-01T00:00:00Z",
   "suspects": [
-    { "name": "Gowri Shankar", "alias": "Auto Shankar", "role": "Primary Operator" }
+    {
+      "name": "Gowri Shankar",
+      "alias": "Auto Shankar",
+      "role": "Gang Leader / Primary Convicted Offender"
+    },
+    {
+      "name": "Eldin",
+      "alias": "Accomplice",
+      "role": "Convicted Offender"
+    },
+    {
+      "name": "Shivaji",
+      "alias": "Accomplice",
+      "role": "Convicted Offender"
+    }
   ],
   "evidence": [
-    "Police investigation connected Shankar and his associates to multiple disappearances",
-    "Victims' remains were recovered after the investigation",
-    "Shankar confessed to multiple murders",
-    "The trial resulted in murder convictions and death sentences",
-    "His accomplices were also convicted in connection with the murders"
+    "Demolition and forensic recovery of human skeletal remains buried beneath concrete kitchen flooring and inside plastered wall cavities of Shankar's residence",
+    "Forensic superimposition photo identification linking excavated skulls to missing teenage girls and illicit liquor associates",
+    "Recovery of an autorickshaw (registration MSW 3786) customized with reinforced passenger locks used for abductions",
+    "Co-accused confession under Section 164 CrPC identifying burial spots and execution method",
+    "Recovery of victim gold ear studs and wristwatches from local pawn brokers"
   ],
-  "modus_operandi": "Shankar operated within a criminal network involved in illicit liquor and prostitution. He used associates and his criminal influence to lure, abduct, and murder victims, subsequently concealing or destroying their remains.",
-  "personality_disorder": "No reliably documented formal personality-disorder diagnosis should be assigned. His documented behavioral profile includes manipulation, coercive control, violence, criminal opportunism, and exploitation of people within his criminal network.",
+  "modus_operandi": "Operated an autorickshaw fleet connected to illicit prostitution and moonshine networks. Picked up victims under pretext of transport, abducted young women resisting trafficking, and liquidated business rivals. Drugged victims, strangled them inside rented beach houses, cremated or buried remains under newly cast cement flooring inside his home, and whitewashed the walls.",
+  "personality_disorder": "Clinical and criminological assessment documented psychopathy, extreme power and dominance fixation, predatory sexual aggression, and coercive antisocial leadership.",
   "common_traits": [
-    "Manipulation",
-    "Coercive control",
-    "Criminal opportunism",
-    "Violence against vulnerable victims",
-    "Use of accomplices",
-    "Concealment of bodies",
-    "Organized criminal activity"
+    "Use of commercial auto-rickshaws as abduction vehicles",
+    "Auto-rickshaw fleet operation for illicit liquor transport",
+    "Covert concealment of victims' remains under concrete masonry inside home",
+    "Burying bodies under residential concrete floors and cement plaster",
+    "Targeting marginalized women and underworld rivals",
+    "Coordination with familial and local criminal gang affiliates",
+    "Intimidation of local neighborhood through claimed political and police patronage"
   ],
-  "summary": "Gowri Shankar, popularly known as Auto Shankar, was a Tamil Nadu criminal involved in multiple murders, kidnappings, and organized criminal activity. He was convicted of six murders and executed in 1995."
+  "summary": "Historic Chennai serial murder investigation involving six victims between 1987 and 1988. The Supreme Court confirmed capital punishment for Auto Shankar and two accomplices, making it a foundational Indian legal precedent on corpus delicti and recovery under Section 27 Evidence Act."
 }
-

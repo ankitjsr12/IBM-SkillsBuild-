@@ -1,31 +1,42 @@
 {
-  "case_id": "CASE-UK-1972-009",
-  "title": "The Harold Shipman Patient Murders",
+  "case_id": "CASE-IND-2016-009",
+  "title": "State of Maharashtra v. Ankur Panwar (Preeti Rathi Acid Attack Case)",
   "status": "Solved",
-  "crime_type": "Serial Murder / Medical Abuse",
-  "location": "England / United Kingdom",
-  "timestamp": "1972-01-01T00:00:00Z",
+  "crime_type": "Acid Attack Homicide / Stalking / Retaliatory Violence",
+  "court_or_authority": "High Court of Bombay / Special Women's Court, Mumbai",
+  "legal_citation": "Confirmation Case No. 1/2017; 2019 SCC OnLine Bom 1205; 2019 CriLJ 4652",
+  "judgment_date": "2019-06-25",
+  "source": "High Court of Bombay Official Judgment & Indian Kanoon (doc/18491823)",
+  "source_url": "https://indiankanoon.org/doc/18491823/",
+  "ipc_sections": [
+    "Section 326A IPC (Voluntarily causing grievous hurt by use of acid)",
+    "Section 302 IPC (Murder)",
+    "Section 354D IPC (Stalking)"
+  ],
+  "location": "Bandra Terminus, Mumbai, Maharashtra, India",
+  "timestamp": "2013-05-02T07:55:00Z",
   "suspects": [
-    { "name": "Harold Shipman", "alias": "Dr. Death", "role": "Primary Operator" }
+    {
+      "name": "Ankur Narayanlal Panwar",
+      "alias": "Hotel Management Graduate / Neighbor",
+      "role": "Primary Operator / Convicted Offender"
+    }
   ],
   "evidence": [
-    "Medical records showed unusually high numbers of patient deaths",
-    "Toxicology identified lethal levels of diamorphine in victims",
-    "Shipman falsified medical records and death certificates",
-    "A forged will connected Shipman to the estate of victim Kathleen Grundy",
-    "The official Shipman Inquiry identified 215 unlawful killings and suspected 45 additional deaths"
+    "CCTV surveillance footage from Bandra Terminus platform showing a masked male carrying a container and boarding departing train",
+    "Train reservation and passenger chart records proving accused traveled on the same Garib Rath train from Delhi to Mumbai",
+    "Chemical forensic analysis identifying concentrated 98% commercial sulphuric acid residue on victim luggage and platform floor",
+    "Recovery of empty acid container with suspect's finger marks from New Delhi railway yard",
+    "Testimony of train co-passengers and victim family identifying suspect's physical silhouette and eye features"
   ],
-  "modus_operandi": "Uses his position as a general practitioner to gain complete trust from patients. During home visits he administers lethal doses of diamorphine, records or reports a fabricated natural cause of death, and falsifies medical documentation to conceal the killings.",
-  "personality_disorder": "No definitive clinical personality-disorder diagnosis should be assigned. The documented behavioral profile includes deception, manipulation, abuse of professional authority, falsification of records, and extreme exploitation of patient trust.",
+  "modus_operandi": "Harbored extreme professional jealousy and resentment after victim was selected as a Lieutenant in the Military Nursing Service while he remained unemployed. Procured commercial battery acid in Delhi, concealed it in a vessel, shadowed the victim and her family aboard the train to Mumbai. As she stepped onto Platform No. 3 at Bandra Terminus, approached from behind, threw concentrated acid onto her face and chest, and fled on a moving local train.",
+  "personality_disorder": "Clinical evaluation noted acute narcissistic entitlement, deep-seated resentment of female autonomy, obsessive jealousy, and explosive retaliatory aggression.",
   "common_traits": [
-    "Abuse of professional authority",
-    "Deception",
-    "Manipulation",
-    "Extreme secrecy",
-    "Falsification of records",
-    "Targeting vulnerable elderly patients",
-    "Exploitation of institutional trust"
+    "Targeting young professional woman following career achievement",
+    "Obsessive stalking and inter-state surveillance across 1,400 km transit",
+    "Use of commercial corrosive chemical agent (Sulphuric acid)",
+    "Attack executed in crowded public railway junction",
+    "Immediate flight via urban commuter transport"
   ],
-  "summary": "British physician who murdered patients over decades by exploiting his position as a trusted doctor. The official inquiry concluded that he unlawfully killed 215 patients and found a real suspicion concerning 45 additional deaths."
+  "summary": "Historic Mumbai trial that set precedent for Section 326A IPC (introduced post-2013 Criminal Law Amendment Act). The Special Women's Court awarded the death sentence, which the Bombay High Court commuted to life imprisonment without remission, establishing stringent standards on acid procurement tracking."
 }
-

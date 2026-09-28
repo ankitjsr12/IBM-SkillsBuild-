@@ -46,9 +46,7 @@ def _cosine(a: Dict[str, float], b: Dict[str, float]) -> float:
 
 
 # Minimum cosine similarity required to include a case in results.
-# 0.20 means at least 20% token-overlap weighted similarity.
-# Raising this reduces false positives at the cost of fewer matches.
-SIMILARITY_THRESHOLD: float = 0.20
+SIMILARITY_THRESHOLD: float = 0.15
 
 # The label attached to results so the UI can distinguish them.
 RESULT_SOURCE_LABEL: str = "RETRIEVED EVIDENCE (similarity match)"
@@ -91,6 +89,7 @@ class CaseRetriever:
 
         fields = (
             "title", "summary", "crime_type", "location", "status",
+            "court_or_authority", "legal_citation", "ipc_sections",
             "modus_operandi", "personality_disorder", "common_traits",
             "evidence", "suspects", "case_notes", "investigation_notes",
         )
@@ -107,7 +106,7 @@ class CaseRetriever:
 
         indexed = 0
         for file in sorted(os.listdir(self.cases_dir)):
-            if not file.lower().endswith(".json"):
+            if not file.lower().endswith(".json") or file.lower().startswith(("package", "config", "skills-lock", ".")):
                 continue
 
             file_path = os.path.join(self.cases_dir, file)
@@ -118,8 +117,7 @@ class CaseRetriever:
                     continue
 
                 case = json.loads(content)
-                if not isinstance(case, dict):
-                    logger.warning("Skipping non-dict case file: %s", file)
+                if not isinstance(case, dict) or not case.get("case_id"):
                     continue
 
                 doc_text = self._case_text(case)
@@ -134,10 +132,27 @@ class CaseRetriever:
                 crime_type = str(case.get("crime_type", "Unknown"))
                 summary = str(case.get("summary", ""))
 
+                # Modus operandi & common traits targeted text
+                mo_val = case.get("modus_operandi", "")
+                traits_val = case.get("common_traits", [])
+                traits_str = " ".join(traits_val) if isinstance(traits_val, list) else str(traits_val)
+                mo_composite = f"{crime_type} {mo_val} {traits_str}"
+                mo_tokens = _tokenize(mo_composite)
+                mo_tf = _tf(mo_tokens) if mo_tokens else {}
+
+                # Evidence targeted text
+                ev_val = case.get("evidence", [])
+                ev_str = " ".join(ev_val) if isinstance(ev_val, list) else str(ev_val)
+                ev_tokens = _tokenize(ev_str)
+                ev_tf = _tf(ev_tokens) if ev_tokens else {}
+
                 self._docs.append({
                     "case_id": case_id,
                     "text": doc_text,
                     "tf": _tf(tokens),
+                    "mo_tf": mo_tf,
+                    "ev_tf": ev_tf,
+                    "tokens_set": set(tokens),
                     "summary": summary,
                     "metadata": {
                         "case_id": case_id,
@@ -146,6 +161,12 @@ class CaseRetriever:
                         "location": location,
                         "crime_type": crime_type,
                         "summary": summary,
+                        "court_or_authority": str(case.get("court_or_authority", "Supreme Court / High Court")),
+                        "legal_citation": str(case.get("legal_citation", "Public Criminal Case Record")),
+                        "source": str(case.get("source", "Indian Kanoon / Official Judicial Judgment")),
+                        "source_url": str(case.get("source_url", "")),
+                        "ipc_sections": case.get("ipc_sections", []),
+                        "judgment_date": str(case.get("judgment_date", "")),
                     },
                 })
                 indexed += 1
@@ -197,10 +218,24 @@ class CaseRetriever:
             return []
 
         query_tf = _tf(query_tokens)
+        unique_q = set(query_tokens)
         scored = []
 
         for doc in self._docs:
-            similarity = _cosine(query_tf, doc["tf"])
+            sim_full = _cosine(query_tf, doc["tf"])
+            sim_mo = _cosine(query_tf, doc.get("mo_tf", {}))
+            sim_ev = _cosine(query_tf, doc.get("ev_tf", {}))
+            max_sec = max(sim_full, sim_mo, sim_ev)
+
+            matched_tokens = unique_q & doc.get("tokens_set", set())
+            coverage = len(matched_tokens) / len(unique_q) if unique_q else 0.0
+
+            # Dynamic blend: section similarity + keyword coverage
+            if coverage >= 0.20 and max_sec > 0.07:
+                similarity = max(sim_full, 0.7 * max_sec + 0.3 * (coverage * max_sec * 1.5))
+            else:
+                similarity = max(sim_full, max_sec)
+
             if similarity <= 0:
                 continue
             distance = max(0.0, 1.0 - similarity)
@@ -221,6 +256,12 @@ class CaseRetriever:
                 "case_title": metadata.get("case_title", metadata.get("title", "Unknown Case")),
                 "location": metadata.get("location", "Unknown"),
                 "crime_type": metadata.get("crime_type", "Unknown"),
+                "court_or_authority": metadata.get("court_or_authority", "Supreme Court / High Court"),
+                "legal_citation": metadata.get("legal_citation", "Public Criminal Case Record"),
+                "source": metadata.get("source", "Indian Kanoon / Official Judicial Judgment"),
+                "source_url": metadata.get("source_url", ""),
+                "ipc_sections": metadata.get("ipc_sections", []),
+                "judgment_date": metadata.get("judgment_date", ""),
                 # Provide summary (factual) and snippet (extracted) separately
                 "summary": doc.get("summary", ""),
                 "snippet": doc["text"][:300],

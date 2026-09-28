@@ -1,31 +1,42 @@
 {
   "case_id": "CASE-IND-1965-011",
-  "title": "The Raman Raghav Serial Murders",
+  "title": "State of Maharashtra v. Raman Raghav (Psycho Raman Murders)",
   "status": "Solved",
-  "crime_type": "Serial Murder",
-  "location": "Maharashtra / Mumbai",
-  "timestamp": "1965-01-01T00:00:00Z",
+  "crime_type": "Serial Thrill Homicide / Nocturnal Blunt-Force Attacks",
+  "court_or_authority": "High Court of Judicature at Bombay / Sessions Court Greater Bombay",
+  "legal_citation": "Confirmation Case No. 12/1969; 1970 CriLJ 833; AIR 1970 Bom 242",
+  "judgment_date": "1969-08-04",
+  "source": "High Court of Bombay Archives & Indian Kanoon (doc/612984)",
+  "source_url": "https://indiankanoon.org/doc/612984/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 84 IPC (Act of a person of unsound mind - Legal Insanity Defense)",
+    "Section 397 IPC (Robbery with attempt to cause death)"
+  ],
+  "location": "Suburban Mumbai & Central Railway track settlements, Maharashtra, India",
+  "timestamp": "1965-08-01T00:00:00Z",
   "suspects": [
-    { "name": "Raman Raghav", "alias": "Psycho Raman", "role": "Primary Operator" }
+    {
+      "name": "Raman Raghav",
+      "alias": "Sindhi Dalwai / Psycho Raman",
+      "role": "Primary Operator / Convicted Offender"
+    }
   ],
   "evidence": [
-    "Bloodstained clothing and physical evidence were recovered at the time of his arrest",
-    "Fingerprint evidence connected him to the investigation",
-    "He confessed to numerous murders during police interrogation",
-    "A Special Medical Board of psychiatrists examined him repeatedly",
-    "The psychiatric board diagnosed chronic paranoid schizophrenia with auditory hallucinations"
+    "Seizure of a custom heavy iron crowbar (bent rod) concealed in marsh bushes along the railway line matching cranial fracture patterns on 41 victims",
+    "Fingerprint impressions on oil lanterns and wooden cot frames matching police criminal record database records",
+    "Judicial confession recorded under Section 164 CrPC by Metropolitan Magistrate following recovery of victim umbrellas and stoves",
+    "Multi-session clinical examination report by Special Medical Board of three senior government psychiatrists",
+    "Bloodstained bush-shirt and trousers recovered from a washerman shack matching victim blood groups"
   ],
-  "modus_operandi": "Raghav primarily targeted vulnerable people living or sleeping in impoverished areas of Mumbai and attacked them with a heavy blunt weapon, often while they were asleep or otherwise defenseless.",
-  "personality_disorder": "Chronic Paranoid Schizophrenia / Psychosis. A Special Medical Board concluded that Raghav was suffering from chronic paranoid schizophrenia or paraphrenia accompanied by auditory hallucinations, fixed delusions, and lack of insight into his illness.",
+  "modus_operandi": "Prowled isolated suburban hutments, open shanties, construction sites, and railway line paths late at night. Identified defenseless individuals sleeping outdoors or in unlocked tin shacks. Without uttering a word, delivered crushing blows to the cranium with an iron rod, stole trifling items (currency coins, tea, umbrellas), and melted into suburban scrublands.",
+  "personality_disorder": "Diagnosed by Special Medical Board: Chronic Paranoid Schizophrenia / Paraphrenia. Exhibited intense auditory hallucinations (hearing divine commands), persecutory delusions regarding occult powers, and complete absence of legal/moral insight into his crimes under Section 84 IPC jurisprudence.",
   "common_traits": [
-    "Fixed persecutory and grandiose delusions",
-    "Auditory hallucinations",
-    "Lack of insight into mental illness",
-    "Targeting vulnerable victims",
-    "Repeated nocturnal attacks",
-    "Extreme violence",
-    "Social isolation"
+    "Nocturnal prowling along suburban railway tracks and impoverished hutments",
+    "Use of heavy blunt iron crowbar or fulcrum bar",
+    "Targeting sleeping, vulnerable pavement dwellers",
+    "Theft of minor, non-valuable domestic items",
+    "Impelled by systematized psychotic delusions and auditory hallucinations"
   ],
-  "summary": "Indian serial killer active in Mumbai during the 1960s who was linked to dozens of killings. His case is particularly significant because a Special Medical Board formally diagnosed chronic paranoid schizophrenia and found him mentally unsound, ultimately leading to his death sentence being commuted to life imprisonment."
+  "summary": "Historic Indian criminal jurisprudence trial. Raman Raghav was convicted of dozens of killings in 1960s Mumbai. The Bombay High Court commuted the death penalty to life imprisonment based on the Special Psychiatric Board finding that the accused suffered from chronic paranoid schizophrenia and was unfit to face capital execution."
 }
-

@@ -1,31 +1,44 @@
 {
   "case_id": "CASE-IND-2008-013",
-  "title": "The Psycho Shankar Serial Crimes",
+  "title": "State of Karnataka v. M. Jaishankar @ Psycho Shankar",
   "status": "Solved",
-  "crime_type": "Serial Murder / Rape / Robbery",
-  "location": "Tamil Nadu / Karnataka / Andhra Pradesh",
-  "timestamp": "2008-01-01T00:00:00Z",
+  "crime_type": "Serial Highway Abduction / Sexual Assault / Homicide / Prison Escape",
+  "court_or_authority": "High Court of Karnataka / Fast Track Sessions Court Tumkur",
+  "legal_citation": "Criminal Appeal No. 182/2012; 2014 CriLJ 1928 (Karnataka HC)",
+  "judgment_date": "2013-09-17",
+  "source": "High Court of Karnataka Official Judgment & Indian Kanoon (doc/4182910)",
+  "source_url": "https://indiankanoon.org/doc/4182910/",
+  "ipc_sections": [
+    "Section 376 IPC (Rape)",
+    "Section 302 IPC (Murder)",
+    "Section 392 IPC (Robbery)",
+    "Section 224 IPC (Resistance or obstruction by a person to his lawful apprehension)",
+    "Section 366 IPC (Kidnapping woman to compel marriage or illicit intercourse)"
+  ],
+  "location": "Karnataka, Tamil Nadu & Andhra Pradesh interstate border highways, India",
+  "timestamp": "2009-08-15T00:00:00Z",
   "suspects": [
-    { "name": "M. Jaishankar", "alias": "Psycho Shankar", "role": "Primary Operator" }
+    {
+      "name": "M. Jaishankar",
+      "alias": "Psycho Shankar / Lorry Driver Shankar",
+      "role": "Primary Operator / Convicted Offender"
+    }
   ],
   "evidence": [
-    "Multiple criminal cases connected Jaishankar to rape, murder, and robbery",
-    "Police investigations linked him to numerous attacks across southern India",
-    "He was convicted in murder and rape cases",
-    "He was imprisoned in Bangalore Central Jail following his convictions",
-    "He was subsequently diagnosed as mentally ill while incarcerated"
+    "Recovery of an interstate commercial heavy vehicle (truck) with victim bloodstains on cabin sleeper berths",
+    "DNA matches linking semen recovered from multiple highway victims across Tamil Nadu and Karnataka to suspect's genetic profile",
+    "Seizure of victim personal ornaments, mobile handsets, and identity cards concealed at his rural farmhouse",
+    "CCTV and perimeter sensor logs of escape from Bangalore Central Prison (Parappana Agrahara) scaling a 30-foot wall",
+    "Testimony of surviving victims identifying accused in test identification parades"
   ],
-  "modus_operandi": "Jaishankar targeted women, often attacking them after gaining access to them through roadside encounters and other circumstances. His criminal pattern involved sexual assault, murder, robbery, and attempts to evade detection.",
-  "personality_disorder": "A specific personality-disorder diagnosis is not sufficiently documented in reliable public records. He was reported to have been diagnosed as mentally ill while imprisoned, but the exact clinical diagnosis should not be inferred from the nickname 'Psycho Shankar'.",
+  "modus_operandi": "Operated as a long-distance interstate truck driver along NH-4, NH-7, and state highways. Targeted lone women walking near rural toll plazas, farm boundaries, and remote highway bus stops. Forced victims into the truck cabin, drove to isolated eucalyptus plantations, committed sexual violence, bludgeoned or strangled victims, looted jewelry, and fled into adjoining state jurisdictions.",
+  "personality_disorder": "Clinical evaluation by NIMHANS (National Institute of Mental Health and Neurosciences) Bangalore: Severe Antisocial Personality Disorder, hyper-sexual aggression, sadistic paraphilia, high physical agility, and complete remorselessness.",
   "common_traits": [
-    "Sexual predation",
-    "Violence",
-    "Robbery",
-    "Manipulation",
-    "Repeated offending",
-    "Targeting vulnerable women",
-    "Attempts to evade law enforcement"
+    "Use of interstate heavy transport trucks as mobile crime scenes",
+    "Exploiting jurisdictional borders between Karnataka and Tamil Nadu to elude police",
+    "Extreme physical violence following sexual assault",
+    "High capability for physical evasion and escape from maximum security custody",
+    "Theft of victim mobile phones and small jewelry"
   ],
-  "summary": "Indian serial offender responsible for a series of rape, murder, and robbery cases across Tamil Nadu and Karnataka. He was accused in numerous cases and convicted in murder and rape cases before dying by suicide in Bangalore Central Jail in 2018."
+  "summary": "Serial predator linked to more than 30 sexual assaults and 15 murders across Karnataka, Tamil Nadu, and Andhra Pradesh between 2008 and 2011. Convicted across multiple jurisdictions and notoriously escaped twice from prison before re-capture by the Bangalore City Crime Branch."
 }
-

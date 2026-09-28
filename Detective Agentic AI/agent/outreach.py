@@ -47,9 +47,9 @@ Claim your 25 FREE Profiling Evaluations now — no credit card required:
 If you have any questions or would like a live walkthrough, simply reply to this email.
 
 Best regards,
-Aditya Srivastava          |  Akshat Verma
-Founder                    |  Partner
-yeahboyadi@gmail.com       |  akshat.v2166@gmail.com
+Ankit kumar          |   Subhadeep Bag
+Founder              |  Partner
+ankitjsr12345@gmail.com   |   subhadeepbag571@gmail.com
 Detective Agentic AI — {platform_url}
 """
 

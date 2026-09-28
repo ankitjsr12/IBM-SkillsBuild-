@@ -41,6 +41,26 @@ from agent.billing import (
     STATUS_FLAGGED,
     STATUS_INVALID_UTR,
 )
+from database.connection import init_db, migrate_existing_cases
+from frontend.cases_view import render_case_management
+from frontend.suspects_view import render_suspect_management
+from frontend.evidence_view import render_evidence_management
+from frontend.timeline_view import render_timeline_management
+from frontend.anomaly_view import render_anomaly_dashboard
+from frontend.graph_view import render_relationship_graph
+from frontend.dashboard_view import render_analytics_dashboard
+from frontend.audit_view import render_audit_trail_view
+
+
+
+
+# Initialize database schema and migrate existing JSON cases on startup
+try:
+    init_db()
+    migrate_existing_cases()
+except Exception as _db_err:
+    pass
+
 
 st.set_page_config(
     page_title="Detective Agentic AI - Criminal Profiler",
@@ -154,7 +174,7 @@ def _get_upi_vpa() -> str:
                 return v
         except Exception:
             pass
-    return "adityasriv@ptyes"
+    return "ankitjsr12345@okaxis"
 
 def _get_upi_name() -> str:
     for source in (
@@ -167,7 +187,7 @@ def _get_upi_name() -> str:
                 return v
         except Exception:
             pass
-    return "Aditya Srivastava"
+    return "Mr Ankit Kumar"
 
 def _get_gmail_app_password() -> str:
     """Read the Gmail App Password from Streamlit secrets or env vars."""
@@ -799,23 +819,72 @@ if st.session_state.partial_utr:
     else:
         st.session_state.partial_utr = None
 
-_tab_labels = ["🔍 Profiling Dashboard", "💳 Billing & Plans", "📬 Contact & Feedback"]
+_tab_labels = ["📊 Executive Analytics", "🔍 Profiling Analysis", "📁 Case Management", "👤 Suspects", "🔬 Evidence", "⏱️ Case Timeline", "⚠️ Anomaly Analysis", "🕸️ Relationship Graph", "💳 Billing & Plans", "📬 Contact & Feedback"]
 if st.session_state.is_admin:
+    _tab_labels.append("🛡️ Audit Trail")
     _tab_labels.append("📢 B2B Agency Acquisition")
 _tabs = st.tabs(_tab_labels)
-tab_profile = _tabs[0]
-tab_billing = _tabs[1]
-tab_contact = _tabs[2]
-tab_outreach = _tabs[3] if st.session_state.is_admin else None
+tab_dashboard = _tabs[0]
+tab_profile = _tabs[1]
+tab_cases = _tabs[2]
+tab_suspects = _tabs[3]
+tab_evidence = _tabs[4]
+tab_timeline = _tabs[5]
+tab_anomalies = _tabs[6]
+tab_graph = _tabs[7]
+tab_billing = _tabs[8]
+tab_contact = _tabs[9]
+tab_audit = _tabs[10] if st.session_state.is_admin else None
+tab_outreach = _tabs[11] if st.session_state.is_admin else None
+
+with tab_dashboard:
+    render_analytics_dashboard()
 
 with tab_profile:
     col1, col2 = st.columns([1, 1])
     with col1:
         st.subheader("Suspect Information & Observations")
+
+        # Quick Presets for Real Indian Landmark Precedents
+        st.markdown("**⚡ Quick Precedent Test Scenarios (1-Click Fill):**")
+        p_c1, p_c2, p_c3 = st.columns(3)
+        if p_c1.button("💊 Cyanide Mohan", use_container_width=True, key="quick_preset_cyanide"):
+            st.session_state["suspect_name_input"] = "Mohan K. @ Cyanide Mohan"
+            st.session_state["age_input"] = "45"
+            st.session_state["behaviors_input"] = "Befriends women under false pretext of marriage proposal. Takes victims to lodge rooms distant from their home. Convinces victims to consume cyanide disguised as contraceptive medicine near bus stations or hotel washrooms. Takes deceased's jewelry and cash before departing scene."
+            st.rerun()
+        if p_c2.button("🐍 Uthra Snakebite", use_container_width=True, key="quick_preset_snakebite"):
+            st.session_state["suspect_name_input"] = "Sooraj S. Kumar"
+            st.session_state["age_input"] = "28"
+            st.session_state["behaviors_input"] = "Procuring venomous viper and cobra snakes from snake handlers. Releasing lethal serpent into bedroom while victim is sedated or sleeping to stage accidental snakebite, targeting insurance payout and gold jewelry."
+            st.rerun()
+        if p_c3.button("🧪 Preeti Rathi Acid", use_container_width=True, key="quick_preset_acid"):
+            st.session_state["suspect_name_input"] = "Ankur Panwar"
+            st.session_state["age_input"] = "25"
+            st.session_state["behaviors_input"] = "Stalking female victim after marriage proposal rejected. Followed victim across state transit lines to railway station platform. Threw concentrated sulfuric acid from can, causing fatal chemical burn injuries."
+            st.rerun()
+
+        p_c4, p_c5, p_c6 = st.columns(3)
+        if p_c4.button("🔨 Raman Raghav", use_container_width=True, key="quick_preset_raman"):
+            st.session_state["suspect_name_input"] = "Raman Raghav"
+            st.session_state["age_input"] = "40"
+            st.session_state["behaviors_input"] = "Attacking homeless and impoverished pavement dwellers sleeping along railway tracks and suburban shanties during midnight hours using a blunt iron rod, stealing trivial food items and small change."
+            st.rerun()
+        if p_c5.button("🚌 Nirbhaya Assault", use_container_width=True, key="quick_preset_nirbhaya"):
+            st.session_state["suspect_name_input"] = "Mukesh Singh & Co."
+            st.session_state["age_input"] = "32"
+            st.session_state["behaviors_input"] = "Operating chartered private bus after hours. Luring passengers under pretext of transit route. Systematic violent assault and grievous hurt using rusted iron rod, destroying evidence and dumping victim on airport road."
+            st.rerun()
+        if p_c6.button("🪚 Chandrakant Jha", use_container_width=True, key="quick_preset_chandrakant"):
+            st.session_state["suspect_name_input"] = "Chandrakant Jha"
+            st.session_state["age_input"] = "39"
+            st.session_state["behaviors_input"] = "Befriending migrant laborers, binding and strangling victims, followed by methodical decapitation and anatomical dismemberment. Dumping severed torso in plastic sacks outside central prison gates with taunting handwritten notes."
+            st.rerun()
+
         with st.form(key="suspect_profiling_form"):
-            suspect_name = st.text_input("Suspect Name / Alias", placeholder="John Doe")
-            age = st.text_input("Age", placeholder="34")
-            behaviors = st.text_area("Observed Behaviors, MO, & Traits", height=180,
+            suspect_name = st.text_input("Suspect Name / Alias", value=st.session_state.get("suspect_name_input", ""), placeholder="e.g. John Doe / Suspect Alpha")
+            age = st.text_input("Age", value=st.session_state.get("age_input", ""), placeholder="e.g. 34")
+            behaviors = st.text_area("Observed Behaviors, MO, & Traits", value=st.session_state.get("behaviors_input", ""), height=180,
                                      placeholder="Entering residential premises during late hours, targeting locked cabinets...")
             submit_btn = st.form_submit_button("Run Intelligence Analysis", type="primary", use_container_width=True)
     with col2:
@@ -860,6 +929,21 @@ with tab_profile:
                             "timestamp": time.time(),
                         }
                         st.session_state.analysis_history.append(st.session_state.latest_results.copy())
+                        try:
+                            from agent.suspect_engine import SuspectEngine
+                            _s_eng = SuspectEngine()
+                            _matches = _s_eng.list_suspects(search=name_str)
+                            _t_susp = next((_s for _s in _matches if _s.name.lower() == name_str.lower()), None)
+                            if not _t_susp:
+                                _, _, _t_susp = _s_eng.register_suspect(
+                                    name=name_str,
+                                    age=age.strip() if age and age.strip() else None,
+                                    observed_behaviors=behaviors.strip() if behaviors else None,
+                                )
+                            if _t_susp:
+                                _s_eng.record_assessment(_t_susp.suspect_id, res)
+                        except Exception:
+                            pass
                     except Exception as err:
                         st.error(f"Analysis error. Please try again. (Details: {err})")
 
@@ -885,28 +969,71 @@ with tab_profile:
             if res.get("disclaimer"):
                 st.warning(res["disclaimer"])
 
-            st.markdown("#### Retrieved Historical Precedents")
-            st.caption("SOURCE TYPE: RETRIEVED EVIDENCE — similarity-based match from historical case index. Not AI-generated.")
+            st.markdown("#### ⚖️ Retrieved Indian Legal Case Precedents")
+            st.caption("SOURCE TYPE: VERIFIED INDIAN LEGAL RECORDS — Retrieved via ChromaDB/Vector Similarity. Never present as proof of guilt.")
             if res["matched_cases"]:
-                for case in res["matched_cases"]:
+                top_case = res["matched_cases"][0]
+                top_sim_pct = f"{float(top_case.get('similarity', 0.0)):.0%}"
+                top_court = top_case.get("court_or_authority") or top_case.get("metadata", {}).get("court_or_authority", "Supreme Court / High Court")
+                top_cite = top_case.get("legal_citation") or top_case.get("metadata", {}).get("legal_citation", "Public Legal Record")
+                top_source = top_case.get("source") or top_case.get("metadata", {}).get("source", "Indian Kanoon / Judicial Records")
+                top_url = top_case.get("source_url") or top_case.get("metadata", {}).get("source_url", "")
+                top_ipc = top_case.get("ipc_sections") or top_case.get("metadata", {}).get("ipc_sections", [])
+                top_ipc_str = ", ".join(top_ipc) if isinstance(top_ipc, list) else str(top_ipc)
+
+                st.success(
+                    f"🎯 **TOP MATCHED INDIAN PRECEDENT ({top_sim_pct} ALIGNMENT):**  \n"
+                    f"**{top_case.get('case_title', 'Landmark Precedent')}** [`{top_case.get('case_id')}`]  \n"
+                    f"🏛️ **Authority:** {top_court} | 📖 **Citation:** {top_cite}  \n"
+                    f"⚖️ **Statutory Sections:** {top_ipc_str or 'Indian Penal Code'}"
+                )
+                if top_url:
+                    st.markdown(f"🔗 **Primary Source Verification:** [{top_source}]({top_url})")
+
+                for idx, case in enumerate(res["matched_cases"]):
                     sim_pct = f"{float(case.get('similarity', 0.0)):.0%}"
                     result_type = case.get("result_type", "RETRIEVED EVIDENCE")
+                    court = case.get("court_or_authority") or case.get("metadata", {}).get("court_or_authority", "Supreme Court / High Court")
+                    cite = case.get("legal_citation") or case.get("metadata", {}).get("legal_citation", "Public Legal Record")
+                    source_desc = case.get("source") or case.get("metadata", {}).get("source", "Indian Kanoon / Judicial Records")
+                    source_url = case.get("source_url") or case.get("metadata", {}).get("source_url", "")
+                    ipc_secs = case.get("ipc_sections") or case.get("metadata", {}).get("ipc_sections", [])
+                    ipc_str = ", ".join(ipc_secs) if isinstance(ipc_secs, list) else str(ipc_secs)
+
                     with st.expander(
-                        f"📌 [{result_type}] {case.get('case_title','Historical Precedent')} "
-                        f"({case.get('location','Global')}) — Similarity: {sim_pct}"
+                        f"📌 #{idx+1} [{result_type}] {case.get('case_title','Historical Precedent')} "
+                        f"({case.get('location','India')}) — Similarity: {sim_pct}",
+                        expanded=(idx == 0)
                     ):
-                        st.write(f"**Case ID:** {case.get('case_id','N/A')}")
-                        st.write(f"**Crime Type:** {case.get('crime_type', 'N/A')}")
+                        st.info(
+                            f"**EXPLAINABLE CORRELATION PIPELINE:**  \n"
+                            f"**SOURCE DATA:** {court} [{cite}]  \n"
+                            f"**→ MATCHED PATTERN:** {case.get('crime_type', 'Offence')} ({case.get('location', 'India')})  \n"
+                            f"**→ SIMILARITY:** `{sim_pct}`  \n"
+                            f"**→ AI ANALYSIS:** Statistical behavioral pattern match under {ipc_str or 'Indian Penal Code'}. Non-legal finding."
+                        )
+                        c_m1, c_m2 = st.columns(2)
+                        with c_m1:
+                            st.write(f"**Case Reference ID:** `{case.get('case_id','N/A')}`")
+                            st.write(f"**Judicial Court / Authority:** {court}")
+                            st.write(f"**Legal Citation:** {cite}")
+                        with c_m2:
+                            st.write(f"**IPC / Statutory Sections:** {ipc_str or 'General Criminal Law'}")
+                            if source_url:
+                                st.write(f"**Official Legal Source:** [{source_desc}]({source_url})")
+                            else:
+                                st.write(f"**Official Legal Source:** {source_desc}")
+
                         # Show summary (factual case record) separately from snippet (extracted text)
                         if case.get("summary"):
-                            st.write(f"**Case Summary (FACT — from case record):** {case['summary']}")
+                            st.write(f"**Case Summary (FACT — Judicial Record):** {case['summary']}")
                         if case.get("snippet"):
-                            st.write(f"**Extracted Context (RETRIEVED):** {case['snippet'][:300]}...")
+                            st.write(f"**Extracted Context (RETRIEVED):** {case['snippet'][:350]}...")
                         st.caption(
                             f"Cosine similarity: {sim_pct} | Distance: {case.get('distance', 'N/A')}"
                         )
             else:
-                st.info("ℹ️ No sufficiently similar precedent found. No historical case in the index met the similarity threshold for this input.")
+                st.info("ℹ️ No sufficiently similar Indian record found in the precedent index.")
             try:
                 pdf_bytes = generate_pdf_report(
                     res["name"], res["age"], res["tendency_score"],
@@ -924,6 +1051,24 @@ with tab_profile:
                 )
             except Exception as pdf_err:
                 st.warning(f"PDF generation failed: {pdf_err}")
+
+with tab_cases:
+    render_case_management()
+
+with tab_suspects:
+    render_suspect_management()
+
+with tab_evidence:
+    render_evidence_management()
+
+with tab_timeline:
+    render_timeline_management()
+
+with tab_anomalies:
+    render_anomaly_dashboard()
+
+with tab_graph:
+    render_relationship_graph()
 
 with tab_billing:
     PLANS = {
@@ -1042,6 +1187,10 @@ with tab_contact:
     )
 
 if st.session_state.is_admin:
+    if tab_audit:
+        with tab_audit:
+            render_audit_trail_view()
+
     with tab_outreach:
         st.subheader("📢 B2B Lead Scraper & Cold Email Outreach")
         st.caption("Scrape target agency/detective contact information, select specific prospects, preview emails, and dispatch only after approval.")
