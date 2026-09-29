@@ -921,6 +921,7 @@ with tab_profile:
                     match_quality=res.get("match_quality", ""),
                     evidence_hash=res.get("evidence_hash"),
                     legal_compliance=res.get("legal_compliance"),
+                    summary_text=res.get("summary_text"),
                 )
                 # Use microseconds to guarantee a unique key even within the same second
                 dynamic_key = f"dl_pdf_{int(res.get('timestamp', time.time()) * 1e6)}"

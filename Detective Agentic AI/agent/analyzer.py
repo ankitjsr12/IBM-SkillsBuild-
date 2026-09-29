@@ -179,10 +179,13 @@ class DetectiveAgent:
             else:
                 match_quality = "Weak case-index similarity"
 
+            case_count = len(retrieved_cases)
             summary = (
-                f"Model assessment: behaviour pattern aligns with "
-                f"{len(retrieved_cases)} historical case(s) in the index. "
-                "This is a similarity-based result, not a legal finding."
+                f"The system identified behavioural similarities with {case_count} historical "
+                f"case{'s' if case_count != 1 else ''} in the indexed dataset. "
+                "This is an AI-generated similarity analysis for investigative research only and is not a legal finding, "
+                "proof of guilt, or probability of criminal activity. "
+                "Final interpretation must be performed by a qualified investigator."
             )
 
         else:
@@ -216,8 +219,10 @@ class DetectiveAgent:
 
             match_quality = "No sufficiently similar Indian record found."
             summary = (
-                "No sufficiently similar Indian record found in the precedent index. "
-                "Risk evaluated from behavioural keyword indicators only. Confidence is low — manual investigator review recommended."
+                "The system found no sufficiently similar historical cases in the indexed dataset. "
+                "This is an AI-generated similarity analysis for investigative research only and is not a legal finding, "
+                "proof of guilt, or probability of criminal activity. "
+                "Final interpretation must be performed by a qualified investigator."
             )
 
         # --- 4. Risk category ---

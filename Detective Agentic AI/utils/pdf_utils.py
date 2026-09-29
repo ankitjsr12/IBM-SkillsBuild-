@@ -65,10 +65,11 @@ def _render_1page_pdf(
         truncate_text(
             safe_str(
                 summary_text,
-                "AI behavioral pattern matching executed across indexed Indian landmark precedents. "
-                "Evidence correlations indicate structural alignment with historical modus operandi.",
+                "The system identified behavioural similarities with historical cases in the indexed dataset. "
+                "This is an AI-generated similarity analysis for investigative research only and is not a legal finding, "
+                "proof of guilt, or probability of criminal activity. Final interpretation must be performed by a qualified investigator.",
             ),
-            230,
+            350,
         )
     )
     clean_disclaimer = sanitize_for_pdf(safe_str(disclaimer) if disclaimer else MANDATORY_DISCLAIMER)
@@ -293,10 +294,10 @@ def _render_1page_pdf(
     pdf.set_draw_color(210, 225, 245)
     pdf.rect(12, box3_y, 186, box3_h, style="FD")
 
-    pdf.set_font("Helvetica", "", 7.2)
+    pdf.set_font("Helvetica", "", 6.8)
     pdf.set_text_color(30, 45, 65)
     pdf.set_xy(15, box3_y + 2.5)
-    pdf.multi_cell(180, 3.5, clean_summary)
+    pdf.multi_cell(180, 3.2, clean_summary)
 
     pdf.set_font("Helvetica", "B", 6.8)
     pdf.set_text_color(70, 85, 110)
@@ -407,15 +408,19 @@ def generate_pdf_report(
     match_quality: str = "",
     evidence_hash: Optional[str] = None,
     legal_compliance: Optional[Dict[str, Any]] = None,
+    summary_text: Optional[str] = None,
 ) -> bytes:
     """
     Generate a simple, clean, and elegant 1-Page AI PDF Intelligence Profile Report.
     """
-    summary = (
-        f"Subject profiled with tendency score of {tendency_score} ({risk_level}). "
-        f"Match quality evaluated as {match_quality or 'Standard RAG'}. Modus operandi analysis "
-        "indicates specific operational patterns correlated with indexed Indian precedents."
+    case_count = len(matched_cases or [])
+    default_summary = (
+        f"The system identified behavioural similarities with {case_count} historical "
+        f"case{'s' if case_count != 1 else ''} in the indexed dataset. "
+        "This is an AI-generated similarity analysis for investigative research only and is not a legal finding, "
+        "proof of guilt, or probability of criminal activity. Final interpretation must be performed by a qualified investigator."
     )
+    summary = summary_text or default_summary
     return _render_1page_pdf(
         subject_name=suspect_name,
         age=age,
