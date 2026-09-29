@@ -1,7 +1,12 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+_BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if _BASE_DIR not in sys.path:
+    sys.path.insert(0, _BASE_DIR)
+_REPO_ROOT = os.path.abspath(os.path.join(_BASE_DIR, ".."))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(1, _REPO_ROOT)
 
 try:
     from dotenv import load_dotenv
@@ -272,8 +277,69 @@ def make_upi_qr(amount: int, plan_ref: str) -> bytes:
     return buf.getvalue()
 
 
-from utils.pdf_utils import generate_pdf_report, generate_investigation_dossier_pdf
-from utils.text_utils import sanitize_for_pdf, extract_behavioral_patterns
+# Resilient imports for PDF generation & behavioral pattern extraction
+try:
+    from utils.pdf_utils import generate_pdf_report
+except Exception:
+    try:
+        import importlib
+        import utils.pdf_utils
+        importlib.reload(utils.pdf_utils)
+        from utils.pdf_utils import generate_pdf_report
+    except Exception:
+        generate_pdf_report = None
+
+try:
+    from utils.text_utils import sanitize_for_pdf, extract_behavioral_patterns
+except Exception:
+    try:
+        import importlib
+        import utils.text_utils
+        importlib.reload(utils.text_utils)
+        from utils.text_utils import sanitize_for_pdf, extract_behavioral_patterns
+    except Exception:
+        def sanitize_for_pdf(val, default="Not provided"):
+            return str(val) if val else default
+
+        def extract_behavioral_patterns(text: str) -> list:
+            if not text or not str(text).strip():
+                return []
+            import re
+            clean_text = str(text).strip()
+            raw_clauses = re.split(r"[\n\r.;,]+", clean_text)
+            clauses = [c.strip() for c in raw_clauses if len(c.strip()) > 3]
+            rules = [
+                ("Communication patterns", [r"phone", r"burner", r"sim", r"call", r"note", r"letter", r"message", r"communicat", r"contact", r"whatsapp", r"telegram", r"confession"]),
+                ("Surveillance-related behaviour", [r"cctv", r"camera", r"surveillance", r"monitoring", r"casing", r"watch", r"reconnaissance", r"scout", r"stakeout"]),
+                ("Time-of-day pattern", [r"night", r"midnight", r"nocturnal", r"after-hours", r"late", r"hours", r"dawn", r"dark", r"evening", r"morning", r"shift"]),
+                ("Location changes & Movement pattern", [r"location", r"transit", r"railway", r"delhi", r"ghaziabad", r"station", r"bus", r"interstate", r"travel", r"movement", r"move", r"lodge", r"hotel", r"route"]),
+                ("Target presence & approach pattern", [r"befriend", r"lure", r"vulnerable", r"migrant", r"jewelry", r"shop", r"warehouse", r"target", r"victim", r"premises", r"locked", r"pavement", r"door"]),
+                ("Forensic counter-measures & concealment", [r"disabl", r"wire", r"alarm", r"plastic", r"sack", r"dump", r"conceal", r"cut", r"destroy", r"hide", r"mask", r"glove"]),
+                ("Operational instrument / substance usage", [r"poison", r"cyanide", r"acid", r"rod", r"serpent", r"snake", r"strangl", r"decapitat", r"dismember", r"lock-pick", r"chemical", r"weapon", r"substance"]),
+            ]
+            extracted = []
+            used_clauses = set()
+            for pattern_name, regex_list in rules:
+                for clause in clauses:
+                    if clause.lower() in used_clauses:
+                        continue
+                    if any(re.search(rx, clause, re.IGNORECASE) for rx in regex_list):
+                        extracted.append({
+                            "pattern": pattern_name,
+                            "evidence": clause,
+                            "confidence": "Based on available textual evidence",
+                        })
+                        used_clauses.add(clause.lower())
+                        break
+            for clause in clauses:
+                if clause.lower() not in used_clauses and len(extracted) < 6:
+                    extracted.append({
+                        "pattern": "Other explicitly mentioned behaviour",
+                        "evidence": clause,
+                        "confidence": "Based on available textual evidence",
+                    })
+                    used_clauses.add(clause.lower())
+            return extracted
 
 _safe_pdf_text = sanitize_for_pdf
 

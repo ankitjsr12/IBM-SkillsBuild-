@@ -1,7 +1,12 @@
 """
 Utilities package for Detective Agentic AI.
 """
-from utils.text_utils import sanitize_for_pdf, safe_str, truncate_text
+from utils.text_utils import (
+    sanitize_for_pdf,
+    safe_str,
+    truncate_text,
+    extract_behavioral_patterns,
+)
 from utils.validators import (
     validate_case_id,
     validate_suspect_id,
@@ -17,6 +22,7 @@ __all__ = [
     "sanitize_for_pdf",
     "safe_str",
     "truncate_text",
+    "extract_behavioral_patterns",
     "validate_case_id",
     "validate_suspect_id",
     "validate_evidence_id",
