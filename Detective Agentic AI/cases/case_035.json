@@ -1,0 +1,48 @@
+{
+  "case_id": "CASE-IND-2004-035",
+  "title": "State of Tamil Nadu & Karnataka v. Koose Muniswamy Veerappan (Operation Cocoon)",
+  "status": "Solved",
+  "crime_type": "Forest Banditry / Sandalwood Smuggling / Elephant Poaching / Ambush of Police Forces",
+  "court_or_authority": "Special STF Joint Operations / High Court of Madras",
+  "legal_citation": "2004 SCC OnLine Mad 982; Special STF Report No. 44/2004",
+  "judgment_date": "2004-10-18",
+  "source": "Tamil Nadu Special Task Force Archive & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 364A IPC (Kidnapping for ransom)",
+    "Section 395 IPC (Dacoity)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Wild Life (Protection) Act 1972",
+    "Indian Forest Act 1927"
+  ],
+  "location": "Sathyamangalam & MM Hills Forest Ranges, Tamil Nadu & Karnataka, India",
+  "timestamp": "2004-10-18T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Koose Muniswamy Veerappan",
+      "alias": "Forest Brigand / Sandalwood Smuggler",
+      "role": "Bandit Gang Leader (Killed in STF Ambush)"
+    },
+    {
+      "name": "Sethukuli Govindan",
+      "alias": "Chief Lieutenant",
+      "role": "Second-in-Command"
+    }
+  ],
+  "evidence": [
+    "Recovery of 12 Bore rifles, self-loading rifles (SLR), hand grenades, and wireless transceivers from ambushed ambulance vehicle",
+    "Ballistic matching linking seized weapons to assassination of 184 police officers and forest rangers over three decades",
+    "Intelligence audio intercepts of undercover STF operative disguised as arms broker infiltrator",
+    "Forensic autopsies of Veerappan and three associates confirming bullet wounds sustained in tactical STF counter-ambush"
+  ],
+  "modus_operandi": "Controlled 6,000 sq km of dense scrub jungle across Tamil Nadu, Karnataka, and Kerala. Operated an armed insurgent bandit network harvesting thousands of tons of sandalwood and poaching hundreds of elephants. Kidnapped high-profile dignitaries (including Kannada superstar Dr. Rajkumar) for multi-crore ransom and executed landmine ambushes against police task forces.",
+  "personality_disorder": "Megalomanic forest insurgent mindset, ruthless guerrilla violence, and predatory mastery of wilderness terrain.",
+  "common_traits": [
+    "Wilderness guerrilla evasion over decades",
+    "Landmine and improvised explosive ambushes of police convoys",
+    "Kidnapping public figures and cinema icons for state ransom demands",
+    "Ruthless execution of suspected tribal police informants"
+  ],
+  "summary": "Operation Cocoon was a 10-month undercover intelligence operation by the Tamil Nadu STF led by K. Vijay Kumar. Infiltrators lured Veerappan out of the jungle in an ambulance on pretext of eye medical surgery, neutralizing the gang in an encounter at Papparapatti."
+}

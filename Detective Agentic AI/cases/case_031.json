@@ -1,0 +1,51 @@
+{
+  "case_id": "CASE-IND-1999-031",
+  "title": "Manu Sharma @ Siddharth Vashisht v. State (NCT of Delhi) (Jessica Lal Murder)",
+  "status": "Solved",
+  "crime_type": "Homicide / Public Intoxication Violence / Suborning Witnesses & Perjury",
+  "court_or_authority": "Supreme Court of India / High Court of Delhi",
+  "legal_citation": "(2010) 6 SCC 1; AIR 2010 SC 2352; 2010 CriLJ 3089",
+  "judgment_date": "2010-04-19",
+  "source": "Supreme Court of India Judgment & Indian Kanoon (doc/1359141)",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 201 IPC (Causing disappearance of evidence)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 27 Arms Act 1959"
+  ],
+  "location": "Tamarind Court, Qutub Colonnade, Mehrauli, New Delhi, India",
+  "timestamp": "1999-04-30T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Manu Sharma",
+      "alias": "Siddharth Vashisht",
+      "role": "Primary Shooter / Convicted Offender"
+    },
+    {
+      "name": "Amardeep Singh Gill",
+      "alias": "Tony",
+      "role": "Accomplice"
+    },
+    {
+      "name": "Vikas Yadav",
+      "alias": "Present at Scene",
+      "role": "Accomplice"
+    }
+  ],
+  "evidence": [
+    "Spent .22 caliber cartridge casings recovered from bar counter matching licensed firearm category",
+    "White Tata Safari vehicle used by suspect abandoned in Noida before flight to Chandigarh",
+    "High Court reversal of controversial trial court acquittal based on eyewitness testimony and medical forensic analysis",
+    "Extensive media and public interest mobilization challenging witness hostility and political subornation"
+  ],
+  "modus_operandi": "Refused service of alcohol after closing hours at an unlicensed socialite party. Discharged a licensed .22 caliber firearm into the ceiling to intimidate staff, followed by a second shot into the temple of model/bartender Jessica Lal upon her polite refusal to serve drinks. Fled the scene with political friends and concealed vehicle.",
+  "personality_disorder": "Severe narcissistic entitlement, drunken rage impulsivity, and toxic reliance on political dynasty immunity.",
+  "common_traits": [
+    "Disproportionate violent retaliation to minor service refusal",
+    "Carrying concealed firearms into civilian night venues",
+    "Aggressive systemic witness tampering and perjury intimidation",
+    "Flight to political family estates following crime"
+  ],
+  "summary": "Iconic Indian criminal justice case defining the dangers of hostile witness manipulation and political impunity. Following nationwide public outcry, the Delhi High Court and Supreme Court convicted Manu Sharma to life imprisonment, establishing strict guidelines on witness protection and media trial boundaries."
+}

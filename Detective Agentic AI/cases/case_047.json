@@ -1,0 +1,47 @@
+{
+  "case_id": "CASE-IND-2014-047",
+  "title": "State of Haryana v. Rampal Das @ Sant Rampal (Satlok Ashram Siege)",
+  "status": "Solved",
+  "crime_type": "Armed Siege Against State Forces / Sedition / Private Militia Hostage Fortification",
+  "court_or_authority": "Additional District & Sessions Court, Hisar / High Court of Punjab & Haryana",
+  "legal_citation": "Sessions Case No. 142/2015; 2018 CriLJ (P&H) 3411",
+  "judgment_date": "2018-10-11",
+  "source": "Punjab & Haryana High Court Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 121 IPC (Waging war against the Government of India)",
+    "Section 302 IPC (Murder)",
+    "Section 342 IPC (Wrongful confinement)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Arms Act 1959"
+  ],
+  "location": "Satlok Ashram, Barwala, Hisar, Haryana, India",
+  "timestamp": "2014-11-18T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Rampal Das",
+      "alias": "Sant Rampal",
+      "role": "Cult Leader / Convicted Offender"
+    },
+    {
+      "name": "Purushottam Das",
+      "alias": "Ashram Commander",
+      "role": "Militia Organizer"
+    }
+  ],
+  "evidence": [
+    "Fortified 12-acre ashram compound with watchtowers, razor wire barricades, petrol bomb stockpiles, and acid containers",
+    "Seizure of 3 single-barrel rifles, 18 double-barrel guns, 2 revolver firearms, and 500 rounds of live ammunition from sanctum sanctorum",
+    "Detention of over 15,000 women and children kept as human shields to prevent security force water cannon and tear gas advance",
+    "Autopsies confirming five women and an infant died of asphyxiation and dehydration due to forced confinement inside compound"
+  ],
+  "modus_operandi": "Self-styled religious preacher defied 43 non-bailable arrest warrants issued by the High Court. Raised a trained private militia (Rashtriya Samaj Seva Samiti) equipped with batons, firearms, and acid pouches. Fortified ashram compound, using thousands of followers (including women and infants) as human shields against state police and paramilitary personnel during a two-week siege.",
+  "personality_disorder": "Megalomanic religious cult delusions, defiance of constitutional judicial authority, and militarized authoritarian control.",
+  "common_traits": [
+    "Religious cult compound fortification with private armed militia",
+    "Holding followers as captive human shields against police forces",
+    "Discharging acid bombs and live ammunition from compound watchtowers",
+    "Sedition and systematic contempt of high court warrants"
+  ],
+  "summary": "One of the largest domestic police siege operations in modern Indian history, costing over ₹26 crore to enforce court warrants. The Hisar Sessions Court convicted Rampal and 14 followers to life imprisonment for murder and criminal conspiracy."
+}

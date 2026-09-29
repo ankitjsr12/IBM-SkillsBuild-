@@ -92,3 +92,33 @@ def test_validate_file_size_and_type():
     assert ok
     ok, _ = validate_file_size(30 * 1024 * 1024)  # 30 MB > 25 MB limit
     assert not ok
+
+
+def test_transliterate_devanagari():
+    from utils.text_utils import transliterate_devanagari
+    hindi_text = "राजेश कुमार उर्फ राजू"
+    romanized = transliterate_devanagari(hindi_text)
+    assert "raajesh" in romanized.lower()
+    assert "kumaar" in romanized.lower()
+    assert "raajoo" in romanized.lower()
+    # Check that sanitize_for_pdf handles Hindi without crashing or generating question marks
+    cleaned = sanitize_for_pdf(hindi_text)
+    assert "?" not in cleaned
+    assert len(cleaned) > 5
+
+
+def test_extract_behavioral_patterns():
+    from utils.text_utils import extract_behavioral_patterns
+    sample = "Late night movements near commercial jewelry shops, using multiple burner phone numbers, disabling CCTV cameras before entry, frequent location changes between Delhi and Ghaziabad."
+    patterns = extract_behavioral_patterns(sample)
+    assert len(patterns) >= 3
+    pattern_names = [p["pattern"] for p in patterns]
+    assert any("Communication" in p for p in pattern_names)
+    assert any("Surveillance" in p for p in pattern_names)
+    assert any("Time-of-day" in p or "Temporal" in p for p in pattern_names)
+    assert any("Movement" in p or "Location" in p for p in pattern_names)
+    # Check that confidence and evidence are grounded
+    for p in patterns:
+        assert p["confidence"] == "Based on available textual evidence"
+        assert len(p["evidence"]) > 3
+

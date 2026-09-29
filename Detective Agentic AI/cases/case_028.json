@@ -1,0 +1,51 @@
+{
+  "case_id": "CASE-IND-1993-028",
+  "title": "Yakub Abdul Razak Memon v. State of Maharashtra (1993 Bombay Serial Blasts)",
+  "status": "Solved",
+  "crime_type": "Coordinated Vehicle Bombings / Terror Conspiracy / RDX Smuggling",
+  "court_or_authority": "Supreme Court of India / TADA Special Court Greater Bombay",
+  "legal_citation": "(2013) 13 SCC 1; 2013 CriLJ 2489",
+  "judgment_date": "2013-03-21",
+  "source": "Supreme Court of India Judgment & Indian Kanoon (doc/1359141)",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 302 IPC (Murder)",
+    "Section 3(2) TADA (Terrorist and Disruptive Activities Prevention Act)",
+    "Section 3 Explosive Substances Act 1908"
+  ],
+  "location": "Bombay Stock Exchange, Air India Building, Zaveri Bazaar, Mumbai, India",
+  "timestamp": "1993-03-12T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Yakub Abdul Razak Memon",
+      "alias": "Chartered Accountant / Financer",
+      "role": "Logistical & Financial Mastermind"
+    },
+    {
+      "name": "Ibrahim Mushtaq Razak Memon",
+      "alias": "Tiger Memon",
+      "role": "Absconding Operational Head"
+    },
+    {
+      "name": "Dawood Ibrahim Kaskar",
+      "alias": "D-Company Kingpin",
+      "role": "Absconding Global Terrorist"
+    }
+  ],
+  "evidence": [
+    "Recovery of unexploded RDX-laden Maruti car near Worli and scooter parked at Century Bazaar containing Tiger Memon vehicle documents",
+    "Hawala banking slips and air ticket booking records showing transit of conspirators to Islamabad via Dubai for arms training",
+    "Seizure of massive caches of RDX, detonators, and assault rifles smuggled via Shekhadi coast in Raigad district",
+    "Confessional statements recorded under Section 15 of TADA detailing secret coordination meetings at Al-Husseini building"
+  ],
+  "modus_operandi": "Organized crime syndicate joined forces with foreign intelligence handlers to smuggle tons of military RDX and assault weapons via coastal sea routes. Planted car bombs and suitcase explosives across 12 high-density financial and commercial landmarks in Mumbai, detonating them within a two-hour window.",
+  "personality_disorder": "Calculated criminal vengeance, organizational loyalty to transnational mafia syndicates, and logistical ruthlessness.",
+  "common_traits": [
+    "Coordinated multi-site vehicle-borne improvised explosive devices (VBIED)",
+    "Use of military RDX and pencil timers",
+    "Financing via transnational hawala channels",
+    "Pre-coordinated family flight overseas prior to detonation"
+  ],
+  "summary": "First synchronized multi-target urban bomb attacks in modern history, killing 257 people. The TADA Special Court and Supreme Court convicted Yakub Memon for financing and arranging travel/logistics, leading to his execution in 2015."
+}

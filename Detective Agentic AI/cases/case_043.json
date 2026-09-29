@@ -1,0 +1,47 @@
+{
+  "case_id": "CASE-IND-2008-043",
+  "title": "National Investigation Agency v. Ranjan Daimary & Ors. (Assam Serial Blasts)",
+  "status": "Solved",
+  "crime_type": "Synchronized Multi-District Vehicle Bombings / Separatist Insurgency / Mass Casualties",
+  "court_or_authority": "Special CBI / NIA Sessions Court Guwahati / Gauhati High Court",
+  "legal_citation": "Special NIA Case No. 1/2009; 2020 SCC OnLine Gau 4412",
+  "judgment_date": "2019-01-30",
+  "source": "Special Court Guwahati Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 121 IPC (Waging war against the Government of India)",
+    "Section 302 IPC (Murder)",
+    "Sections 3, 4, 5 Explosive Substances Act 1908",
+    "Sections 10, 13, 16, 20 UAPA 1967"
+  ],
+  "location": "Guwahati, Kokrajhar, Barpeta Road & Bongaigaon, Assam, India",
+  "timestamp": "2008-10-30T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Ranjan Daimary",
+      "alias": "D.R. Nabla",
+      "role": "Chairman NDFB / Mastermind"
+    },
+    {
+      "name": "George Bodo",
+      "alias": "Field Commander",
+      "role": "Explosives Coordinator"
+    }
+  ],
+  "evidence": [
+    "Simultaneous detonation of 18 vehicle-borne improvised explosive devices (VBIED) in cars and motorcycles within a 20-minute span",
+    "Chemical detection of RDX, Ammonium Nitrate, and fuel oil slurry in crater residue at Ganeshguri flyover and Panbazar",
+    "Confession of bomb assembler detailing procurement of chemicals through cross-border camps in Bangladesh",
+    "Engine chassis numbers of exploded Maruti 800 cars traced to purchased stolen vehicles"
+  ],
+  "modus_operandi": "Separatist insurgent group procured stolen hatchback cars and motorcycles. Fitted trunks with heavy ammonium nitrate and RDX fuel-slurry charges wired to digital timer clocks. Parked vehicles under crowded flyovers, vegetable markets, and near district court premises, triggering detonations simultaneously at 11:30 AM.",
+  "personality_disorder": "Insurgent ideological fanaticism, ruthless indifference to non-combatant casualties, and militant hierarchy.",
+  "common_traits": [
+    "Synchronized multi-district car bomb detonations",
+    "Ammonium nitrate, fuel oil, and RDX compound cocktails",
+    "Cross-border command sanctuaries in neighboring countries",
+    "Targeting crowded civilian markets and judicial court grounds"
+  ],
+  "summary": "The worst terror incident in Northeast Indian history, killing 88 civilians and injuring 540. The Special CBI/NIA Court convicted NDFB chief Ranjan Daimary and 14 others to life imprisonment in 2019."
+}

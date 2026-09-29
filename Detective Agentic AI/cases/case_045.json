@@ -1,0 +1,56 @@
+{
+  "case_id": "CASE-IND-2019-045",
+  "title": "State of Telangana v. Mohammed Areef & 3 Ors. (Disha Veterinary Doctor Case)",
+  "status": "Solved",
+  "crime_type": "Highway Lorry Ambush / Deliberate Tyre Puncture Trap / Gang Rape & Underpass Incineration",
+  "court_or_authority": "Shadnagar Sessions Court / Supreme Court Judicial Commission of Inquiry",
+  "legal_citation": "SC Inquiry Commission Report (Justice Sirpurkar Commission 2022); Crime No. 784/2019",
+  "judgment_date": "2022-05-20",
+  "source": "Supreme Court of India Commission Report & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 376D IPC (Gang Rape)",
+    "Section 302 IPC (Murder)",
+    "Section 366 IPC (Kidnapping woman to compel marriage/illicit intercourse)",
+    "Section 201 IPC (Causing disappearance of evidence)"
+  ],
+  "location": "Tondupally Toll Plaza, Shamshabad & Chattanpally, Hyderabad, Telangana, India",
+  "timestamp": "2019-11-27T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Mohammed Areef",
+      "alias": "Truck Driver",
+      "role": "Primary Accused"
+    },
+    {
+      "name": "Jollu Shiva",
+      "alias": "Cleaner",
+      "role": "Accused"
+    },
+    {
+      "name": "Jollu Naveen",
+      "alias": "Cleaner",
+      "role": "Accused"
+    },
+    {
+      "name": "Chintakunta Chennakeshavulu",
+      "alias": "Cleaner",
+      "role": "Accused"
+    }
+  ],
+  "evidence": [
+    "CCTV footage from Tondupally toll plaza showing suspect deliberately deflating victim scooter tire and offering fake assistance",
+    "Audio recording of distress call made by victim to her sister describing four suspicious truck drivers offering help",
+    "Recovery of victim charred remains and dental bridge under Chattanpally national highway bridge",
+    "Diesel and petrol purchase logs from nearby fuel station matching suspect truck movements"
+  ],
+  "modus_operandi": "Truck driver and cleaners parked near toll plaza observed young female veterinary doctor park her scooter. Deliberately deflated rear scooter tire while she was away. When she returned, feigned helpfulness while trapping her in an isolated compound near the toll plaza, gang-raped and smothered her, loaded body into truck cabin, and burned it under an underpass bridge.",
+  "personality_disorder": "Opportunistic predatory sociopathy, uninhibited sexual violence, and herd brutality under intoxication.",
+  "common_traits": [
+    "Sabotaging victim two-wheeler tire at public transit parking",
+    "Approaching stranded lone female under pretense of mechanic assistance",
+    "Using freight lorry as mobile concealment for sexual violence",
+    "Highway culvert body dumping and chemical fuel combustion"
+  ],
+  "summary": "Triggered national outrage across India, leading to extensive legal debates on fast-track trials, systemic urban toll-plaza illumination standards, and the Supreme Court appointment of the Sirpurkar Commission regarding police encounters."
+}

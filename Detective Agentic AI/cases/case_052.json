@@ -1,0 +1,48 @@
+{
+  "case_id": "CASE-IND-2015-052",
+  "title": "State of MP through CBI v. Vyapam Examination & Recruitment Scam",
+  "status": "Solved",
+  "crime_type": "Organized Competitive Exam Fraud / Proxy Impersonation / OMR Engine Manipulation",
+  "court_or_authority": "Supreme Court of India / Special CBI Sessions Court Gwalior & Bhopal",
+  "legal_citation": "(2017) 3 SCC 435; AIR 2017 SC 1006",
+  "judgment_date": "2017-02-13",
+  "source": "Supreme Court of India Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 419 IPC (Cheating by personation)",
+    "Section 420 IPC (Cheating)",
+    "Section 467 IPC (Forgery of valuable security)",
+    "Section 468 IPC (Forgery for purpose of cheating)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "MP Recognised Examinations Act 1937"
+  ],
+  "location": "Bhopal, Gwalior & Indore, Madhya Pradesh, India",
+  "timestamp": "2013-07-07T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Dr. Jagdish Sagar",
+      "alias": "Kingpin Racket Handler",
+      "role": "Primary Racketeer"
+    },
+    {
+      "name": "Nitin Mohindra",
+      "alias": "System Analyst Vyapam",
+      "role": "Internal Database Manipulator"
+    }
+  ],
+  "evidence": [
+    "Hard disk forensic extraction from Vyapam computer servers revealing altered excel sheets matching roll numbers to corrupt official codes",
+    "Photographs of proxy impersonators (scorers) from Uttar Pradesh and Bihar pasted over genuine admit cards",
+    "Seizure of ₹3 crore in cash and luxury vehicles from mastermind Indore residence",
+    "Testimonies of medical students admitting payment of ₹25 to 50 lakh for guaranteed entrance selection"
+  ],
+  "modus_operandi": "Systemic collusion between state exam board officials, middleman doctors, and high-scoring medical students. Arranged brilliant medical students to sit as proxy examinees (scorers) using manipulated admit card photos, or orchestrated engine-seat pairing where corrupt candidates sat adjacent to paid proxies. Alternatively left OMR answer sheets blank during exam to be filled post-submission in the board vault.",
+  "personality_disorder": "Institutional parasitic corruption, normalization of illicit patronage, and high-stakes greed.",
+  "common_traits": [
+    "Proxy impersonators (scorers) replacing genuine candidates",
+    "Internal tampering of examination board database and seating engines",
+    "Blank OMR answer sheet submission and vault re-marking",
+    "Massive network of middleman doctors and bureaucrat brokers"
+  ],
+  "summary": "The largest educational recruitment fraud in Indian history, involving thousands of arrests and medical seat cancellations. Supreme Court transferred the probe to the CBI and established national computerized online examination norms (NEET) to eliminate state-level manipulation."
+}

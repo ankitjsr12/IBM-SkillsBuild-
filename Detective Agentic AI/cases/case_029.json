@@ -1,0 +1,56 @@
+{
+  "case_id": "CASE-IND-1991-029",
+  "title": "State of Tamil Nadu through CBI v. Nalini & 25 Ors. (Rajiv Gandhi Assassination)",
+  "status": "Solved",
+  "crime_type": "Human Suicide Bombing / Terrorist Conspiracy / Political Assassination",
+  "court_or_authority": "Supreme Court of India / TADA Designated Court Chennai",
+  "legal_citation": "(1999) 5 SCC 253; AIR 1999 SC 2640; 1999 CriLJ 3124",
+  "judgment_date": "1999-05-11",
+  "source": "Supreme Court of India Judgment & Indian Kanoon (doc/1359141)",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 302 IPC (Murder)",
+    "Section 3 & 4 Explosive Substances Act 1908",
+    "Section 3 TADA 1987"
+  ],
+  "location": "Sriperumbudur, Tamil Nadu, India",
+  "timestamp": "1991-05-21T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Thenmozhi Rajaratnam",
+      "alias": "Dhanu",
+      "role": "Suicide Bomber (Died at Scene)"
+    },
+    {
+      "name": "Nalini Sriharan",
+      "alias": "Conspiracy Member",
+      "role": "Logistical Escort & Cover"
+    },
+    {
+      "name": "Murugan",
+      "alias": "LTTE Intelligence Operative",
+      "role": "Conspiracy Coordinator"
+    },
+    {
+      "name": "A.G. Perarivalan",
+      "alias": "Arivu",
+      "role": "Procured 9-Volt Batteries"
+    }
+  ],
+  "evidence": [
+    "Haribabu camera film recovered intact from blast scene showing Dhanu with sandalwood garland advancing towards the Prime Minister",
+    "Fragments of denim vest containing RDX explosive pockets and steel ball pellets embedded in victim bodies",
+    "9-volt Golden Power batteries used to power dual toggle switches recovered from blast epicentre",
+    "Cipher wireless intercepts between LTTE leader Pottu Amman and operational cells in Tamil Nadu"
+  ],
+  "modus_operandi": "Suicide bomber wearing a concealed denim jacket loaded with RDX pellets and connected to dual toggle trigger switches infiltrated the VIP security enclosure at an election rally under the guise of offering a floral garland. Detonated the vest while bending to touch the former Prime Minister feet.",
+  "personality_disorder": "Cultic militant fanatical devotion, ideological suicide conditioning, and cold detachment from collateral loss.",
+  "common_traits": [
+    "Pioneering urban use of female suicide belt bomb",
+    "Integration of steel ball bearings for fragmentation lethality",
+    "Extensive dry runs at public political gatherings",
+    "Cyanide capsule necklaces worn by operatives to avoid capture"
+  ],
+  "summary": "Landmark assassination of former Indian Prime Minister Rajiv Gandhi. Supreme Court bench led by Justice K.T. Thomas analyzed circumstantial conspiracy under Section 10 of Indian Evidence Act and established forensic standards for blast reconstruction."
+}

@@ -1,0 +1,48 @@
+{
+  "case_id": "CASE-IND-2022-024",
+  "title": "State of Delhi & Telangana v. Instant Micro-Loan Extortion Syndicate",
+  "status": "Solved",
+  "crime_type": "Digital Extortion / Unauthorized Device Exfiltration / Cyber Defamation",
+  "court_or_authority": "Cyber Crime Sessions Court, New Delhi / Hyderabad High Court",
+  "legal_citation": "Cyber PS FIR No. 84/2022; 2023 CriLJ (NCT) 119",
+  "judgment_date": "2023-01-20",
+  "source": "Delhi Police Cyber Cell & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/19402831/",
+  "ipc_sections": [
+    "Section 384 IPC (Extortion)",
+    "Section 385 IPC (Putting person in fear of injury in order to commit extortion)",
+    "Section 420 IPC (Cheating)",
+    "Section 506 IPC (Criminal Intimidation)",
+    "Section 509 IPC (Word, gesture or act intended to insult modesty of woman)",
+    "Section 66E & 67 Information Technology Act 2000"
+  ],
+  "location": "New Delhi, Bangalore & Hyderabad, India",
+  "timestamp": "2022-08-14T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Rohit Kumar",
+      "alias": "Domestic Call Center Manager",
+      "role": "Extortion Call Operations"
+    },
+    {
+      "name": "Shifu Zhang",
+      "alias": "Transnational Coordinator",
+      "role": "Software Developer & Fund Exfiltration"
+    }
+  ],
+  "evidence": [
+    "Source code analysis of illegal APK loan apps extracting contacts, photo galleries, and GPS location upon installation",
+    "Call recording archives revealing abusive extortion agents threatening victims and sending morphed defamatory images to family contacts",
+    "Seizure of server logs hosted on foreign cloud infrastructure storing harvested contacts of over 1.2 million Indian borrowers",
+    "Cryptocurrency wallet trails tracing extorted loan repayments converted to USDT and remitted overseas"
+  ],
+  "modus_operandi": "Lured low-income individuals with offers of instant paperless micro-loans via untrusted Android apps. Required extensive permissions to harvest the entire phone contact book and photo gallery. After disbursing only 60% of the loan with exorbitant weekly interest, agents began relentless extortion, morphing victim photos onto obscene images and circulating them to their family and employer contacts.",
+  "personality_disorder": "Coercive sadism, psychological intimidation, moral disengagement, and relentless harassment.",
+  "common_traits": [
+    "Harvesting sensitive device data via deceptive loan apps",
+    "Predatory short-tenure loan interest compounding",
+    "Morphing personal photographs for psychological coercion",
+    "Mass social humiliation of victims and family members"
+  ],
+  "summary": "Major multi-agency investigation smashing predatory Chinese-linked loan apps. Triggered the Ministry of Electronics and Information Technology (MeitY) blocking orders against hundreds of illegal lending applications and strict Google Play Store financial policies."
+}

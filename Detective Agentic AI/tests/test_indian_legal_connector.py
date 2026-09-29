@@ -3,7 +3,7 @@ tests/test_indian_legal_connector.py
 
 Comprehensive tests for:
 - Indian Legal Gateway Connector (status, supported courts, safe failure on missing auth)
-- Real Indian Case repository verification (15 authentic cases, IPC sections, judicial citations, Indian Kanoon URLs)
+- Real Indian Case repository verification (50+ authentic cases, IPC sections, judicial citations, Indian Kanoon URLs)
 - Explainable AI pipeline (SOURCE DATA → MATCHED PATTERN → SIMILARITY → AI ANALYSIS)
 - Guardrails and "No sufficiently similar Indian record found" fallback
 """
@@ -85,8 +85,8 @@ class TestRealIndianCaseDatabase:
                 cases.append(json.load(f))
         return cases
 
-    def test_has_15_authentic_indian_cases(self, indian_cases):
-        assert len(indian_cases) == 15, f"Expected 15 authentic Indian cases, found {len(indian_cases)}"
+    def test_has_at_least_50_authentic_indian_cases(self, indian_cases):
+        assert len(indian_cases) >= 50, f"Expected at least 50 authentic Indian cases, found {len(indian_cases)}"
 
     def test_all_cases_have_indian_identifiers_and_metadata(self, indian_cases):
         for c in indian_cases:

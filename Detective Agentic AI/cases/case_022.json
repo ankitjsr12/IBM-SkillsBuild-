@@ -1,0 +1,48 @@
+{
+  "case_id": "CASE-IND-2018-022",
+  "title": "State of Maharashtra v. Cosmos Co-operative Bank Malware Syndicate",
+  "status": "Solved",
+  "crime_type": "Cyber Malware Heist / ATM Switch Cloned Transactions / Global SWIFT Attack",
+  "court_or_authority": "Sessions Court, Pune / Cyber Crime Police Station Pune",
+  "legal_citation": "Regular Criminal Case No. 4882/2019; Cyber FIR No. 22/2018",
+  "judgment_date": "2020-12-14",
+  "source": "Pune Cyber Crime Police Charge-sheet & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/17492018/",
+  "ipc_sections": [
+    "Section 420 IPC (Cheating)",
+    "Section 465 IPC (Forgery)",
+    "Section 468 IPC (Forgery for purpose of cheating)",
+    "Section 471 IPC (Using forged document as genuine)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 43, 66, 66C, 66D Information Technology Act 2000"
+  ],
+  "location": "Pune, Maharashtra & 28 International Jurisdictions",
+  "timestamp": "2018-08-11T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Fahim Khan",
+      "alias": "Domestic Cash-Out Coordinator",
+      "role": "Mule Network Handler"
+    },
+    {
+      "name": "Transnational Advanced Persistent Threat (APT) Cell",
+      "alias": "Lazarus / Dark Cyber Syndicate",
+      "role": "Malware Authors & Switch Infiltrators"
+    }
+  ],
+  "evidence": [
+    "Injection of custom proxy malware into Cosmos Bank ATM payment switch server in Pune, bypassing CBS authorization",
+    "Simultaneous coordinated withdrawals totaling ₹78 crore across 14,000 ATM transactions in 28 countries within 2 hours",
+    "Malicious SWIFT message transmissions siphoning ₹13.9 crore to bank accounts in Hong Kong",
+    "Seizure of cloned magnetic strip debit cards and cash from domestic money mules in Pune and Mumbai"
+  ],
+  "modus_operandi": "Infiltrated the cooperative bank internal network via targeted spear-phishing emails containing malware. Severed the connection between the bank ATM switch and its Core Banking System (CBS), deploying a malicious proxy server that auto-approved withdrawal requests for cloned debit cards worldwide during a banking holiday weekend.",
+  "personality_disorder": "Coordinated cyber warfare, militaristic discipline, compartmentalized criminal hierarchy, and complete emotional detachment.",
+  "common_traits": [
+    "Spear-phishing delivery of zero-day switch malware",
+    "Decoupling payment gateway from Core Banking verification",
+    "Synchronized multi-national ATM cash-out operations",
+    "Exploitation of long holiday weekends to delay detection"
+  ],
+  "summary": "Historic ₹94 crore cyber heist striking Cosmos Bank in August 2018. Highlighted critical infrastructure vulnerabilities in Indian banking switches and resulted in definitive RBI cybersecurity directives for urban cooperative banks."
+}

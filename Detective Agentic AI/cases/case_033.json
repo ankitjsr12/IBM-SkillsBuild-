@@ -1,0 +1,40 @@
+{
+  "case_id": "CASE-IND-1996-033",
+  "title": "Santosh Kumar Singh v. State through CBI (Priyadarshini Mattoo Murder)",
+  "status": "Solved",
+  "crime_type": "Obsessive Stalking / Rape / Premeditated Homicide by Blunt Force & Wire",
+  "court_or_authority": "Supreme Court of India / High Court of Delhi",
+  "legal_citation": "(2010) 9 SCC 747; (2010) 3 SCC (Cri) 1469",
+  "judgment_date": "2010-10-06",
+  "source": "Supreme Court of India Judgment & Indian Kanoon (doc/1359141)",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 376 IPC (Rape)",
+    "Section 354D IPC (Stalking - post-amendment alignment)"
+  ],
+  "location": "Vasant Kunj, New Delhi, India",
+  "timestamp": "1996-01-23T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Santosh Kumar Singh",
+      "alias": "Senior IPS Officer Son",
+      "role": "Primary Convicted Offender"
+    }
+  ],
+  "evidence": [
+    "Multiple prior police complaints of harassment and stalker intimidation lodged by victim at Vasant Kunj and Maurice Nagar police stations",
+    "Broken motorcycle helmet visor glass discovered at crime scene matching suspect helmet",
+    "DNA semen sample analysis conducted by Centre for Cellular and Molecular Biology (CCMB) establishing conclusive biological match",
+    "Severe blunt force skull fractures and ligature marks from an electrical heat-convector wire around victim neck"
+  ],
+  "modus_operandi": "Systematically stalked a female law student for over a year despite formal police warnings. Gained entry into her residence when she was alone, assaulted her with a heavy motorcycle helmet fracturing nineteen facial bones, raped her, and strangled her with an electric heater cord before concealing body under a mattress.",
+  "personality_disorder": "Malignant narcissistic stalking, predatory sexual fixation, and aggressive entitlement driven by paternal police influence.",
+  "common_traits": [
+    "Persistent stalking and intimidation across campus environments",
+    "Using motorcycle equipment as lethal blunt force weapon",
+    "Strangulation using domestic household electrical cords",
+    "Exploitation of family law-enforcement connections during initial investigation"
+  ],
+  "summary": "Supreme Court landmark ruling on DNA forensic admissibility in sexual assault and homicide prosecutions. Overturned controversial trial court acquittal, confirming that DNA profiling is an infallible scientific indicator connecting the perpetrator to the victim."
+}

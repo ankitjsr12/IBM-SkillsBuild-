@@ -1,0 +1,39 @@
+{
+  "case_id": "CASE-IND-2022-034",
+  "title": "State of NCT of Delhi v. Aftab Ameen Poonawala (Shraddha Walkar Dismemberment)",
+  "status": "Solved",
+  "crime_type": "Domestic Homicide / Anatomical Dismemberment / Forest Bone Disposal",
+  "court_or_authority": "Saket District & Sessions Court, New Delhi / High Court of Delhi",
+  "legal_citation": "Sessions Case No. 89/2023; FIR No. 659/2022 Mehrauli PS",
+  "judgment_date": "2023-05-09",
+  "source": "Delhi Police Forensic Crime Branch & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/17492018/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 201 IPC (Causing disappearance of evidence of offence)"
+  ],
+  "location": "Mehrauli, New Delhi & Vasai, Maharashtra, India",
+  "timestamp": "2022-05-18T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Aftab Ameen Poonawala",
+      "alias": "Food Blogger / Partner",
+      "role": "Primary Accused"
+    }
+  ],
+  "evidence": [
+    "Recovery of 13 decomposed human bone fragments from Mehrauli forest reserve whose mitochondrial DNA matched victim father",
+    "Purchase receipts and digital payment logs for a 300-litre domestic deep-freezer and saw blades immediately post-homicide",
+    "Google search history records on suspect phone researching human anatomy, blood-cleaning chemicals, and forensic masking techniques",
+    "Blood splatter detected behind refrigerator tiles using luminol chemical spray despite repeated bleach scrubbings"
+  ],
+  "modus_operandi": "Strangled live-in partner during domestic argument. Dragged body into bathroom, purchased a 300-litre refrigerator and miniature bone saws. Methodically dismembered corpse into 35 pieces over several days, preserving flesh in deep freezer. Disposed of body parts incrementally in forested areas of South Delhi during 2:00 AM nocturnal walks over several months.",
+  "personality_disorder": "Antisocial personality structure, cold methodical dissociation, and forensic counter-investigative calculation.",
+  "common_traits": [
+    "Domestic strangulation followed by cold-storage preservation",
+    "Methodical anatomical dismemberment with small hand saws",
+    "Nocturnal forest dispersion of human remains",
+    "Digital search queries researching chemical cleanup of blood"
+  ],
+  "summary": "High-profile forensic investigation demonstrating advanced mitochondrial DNA extraction from weathered bone fragments and luminol chemical detection, revolutionizing protocols for domestic dismemberment forensics in India."
+}

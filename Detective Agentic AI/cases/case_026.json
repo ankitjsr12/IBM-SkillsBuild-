@@ -1,0 +1,39 @@
+{
+  "case_id": "CASE-IND-1959-026",
+  "title": "K.M. Nanavati v. State of Maharashtra",
+  "status": "Solved",
+  "crime_type": "Homicide / Crime of Passion / Grave and Sudden Provocation Defense",
+  "court_or_authority": "Supreme Court of India / High Court of Bombay",
+  "legal_citation": "1962 SCR Supl. (1) 567; AIR 1962 SC 605; 1962 (1) CriLJ 521",
+  "judgment_date": "1961-11-24",
+  "source": "Supreme Court of India Official Judgment & Indian Kanoon (doc/1596139)",
+  "source_url": "https://indiankanoon.org/doc/1596139/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 304 Part I IPC (Culpable homicide not amounting to murder)"
+  ],
+  "location": "Mumbai, Maharashtra, India",
+  "timestamp": "1959-04-27T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Commander Kawas Manekshaw Nanavati",
+      "alias": "Naval Commander",
+      "role": "Primary Accused"
+    }
+  ],
+  "evidence": [
+    "Naval issue semi-automatic revolver (.38 caliber) and six rounds of ammunition obtained from ship armoury under false pretext",
+    "Ballistic expert evidence establishing trajectory of three bullets fired at close range inside victim bedroom",
+    "Surrender memo and immediate confession to Provost Marshal of Western Naval Command and Gamdevi Police Station",
+    "Letters between victim Prem Ahuja and accused wife Sylvia confirming illicit relationship"
+  ],
+  "modus_operandi": "Naval officer obtained a service revolver from his warship INS Mysore under false pretext of self-protection while driving through rural areas. Proceeded to lover Prem Ahuja residence, confronted him in his bedroom, and discharged three point-blank rounds following verbal altercation. Promptly surrendered to naval and civil authorities.",
+  "personality_disorder": "Obsessive sense of military honour, rigid moral perfectionism, emotional impulsivity under profound betrayal.",
+  "common_traits": [
+    "Naval officer weapon misdirection",
+    "Premeditated procurement of lethal firearm following marital disclosure",
+    "Point-blank firearm discharge in residential sanctuary",
+    "Immediate voluntary surrender and adherence to discipline"
+  ],
+  "summary": "Historic trial that effectively ended the jury system in India. The Supreme Court rejected the defense of grave and sudden provocation, establishing that sufficient cooling time had elapsed between confession and shooting, convicting Nanavati of murder under Section 302."
+}

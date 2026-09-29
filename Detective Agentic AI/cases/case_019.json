@@ -1,0 +1,52 @@
+{
+  "case_id": "CASE-IND-2018-019",
+  "title": "CBI & Enforcement Directorate v. Nirav Deepak Modi & Mehul Choksi (PNB Scam)",
+  "status": "Solved",
+  "crime_type": "Bank LoU Fraud / SWIFT Manipulation / Money Laundering",
+  "court_or_authority": "Special PMLA Court, Mumbai / High Court of Bombay / UK High Court of Justice",
+  "legal_citation": "Special PMLA Case No. 4/2018; [2022] EWHC 2858 (Admin)",
+  "judgment_date": "2022-11-09",
+  "source": "ED & High Court of Justice London & Indian Kanoon (doc/4510298)",
+  "source_url": "https://indiankanoon.org/doc/4510298/",
+  "ipc_sections": [
+    "Section 409 IPC (Criminal breach of trust by banker/agent)",
+    "Section 420 IPC (Cheating and dishonestly inducing delivery of property)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 3 & 4 PMLA (Offence of Money Laundering)",
+    "Section 13 Prevention of Corruption Act"
+  ],
+  "location": "Mumbai, Maharashtra, India",
+  "timestamp": "2018-01-29T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Nirav Deepak Modi",
+      "alias": "Luxury Diamond Jeweller",
+      "role": "Prime Accused / Fugitive"
+    },
+    {
+      "name": "Mehul Choksi",
+      "alias": "Promoter Gitanjali Group",
+      "role": "Co-Conspirator / Fugitive"
+    },
+    {
+      "name": "Gokulnath Shetty",
+      "alias": "Deputy Manager PNB",
+      "role": "Insider Bank Official"
+    }
+  ],
+  "evidence": [
+    "Unauthorised transmission of 1,214 fraudulent Letters of Undertaking (LoUs) over the international SWIFT messaging network",
+    "Intentional omission of SWIFT transaction logs from the core banking solution (Finacle) to bypass internal audit reconciliation",
+    "Labyrinthine shell company networks in Hong Kong, UAE, and British Virgin Islands receiving foreign buyer credit funds",
+    "Seizure of imported rough diamonds, luxury properties, and bank accounts across multiple continents"
+  ],
+  "modus_operandi": "Corrupted junior and mid-level bank officials at Punjab National Bank Brady House branch to transmit unapproved Letters of Undertaking (LoUs) via SWIFT to overseas Indian bank branches without sanctioned credit limits or collateral. The transactions were deliberately not recorded in Finacle core banking system to evade regulatory detection.",
+  "personality_disorder": "Grandiosity, lavish status-seeking, flight propensity, and sophisticated transnational corporate shielding.",
+  "common_traits": [
+    "Bypassing core banking software via off-book SWIFT messaging",
+    "Suborning key branch officials over long operational tenures",
+    "Multi-layered international shell entities for round-tripping money",
+    "Immediate cross-border flight prior to public exposure"
+  ],
+  "summary": "A fraud of over ₹13,000 crore against Punjab National Bank. Led to extradition proceedings across the UK and Antigua, enforcement of Fugitive Economic Offenders Act, and major systemic overhauls in banking trade credit operations."
+}

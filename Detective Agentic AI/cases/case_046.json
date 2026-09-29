@@ -1,0 +1,44 @@
+{
+  "case_id": "CASE-IND-2000-046",
+  "title": "CBI v. Sanjeev Chawla & Hansie Cronje (Cricket Match Fixing Conspiracy)",
+  "status": "Solved",
+  "crime_type": "Transnational Sports Fraud / Underworld Syndicate Bookmaking / Hawala Bribery",
+  "court_or_authority": "Patiala House Sessions Court, New Delhi / UK High Court of Justice Extradition",
+  "legal_citation": "[2018] EWHC 1050 (Admin); Special CBI CC No. 34/2000",
+  "judgment_date": "2020-02-13",
+  "source": "Delhi Police Crime Branch & UK High Court Judgment",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 420 IPC (Cheating)",
+    "Section 120B IPC (Criminal Conspiracy)"
+  ],
+  "location": "New Delhi, Mumbai, India & London, United Kingdom",
+  "timestamp": "2000-04-07T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Sanjeev Chawla",
+      "alias": "International Bookie",
+      "role": "Syndicate Operator (Extradited from UK)"
+    },
+    {
+      "name": "Hansie Cronje",
+      "alias": "South African Captain",
+      "role": "Bribed Captain (Admitted in King Commission)"
+    }
+  ],
+  "evidence": [
+    "Intercepted audio recordings of phone conversations between Sanjeev Chawla and Hansie Cronje in Delhi hotel discussing pitch conditions and run-scoring limits",
+    "Transnational wire transfers and cash delivery logs in luxury hotel suites in Taj Palace New Delhi",
+    "Admissions before the King Judicial Commission of Inquiry in South Africa acknowledging acceptance of ,000+ bribes",
+    "Successful extradition ruling by the UK High Court of Justice after nineteen years of legal evasion"
+  ],
+  "modus_operandi": "Approached national sports team captain through middleman bookmakers. Offered lavish cash payments, leather jackets, and jewelry to manipulate team selections, pitch reports, run rates, and match outcomes in bilateral international cricket series to guarantee massive bookmaking betting profits.",
+  "personality_disorder": "Cynical transnational commercial exploitation, covert syndicate maneuvering, and sports integrity subversion.",
+  "common_traits": [
+    "Telecom audio wiretaps capturing match manipulation negotiations",
+    "Bribery of high-integrity team leadership figures",
+    "Hawala cash deliveries inside 5-star hotel sanctuaries",
+    "Extradition battles across Commonwealth jurisdictions"
+  ],
+  "summary": "The biggest corruption scandal in international cricket history. Delhi Police audio intercepts shattered the perceived sanctity of sports integrity, leading to the establishment of the ICC Anti-Corruption Unit (ACU) and landmark UK-India extradition precedents."
+}

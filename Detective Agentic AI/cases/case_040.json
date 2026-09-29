@@ -1,0 +1,51 @@
+{
+  "case_id": "CASE-IND-1995-040",
+  "title": "State of Punjab through CBI v. Jagtar Singh Hawara & Ors. (Beant Singh Assassination)",
+  "status": "Solved",
+  "crime_type": "Human Explosive Vest Detonation / Political Assassination / RDX Secretariat Blast",
+  "court_or_authority": "Supreme Court of India / High Court of Punjab & Haryana",
+  "legal_citation": "(2011) 2 SCC 441; 2011 CriLJ 1461",
+  "judgment_date": "2010-10-12",
+  "source": "Supreme Court of India Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 307 IPC (Attempt to murder)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Sections 3 & 4 Explosive Substances Act 1908"
+  ],
+  "location": "Punjab Civil Secretariat, Sector 1, Chandigarh, India",
+  "timestamp": "1995-08-31T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Dilawar Singh Babbar",
+      "alias": "Punjab Police Officer",
+      "role": "Suicide Human Bomb (Died at Scene)"
+    },
+    {
+      "name": "Jagtar Singh Hawara",
+      "alias": "Operational Commander Babbar Khalsa",
+      "role": "Mastermind Conspirator"
+    },
+    {
+      "name": "Balwant Singh Rajoana",
+      "alias": "Backup Suicide Bomber",
+      "role": "Co-Conspirator"
+    }
+  ],
+  "evidence": [
+    "Forensic reconstruction of body fragments of Dilawar Singh strapped with RDX belt detonating at 5:07 PM",
+    "Ambassador car with fake VIP pass parked in secretariat VIP parking lot",
+    "Seizure of high-grade plastic explosive blocks, electrical wire detonators, and cyanide vials from Patiala hideouts",
+    "Confession of co-accused detailing military-style briefing and assignment of primary and backup suicide bombers"
+  ],
+  "modus_operandi": "Infiltrated state civil secretariat using serving police personnel credentials. Operative Dilawar Singh strapped an RDX explosive belt under his uniform. As Chief Minister Beant Singh entered his bulletproof official car, the operative approached and detonated the explosive, killing the Chief Minister and 16 security personnel.",
+  "personality_disorder": "Fanatical insurgent indoctrination, willingness for self-immolation, and complete tactical compartmentalization.",
+  "common_traits": [
+    "Insider infiltration using active police credentials",
+    "Body-worn RDX explosive belt with manual toggle trigger",
+    "Parallel deployment of primary and backup human bombers",
+    "Targeting high-security fortified government secretariats"
+  ],
+  "summary": "High-profile assassination of Punjab Chief Minister Beant Singh. Supreme Court and High Court affirmed capital punishment and whole-life sentences, setting legal standards for high-security blast site forensic reconstruction."
+}

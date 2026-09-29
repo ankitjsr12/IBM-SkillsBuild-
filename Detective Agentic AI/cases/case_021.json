@@ -1,0 +1,47 @@
+{
+  "case_id": "CASE-IND-2013-021",
+  "title": "Central Bureau of Investigation v. Sudipto Sen & Debjani Mukherjee (Saradha Chit Fund Scam)",
+  "status": "Solved",
+  "crime_type": "Chit Fund Ponzi Scheme / Public Embezzlement / Political Corruption",
+  "court_or_authority": "Supreme Court of India / High Court at Calcutta",
+  "legal_citation": "(2014) 8 SCC 768; 2014 CriLJ 3302",
+  "judgment_date": "2014-05-09",
+  "source": "Supreme Court of India & Indian Kanoon (doc/79261053)",
+  "source_url": "https://indiankanoon.org/doc/79261053/",
+  "ipc_sections": [
+    "Section 406 IPC (Criminal breach of trust)",
+    "Section 409 IPC (Criminal breach of trust by merchant/agent)",
+    "Section 420 IPC (Cheating and dishonestly inducing delivery of property)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Prize Chits and Money Circulation Schemes (Banning) Act 1978"
+  ],
+  "location": "Kolkata, West Bengal & Bhubaneswar, Odisha, India",
+  "timestamp": "2013-04-18T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Sudipto Sen",
+      "alias": "Chairman Saradha Group",
+      "role": "Prime Mastermind"
+    },
+    {
+      "name": "Debjani Mukherjee",
+      "alias": "Director",
+      "role": "Executive Co-Conspirator"
+    }
+  ],
+  "evidence": [
+    "Collapse of 239 subsidiary companies registered under Saradha banner without genuine business operations or revenue streams",
+    "18-page signed confession letter written by Sudipto Sen naming influential political patrons before flight to Sonamarg, Kashmir",
+    "Banking audit documenting collection of over ₹2,500 crore from 1.7 million low-income depositors across East India",
+    "Forensic financial analysis showing redemption payments funded solely by incoming subscriptions from new depositors"
+  ],
+  "modus_operandi": "Constructed an elaborate multi-tiered pyramid collective investment scheme promising absurdly high interest returns of 15% to 50% disguised as timeshare holiday memberships, real estate bookings, and agro-bonds. Funded high-profile television channels, newspapers, and cultural events to cultivate an aura of untouchable prestige and political patronage.",
+  "personality_disorder": "Parasitic sociopathy, pathological charm, and reckless financial predation on working-class citizens.",
+  "common_traits": [
+    "Classic Ponzi payout mechanics (paying old investors with new funds)",
+    "Acquisition of media outlets and political proximity as defensive shields",
+    "Mass mobilization through commission-incentivized village agents",
+    "Abrupt collapse and midnight flight upon cash-flow exhaustion"
+  ],
+  "summary": "One of Eastern India largest financial frauds affecting 1.7 million depositors. Investigated by CBI under Supreme Court orders, leading to landmark rulings on regulatory oversight of non-banking financial companies."
+}

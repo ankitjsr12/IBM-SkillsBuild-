@@ -1,0 +1,42 @@
+{
+  "case_id": "CASE-IND-2006-041",
+  "title": "State of Rajasthan v. Biti K. Mohanty",
+  "status": "Solved",
+  "crime_type": "Foreign Tourist Rape / Jumped Parole / Identity Theft as Bank Officer",
+  "court_or_authority": "Supreme Court of India / High Court of Rajasthan / High Court of Kerala",
+  "legal_citation": "(2013) 4 SCC 341; 2013 CriLJ 2014",
+  "judgment_date": "2013-03-08",
+  "source": "Supreme Court of India & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 376 IPC (Rape)",
+    "Section 419 IPC (Cheating by personation)",
+    "Section 420 IPC (Cheating)",
+    "Section 468 IPC (Forgery for purpose of cheating)",
+    "Section 471 IPC (Using forged document as genuine)"
+  ],
+  "location": "Alwar, Rajasthan & Kannur, Kerala, India",
+  "timestamp": "2006-03-21T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Biti K. Mohanty",
+      "alias": "Raghav Rajan",
+      "role": "Convicted Offender & Fugitive"
+    }
+  ],
+  "evidence": [
+    "Conviction for raping German national in hotel room in Alwar based on prompt medical corroboration and victim statement",
+    "Disappearance while on 15-day parole granted to visit ailing mother in Odisha in November 2006",
+    "Fraudulent MBA degree, forged voter ID, and counterfeit PAN card obtained under alias Raghav Rajan",
+    "Fingerprint comparison by Kerala Police and National Crime Records Bureau (NCRB) matching fugitive bank officer in Kannur"
+  ],
+  "modus_operandi": "After being convicted of raping a foreign national, suspect secured temporary parole through his father (a high-ranking DGP-level IPS officer) and absconded. Forged an entirely new identity as Raghav Rajan, secured a university degree, passed bank competitive exams, and worked as a branch manager at State Bank of Travancore in Kannur for seven years before fingerprint re-verification unmasked him.",
+  "personality_disorder": "Chameleon-like sociopathic adaptation, persistent deceit, and exceptional ability to embed in professional institutions.",
+  "common_traits": [
+    "Abusing judicial parole privileges to abscond",
+    "Total reinvention of identity with complete forged educational credentials",
+    "Securing professional white-collar banking employment under alias",
+    "Long-term evasion across distant linguistic states"
+  ],
+  "summary": "Spectacular fugitive capture case in Indian jurisprudence. The Supreme Court cancelled all lenient bail/parole indulgences, highlighting stringent requirements for identity verification of white-collar bank professionals."
+}

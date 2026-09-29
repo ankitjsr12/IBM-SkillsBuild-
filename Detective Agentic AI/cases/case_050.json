@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-IND-2010-050",
+  "title": "State of Kerala v. Thadiyantavida Nazeer & Ors. (Kalamassery Bus Burning & Terror Conspiracy)",
+  "status": "Solved",
+  "crime_type": "Cross-Border Terror Recruitment / Public Transit Arson / Explosives Stash",
+  "court_or_authority": "Special NIA Court Ernakulam / High Court of Kerala",
+  "legal_citation": "(2022) 3 KLT 102; Special NIA Case No. 2/2010",
+  "judgment_date": "2022-06-24",
+  "source": "Special NIA Court Ernakulam Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 121A IPC (Conspiracy to wage war against the Government of India)",
+    "Section 435 IPC (Mischief by fire with intent to cause damage)",
+    "Sections 16 & 18 UAPA 1967"
+  ],
+  "location": "Kalamassery, Ernakulam, Kerala, India",
+  "timestamp": "2005-09-09T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Thadiyantavida Nazeer",
+      "alias": "Lashkar-e-Taiba South Commander",
+      "role": "Primary Mastermind"
+    },
+    {
+      "name": "Shafas",
+      "alias": "Field Operative",
+      "role": "Arsonist"
+    }
+  ],
+  "evidence": [
+    "Hijacking and setting ablaze of Tamil Nadu State Transport Corporation bus at Kalamassery using petrol bombs",
+    "Seizure of unexploded crude pipe bombs and remote detonators from suspect hideout in Kannur",
+    "Encrypted communication records connecting suspect to LeT recruiters in Pakistan and transit camps in Kashmir",
+    "Testimonies of bus driver and conductor identifying perpetrators armed with concealed knives and petrol cans"
+  ],
+  "modus_operandi": "Boarded an interstate public passenger bus posing as ordinary commuters. Forced passengers to disembark at gunpoint in an isolated section of national highway, poured petrol throughout the vehicle, set it ablaze, and fled on two-wheelers. Utilized the incident as an operational initiation test for newly recruited sleeper operatives.",
+  "personality_disorder": "Radical ideological indoctrination, clandestine militia leadership, and insurgent zealotry.",
+  "common_traits": [
+    "Hijacking public state transport vehicles posing as passengers",
+    "Targeted political arson and intimidation",
+    "Clandestine recruitment pipeline routing youths to cross-border camps",
+    "Use of crude pipe bombs and timer detonators"
+  ],
+  "summary": "Critical prosecution in South Indian counter-terrorism. Special NIA Court convicted LeT commander Thadiyantavida Nazeer to double life imprisonment, laying bare terror financing channels operating across Kerala, Tamil Nadu, and Jammu & Kashmir."
+}

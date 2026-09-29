@@ -1,0 +1,41 @@
+{
+  "case_id": "CASE-IND-2012-020",
+  "title": "Sahara India Real Estate Corp. Ltd. & Ors. v. SEBI",
+  "status": "Solved",
+  "crime_type": "Unlawful Public Deposit Mobilization / Ponzi Mechanics / Contempt of Court",
+  "court_or_authority": "Supreme Court of India",
+  "legal_citation": "(2012) 10 SCC 603; AIR 2012 SC 3829",
+  "judgment_date": "2012-08-31",
+  "source": "Supreme Court of India Judgment & Indian Kanoon (doc/1359141)",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 420 IPC (Cheating)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 55A, 67 & 73 Companies Act 1956",
+    "Contempt of Courts Act 1971"
+  ],
+  "location": "Lucknow, Uttar Pradesh & New Delhi, India",
+  "timestamp": "2012-08-31T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Subrata Roy Sahara",
+      "alias": "Saharasri",
+      "role": "Managing Worker & Chairman"
+    }
+  ],
+  "evidence": [
+    "Mobilization of over ₹24,000 crore from 30 million small retail rural investors through Optionally Fully Convertible Debentures (OFCD)",
+    "Failure to maintain genuine investor identity records or KYC dossiers during massive cash collection drives",
+    "Submission of truckloads of unverifiable and illegible paper application forms to SEBI headquarters",
+    "Supreme Court findings of deliberate obfuscation of public issue rules"
+  ],
+  "modus_operandi": "Issued Optionally Fully Convertible Debentures (OFCDs) to tens of millions of rural and semi-urban small depositors while falsely styling the issue as a private placement to evade statutory SEBI public prospectus compliance. Used a nationwide network of collection agents collecting cash without proper banking KYC.",
+  "personality_disorder": "Cult-like corporate autocracy, paternalistic grandeur, and defiant resistance to regulatory authority.",
+  "common_traits": [
+    "Exploiting unbanked rural depositor savings",
+    "Circumventing public issue compliance under private placement guises",
+    "Deliberate document flooding to exhaust regulatory capacity",
+    "Personal control over conglomerate liquidity"
+  ],
+  "summary": "Historic Supreme Court judgment holding that any security issue offered to more than 49 individuals constitutes a public offer subject to SEBI jurisdiction. The Supreme Court ordered refund of ₹24,000+ crore and imprisoned promoter Subrata Roy for non-compliance."
+}

@@ -1,0 +1,51 @@
+{
+  "case_id": "CASE-IND-2011-037",
+  "title": "State of Rajasthan v. Mahipal Maderna & Malkhan Singh (Bhanwari Devi Murder)",
+  "status": "Solved",
+  "crime_type": "Political Abduction / Contract Homicide / Corpse Incineration & Canal Submersion",
+  "court_or_authority": "Special CBI Court Jodhpur / High Court of Rajasthan",
+  "legal_citation": "Sessions Case No. 12/2012 (CBI); 2018 CriLJ 2190 (Raj)",
+  "judgment_date": "2018-04-18",
+  "source": "Rajasthan High Court Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 364 IPC (Kidnapping in order to murder)",
+    "Section 201 IPC (Causing disappearance of evidence of offence)",
+    "Section 120B IPC (Criminal Conspiracy)"
+  ],
+  "location": "Bilara, Jodhpur, Rajasthan, India",
+  "timestamp": "2011-09-01T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Mahipal Maderna",
+      "alias": "State Cabinet Minister",
+      "role": "Political Mastermind"
+    },
+    {
+      "name": "Malkhan Singh Bishnoi",
+      "alias": "MLA",
+      "role": "Co-Conspirator"
+    },
+    {
+      "name": "Bishna Ram Bishnoi",
+      "alias": "Gang Leader",
+      "role": "Hired Contract Killer"
+    }
+  ],
+  "evidence": [
+    "Recovered CD recordings containing intimate blackmail videos of minister used by auxiliary nurse Bhanwari Devi",
+    "Dredging of Rajiv Gandhi Lift Canal in Jodhpur yielding charred human bone fragments, skull teeth, and Rolex watch",
+    "Bat and wooden club weapons discovered submerged along with gunny sack remnants and burnt limestone pit",
+    "Confession of contract killer Kailash Jakhar detailing strangulation inside vehicle and burning at Jaloda crater"
+  ],
+  "modus_operandi": "Auxiliary nurse attempted to blackmail state cabinet minister and politician with compromising video footage. Politicians hired rural gangster syndicates to lure her under pretense of vehicle purchase. Strangled her inside an SUV, took body to a desolate limestone kiln, burned remains with petrol and wood, crushed bones with wooden bats, and threw ashes into a canal.",
+  "personality_disorder": "Entrenched political arrogance, machiavellian self-preservation, and total disregard for human worth.",
+  "common_traits": [
+    "Retaliation against political sex-for-favors blackmail recordings",
+    "Subcontracting execution to local rural criminal gangs",
+    "Multi-stage body destruction (strangulation, burning, pulverizing, water disposal)",
+    "Extensive political pressure and coverup attempts"
+  ],
+  "summary": "Sensational case exposing collusion between high-level elected political ministers and rural contract killing syndicates. CBI divers dredged canals to recover microscopic bone fragments, resulting in the sacking and lifelong imprisonment of ministers."
+}

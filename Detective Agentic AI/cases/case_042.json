@@ -1,0 +1,50 @@
+{
+  "case_id": "CASE-IND-1998-042",
+  "title": "State of Bihar through CBI v. Rajesh Ranjan @ Pappu Yadav (Ajit Sarkar Murder)",
+  "status": "Solved",
+  "crime_type": "Contract Political Homicide / AK-47 Drive-By Ambush / Criminal-Political Nexus",
+  "court_or_authority": "Supreme Court of India / High Court of Judicature at Patna",
+  "legal_citation": "(2013) 4 BBCJ 145; 2013 SCC OnLine Pat 591",
+  "judgment_date": "2013-05-17",
+  "source": "Patna High Court Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 27 Arms Act 1959"
+  ],
+  "location": "Subhash Nagar, Purnea, Bihar, India",
+  "timestamp": "1998-06-14T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Rajesh Ranjan",
+      "alias": "Pappu Yadav",
+      "role": "Alleged Political Mastermind"
+    },
+    {
+      "name": "Rajan Tiwari",
+      "alias": "Contract Hitman",
+      "role": "Primary Shooter"
+    },
+    {
+      "name": "Anil Yadav",
+      "alias": "Driver",
+      "role": "Getaway Driver"
+    }
+  ],
+  "evidence": [
+    "107 empty cartridges of automatic 7.62mm AK-47 ammunition recovered from politician vehicle at railway crossing",
+    "Testimony of injured personal assistant and driver surviving the barrage of automatic fire",
+    "Disclosures of contract hitman Rajan Tiwari regarding conspiracy meetings at Patna guest house",
+    "Inter-state ballistic tracking of military-grade contraband rifles smuggled across Nepal border"
+  ],
+  "modus_operandi": "Ambushed communist trade union leader and sitting MLA Ajit Sarkar while his vehicle slowed at a railway crossing. Multiple motorcycle-borne shooters armed with AK-47 rifles blocked the road and pumped over 100 rounds into the vehicle, killing Sarkar, his driver, and bodyguard instantaneously.",
+  "personality_disorder": "Feudal muscle hegemony, political territorial ruthlessness, and normalized contract violence.",
+  "common_traits": [
+    "Drive-by automatic weapon ambush at transit chokepoints",
+    "Overwhelming firepower (100+ rounds) to guarantee lethality",
+    "Contract enforcers recruited from cross-border districts",
+    "Long trial duration characterized by witness intimidation"
+  ],
+  "summary": "Defining case of Indian political mafia violence in the 1990s. Investigated by CBI, resulting in landmark Supreme Court orders transferring Pappu Yadav from Beur Jail to Tihar Jail to prevent unlawful political gatherings inside prison."
+}

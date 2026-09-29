@@ -46,7 +46,7 @@ def _cosine(a: Dict[str, float], b: Dict[str, float]) -> float:
 
 
 # Minimum cosine similarity required to include a case in results.
-SIMILARITY_THRESHOLD: float = 0.15
+SIMILARITY_THRESHOLD: float = 0.10
 
 # The label attached to results so the UI can distinguish them.
 RESULT_SOURCE_LABEL: str = "RETRIEVED EVIDENCE (similarity match)"

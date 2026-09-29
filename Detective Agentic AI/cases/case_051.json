@@ -1,0 +1,51 @@
+{
+  "case_id": "CASE-IND-2013-051",
+  "title": "State of Maharashtra v. Vijay Jadhav & Ors. (Shakti Mills Gang Rape)",
+  "status": "Solved",
+  "crime_type": "Abandoned Urban Mill Ambush / Repeat Gang Rape / Threat of Knife Violence",
+  "court_or_authority": "High Court of Bombay / Sessions Court Greater Mumbai",
+  "legal_citation": "2021 SCC OnLine Bom 4220; Confirmation Case No. 1/2014",
+  "judgment_date": "2021-11-25",
+  "source": "Bombay High Court Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 376D IPC (Gang Rape)",
+    "Section 376E IPC (Repeat rape offender provision introduced by Criminal Law Amendment Act 2013)",
+    "Section 342 IPC (Wrongful confinement)",
+    "Section 506 IPC (Criminal Intimidation)"
+  ],
+  "location": "Shakti Mills Compound, Mahalaxmi, Mumbai, Maharashtra, India",
+  "timestamp": "2013-08-22T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Vijay Jadhav",
+      "alias": "Repeat Offender",
+      "role": "Primary Convicted Offender"
+    },
+    {
+      "name": "Kasim Bengali",
+      "alias": "Repeat Offender",
+      "role": "Primary Convicted Offender"
+    },
+    {
+      "name": "Salim Ansari",
+      "alias": "Repeat Offender",
+      "role": "Primary Convicted Offender"
+    }
+  ],
+  "evidence": [
+    "Broken beer bottles and telephone belt cords used to bind the male colleague of photojournalist victim in mill ruins",
+    "DNA semen profiles matching the identical three suspects to a prior unsolved gang rape of a telephone operator at the same mill compound weeks earlier",
+    "Stolen camera memory cards and mobile phone recovered from suspect residential slums in Dhobi Ghat",
+    "Detailed forensic reconstruction of isolated, overgrown 16-acre dilapidated textile mill compound"
+  ],
+  "modus_operandi": "Lurked inside abandoned, overgrown textile mill ruins in central Mumbai. Confronted young photojournalist and her male colleague taking architectural photographs. Fabricated false allegations of trespassing, tied up the male companion with cords, dragged the woman into a ruined boiler room, and committed brutal gang rape while threatening them with broken beer bottles.",
+  "personality_disorder": "Predatory territorial opportunism, pack-animal sexual violence, and persistent antisocial deviance.",
+  "common_traits": [
+    "Exploiting abandoned urban industrial ruins and neglected public land",
+    "Falsely accusing trespassers to isolate and disarm them",
+    "Tying male companions with cords to immobilize resistance",
+    "Repeat predatory gang rape across consecutive weeks"
+  ],
+  "summary": "First landmark judicial test of Section 376E IPC (repeat rape offenders) enacted post-Nirbhaya. The Bombay High Court affirmed the heinousness of repeat offenders operating in urban ruins, commuting death sentences to rigorous imprisonment for the remainder of their natural life without parole."
+}

@@ -3,6 +3,12 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env")))
+except Exception:
+    pass
+
 import streamlit as st
 import json
 import time
@@ -45,8 +51,6 @@ from database.connection import init_db, migrate_existing_cases
 from frontend.cases_view import render_case_management
 from frontend.suspects_view import render_suspect_management
 from frontend.evidence_view import render_evidence_management
-from frontend.timeline_view import render_timeline_management
-from frontend.anomaly_view import render_anomaly_dashboard
 from frontend.graph_view import render_relationship_graph
 from frontend.dashboard_view import render_analytics_dashboard
 from frontend.audit_view import render_audit_trail_view
@@ -147,7 +151,7 @@ def _consume_trial(user_id: str) -> int:
     _save_trial_usage(usage)
     return TRIAL_LIMIT - used - 1
 
-_ADMIN_PIN_DEFAULT = "739"  # overridden by ADMIN_PIN secret/env var
+_ADMIN_PIN_DEFAULT = "867"  # overridden by ADMIN_PIN secret/env var
 
 def _get_admin_pin() -> str:
     """Read admin PIN from Streamlit secrets, env var, or fall back to default."""
@@ -267,270 +271,12 @@ def make_upi_qr(amount: int, plan_ref: str) -> bytes:
     buf.seek(0)
     return buf.getvalue()
 
-import re as _re
 
-def _safe_pdf_text(value, default: str = "Not provided") -> str:
-    """Sanitise text for fpdf2 (Helvetica / Latin-1 core font).
+from utils.pdf_utils import generate_pdf_report, generate_investigation_dossier_pdf
+from utils.text_utils import sanitize_for_pdf, extract_behavioral_patterns
 
-    Steps applied in order:
-    1. Coerce to str and strip leading/trailing whitespace.
-    2. Strip Markdown bold/italic markers (**text**, *text*, __text__).
-    3. Map known Unicode characters to ASCII equivalents.
-    4. Wrap any single whitespace-free token longer than 80 chars so it
-       cannot trigger fpdf2's "Not enough horizontal space" error.
-    5. Encode to Latin-1, replacing any remaining unmapped characters
-       with '?' rather than raising an exception.
-    """
-    if value is None or (isinstance(value, str) and not value.strip()):
-        return default
+_safe_pdf_text = sanitize_for_pdf
 
-    text = str(value).strip()
-
-    # 2. Strip Markdown bold/italic (**, *, __)
-    text = _re.sub(r'\*\*(.+?)\*\*', r'\1', text)
-    text = _re.sub(r'__(.+?)__',     r'\1', text)
-    text = _re.sub(r'\*(.+?)\*',     r'\1', text)
-
-    # 3. Map known Unicode → ASCII
-    replacements = {
-        "\u20b9": "Rs.",   # ₹
-        "\u2019": "'",     # right single quotation mark
-        "\u2018": "'",     # left single quotation mark
-        "\u201c": '"',     # left double quotation mark
-        "\u201d": '"',     # right double quotation mark
-        "\u2013": "-",     # en dash
-        "\u2014": "--",    # em dash
-        "\u2022": "*",     # bullet
-        "\u2026": "...",   # ellipsis
-        "\u2192": "->",    # rightwards arrow →
-        "\u2190": "<-",    # leftwards arrow ←
-        "\u00b0": "deg",   # degree sign
-        "\u00a9": "(c)",   # copyright
-        "\u00ae": "(R)",   # registered
-        "\u2122": "(TM)",  # trade mark
-        # emoji: warning sign and common variations
-        "\u26a0": "[!]",
-        "\ufe0f": "",      # variation selector (attached to emoji)
-    }
-    for uni, ascii_equiv in replacements.items():
-        text = text.replace(uni, ascii_equiv)
-
-    # 4. Wrap unbreakably long tokens (no whitespace > 80 chars)
-    def _wrap_long_token(token: str, max_len: int = 80) -> str:
-        if len(token) <= max_len:
-            return token
-        # Insert a soft newline every max_len characters
-        return "\n".join(token[i:i + max_len] for i in range(0, len(token), max_len))
-
-    text = " ".join(_wrap_long_token(tok) for tok in text.split(" "))
-
-    # 5. Encode to Latin-1, replacing unmapped chars with '?'
-    return text.encode("latin-1", errors="replace").decode("latin-1")
-
-
-def generate_pdf_report(
-    suspect_name: str,
-    age: str,
-    tendency_score: str,
-    risk_level: str,
-    behaviors: str,
-    matched_cases: list,
-    scoring_breakdown: list = None,
-    disclaimer: str = "",
-    match_quality: str = "",
-) -> bytes:
-    """Generate a structured professional PDF dossier.
-
-    Section structure:
-      1. Executive Summary
-      2. Input Information (USER INPUT)
-      3. Risk Indicators (MODEL INFERENCE)
-      4. Scoring Breakdown (MODEL INFERENCE — explainable)
-      5. Behavioural Analysis (USER INPUT)
-      6. RAG Retrieved Precedents (RETRIEVED EVIDENCE)
-      7. Similarity Scores (RETRIEVED EVIDENCE)
-      8. Model Assessment
-      9. Limitations
-     10. Timestamp & Disclaimer
-    """
-    if scoring_breakdown is None:
-        scoring_breakdown = []
-
-    pdf = FPDF()
-    pdf.set_auto_page_break(auto=True, margin=15)
-    pdf.add_page()
-    pdf.set_margins(20, 20, 20)
-
-    # ---- Header ----
-    pdf.set_font("Helvetica", "B", 16)
-    pdf.cell(0, 12, "DETECTIVE AGENTIC AI - SUSPECT PROFILE DOSSIER", new_x="LMARGIN", new_y="NEXT", align="C")
-    pdf.set_font("Helvetica", "I", 9)
-    pdf.cell(0, 6, "Confidential - For Authorised Investigative Use Only", new_x="LMARGIN", new_y="NEXT", align="C")
-    pdf.ln(4)
-    pdf.set_draw_color(50, 50, 50)
-    pdf.line(20, pdf.get_y(), 190, pdf.get_y())
-    pdf.ln(6)
-
-    def section_heading(title: str) -> None:
-        pdf.set_font("Helvetica", "B", 12)
-        pdf.set_fill_color(230, 230, 230)
-        # Use multi_cell so long titles wrap; _safe_pdf_text sanitises em-dashes etc.
-        pdf.multi_cell(0, 8, _safe_pdf_text(title), new_x="LMARGIN", new_y="NEXT", fill=True)
-        pdf.ln(2)
-
-    def body_line(label: str, value: str, label_prefix: str = "") -> None:
-        # Render label and value on separate lines to avoid narrow-width multi_cell
-        # crash that occurs when cursor is already 50 pt into the line.
-        pdf.set_font("Helvetica", "B", 10)
-        display_label = f"[{label_prefix}] {label}: " if label_prefix else f"{label}: "
-        pdf.multi_cell(0, 7, _safe_pdf_text(display_label), new_x="LMARGIN", new_y="NEXT")
-        pdf.set_font("Helvetica", "", 10)
-        pdf.set_x(30)  # indent value slightly under the label
-        pdf.multi_cell(0, 7, _safe_pdf_text(value), new_x="LMARGIN", new_y="NEXT")
-
-    def body_para(text: str, indent: int = 0) -> None:
-        pdf.set_font("Helvetica", "", 10)
-        if indent:
-            pdf.set_x(20 + indent)
-        pdf.multi_cell(0, 6, _safe_pdf_text(text), new_x="LMARGIN", new_y="NEXT")
-        pdf.ln(1)
-
-    # ---- 1. Executive Summary ----
-    section_heading("1. EXECUTIVE SUMMARY")
-    pdf.set_font("Helvetica", "", 10)
-    pdf.multi_cell(0, 6, _safe_pdf_text(
-        f"This dossier presents a similarity-based risk assessment for suspect "
-        f"'{_safe_pdf_text(suspect_name)}'. The risk indicator score of {tendency_score} "
-        f"places this suspect in the '{risk_level}' category based on pattern matching "
-        f"against {len(matched_cases)} historical case(s) in the case index. "
-        f"Match quality: {match_quality or 'N/A'}. "
-        "All scores are model assessments - not legal findings."
-    ), new_x="LMARGIN", new_y="NEXT")
-    pdf.ln(4)
-
-    # ---- 2. Input Information ----
-    section_heading("2. INPUT INFORMATION  [SOURCE: USER INPUT]")
-    body_line("Suspect Name / Alias", suspect_name or "Not provided", "USER INPUT")
-    body_line("Age", age or "Not provided", "USER INPUT")
-    pdf.set_font("Helvetica", "B", 10)
-    pdf.cell(0, 7, "[USER INPUT] Observed Behaviors & MO:", new_x="LMARGIN", new_y="NEXT")
-    body_para(behaviors or "Not provided")
-    pdf.ln(2)
-
-    # ---- 3. Risk Indicators ----
-    section_heading("3. RISK INDICATORS  [SOURCE: MODEL INFERENCE]")
-    body_line("Risk Indicator Score", tendency_score, "MODEL INFERENCE")
-    body_line("Risk Category", risk_level, "MODEL INFERENCE")
-    if match_quality:
-        body_line("Match Quality", match_quality, "MODEL INFERENCE")
-    pdf.ln(2)
-
-    # ---- 4. Scoring Breakdown ----
-    section_heading("4. SCORING BREAKDOWN  [SOURCE: MODEL INFERENCE - EXPLAINABLE]")
-    if scoring_breakdown:
-        for item in scoring_breakdown:
-            pdf.set_font("Helvetica", "B", 10)
-            # multi_cell instead of cell: factor names can be long
-            pdf.multi_cell(0, 6, _safe_pdf_text(
-                f"  Factor: {item.get('factor','?')}  -- {item.get('contribution',0)} pt(s)"
-            ), new_x="LMARGIN", new_y="NEXT")
-            pdf.set_font("Helvetica", "", 9)
-            pdf.multi_cell(0, 5, _safe_pdf_text(f"    {item.get('explanation','')}"), new_x="LMARGIN", new_y="NEXT")
-            pdf.ln(1)
-    else:
-        body_para("Scoring breakdown not available.")
-    pdf.ln(2)
-
-    # ---- 5. Behavioural Analysis ----
-    section_heading("5. BEHAVIOURAL ANALYSIS  [SOURCE: USER INPUT]")
-    body_para(
-        "The following is a verbatim record of the observed behaviours submitted "
-        "by the investigator. This is USER INPUT and has not been independently verified."
-    )
-    body_para(behaviors or "Not provided")
-    pdf.ln(2)
-
-    # ---- 6. RAG Retrieved Precedents ----
-    section_heading("6. RAG RETRIEVED PRECEDENTS  [SOURCE: RETRIEVED EVIDENCE]")
-    if matched_cases:
-        for idx, case in enumerate(matched_cases, 1):
-            sim_pct = f"{float(case.get('similarity', 0.0)):.0%}"
-            pdf.set_font("Helvetica", "B", 10)
-            # multi_cell: case titles can exceed page width
-            pdf.multi_cell(0, 7,
-                _safe_pdf_text(f"  {idx}. [RETRIEVED EVIDENCE] {case.get('case_title','Unknown Case')} ({case.get('location','N/A')})"),
-                new_x="LMARGIN", new_y="NEXT")
-            pdf.set_font("Helvetica", "", 9)
-            pdf.multi_cell(0, 5, _safe_pdf_text(f"     Case ID: {case.get('case_id','N/A')} | Crime Type: {case.get('crime_type','N/A')}"), new_x="LMARGIN", new_y="NEXT")
-            if case.get("summary"):
-                pdf.multi_cell(0, 5, _safe_pdf_text(f"     [FACT - Case Record]: {case['summary'][:200]}"), new_x="LMARGIN", new_y="NEXT")
-            pdf.ln(2)
-    else:
-        body_para(
-            "No sufficiently similar precedent found. No historical case in the index "
-            "met the similarity threshold for this input."
-        )
-    pdf.ln(2)
-
-    # ---- 7. Similarity Scores ----
-    section_heading("7. SIMILARITY SCORES  [SOURCE: RETRIEVED EVIDENCE]")
-    if matched_cases:
-        for idx, case in enumerate(matched_cases, 1):
-            sim_pct = f"{float(case.get('similarity', 0.0)):.0%}"
-            dist = case.get("distance", "N/A")
-            pdf.set_font("Helvetica", "", 10)
-            # multi_cell: titles + metrics can exceed a single line
-            pdf.multi_cell(0, 6,
-                _safe_pdf_text(f"  {idx}. {case.get('case_title','Case')} -- Cosine Similarity: {sim_pct}  |  Distance: {dist}"),
-                new_x="LMARGIN", new_y="NEXT")
-    else:
-        body_para("No similarity scores available - no cases met the retrieval threshold.")
-    pdf.ln(4)
-
-    # ---- 8. Model Assessment ----
-    section_heading("8. MODEL ASSESSMENT  [SOURCE: MODEL INFERENCE]")
-    body_para(
-        f"Risk indicator score {tendency_score} corresponds to risk category: {risk_level}. "
-        "This score is produced by cosine similarity matching against historical case records "
-        "and/or a keyword severity heuristic. It is a SIMILARITY-BASED RESULT, not a legal "
-        "determination. The absence of a match does NOT confirm innocence."
-    )
-    pdf.ln(2)
-
-    # ---- 9. Limitations ----
-    section_heading("9. LIMITATIONS")
-    body_para(
-        "1. The case index is limited to the cases manually uploaded to the system. "
-        "Patterns outside this index will not be matched.\n"
-        "2. TF/cosine similarity is a lexical (word-overlap) method — it does not "
-        "understand context, intent, or nuance.\n"
-        "3. A high similarity score does NOT mean the suspect committed a crime. "
-        "It means their described behaviour shares textual overlap with historical records.\n"
-        "4. This system must never replace qualified human investigative judgment.\n"
-        "5. Results are only as good as the input provided."
-    )
-    pdf.ln(2)
-
-    # ---- 10. Timestamp & Disclaimer ----
-    section_heading("10. TIMESTAMP & DISCLAIMER")
-    pdf.set_font("Helvetica", "", 9)
-    ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S UTC")
-    pdf.multi_cell(0, 6, _safe_pdf_text(f"Report generated: {ts}"), new_x="LMARGIN", new_y="NEXT")
-    pdf.ln(3)
-    # Build disclaimer: always use a safe ASCII fallback; _safe_pdf_text handles
-    # any emoji (⚠️), Markdown, or Unicode passed in from the analyzer.
-    disc = disclaimer or (
-        "WARNING: All scores are MODEL ASSESSMENTS produced by similarity-based pattern "
-        "matching. They are NOT legal findings, NOT proof of guilt, and must NOT be used "
-        "as the sole basis for any legal or investigative decision. Always verify with "
-        "qualified human investigators."
-    )
-    pdf.set_font("Helvetica", "B", 9)
-    pdf.multi_cell(0, 5, "DISCLAIMER", new_x="LMARGIN", new_y="NEXT")
-    pdf.set_font("Helvetica", "I", 9)
-    pdf.multi_cell(0, 5, _safe_pdf_text(disc), new_x="LMARGIN", new_y="NEXT")
-
-    return bytes(pdf.output())
 
 # Sidebar
 st.sidebar.header("⚙️ Case Indexer")
@@ -819,7 +565,7 @@ if st.session_state.partial_utr:
     else:
         st.session_state.partial_utr = None
 
-_tab_labels = ["📊 Executive Analytics", "🔍 Profiling Analysis", "📁 Case Management", "👤 Suspects", "🔬 Evidence", "⏱️ Case Timeline", "⚠️ Anomaly Analysis", "🕸️ Relationship Graph", "💳 Billing & Plans", "📬 Contact & Feedback"]
+_tab_labels = ["📊 Executive Analytics", "🔍 Profiling Analysis", "📁 Case Management", "👤 Suspects", "🔬 Evidence", "🕸️ Relationship Graph", "💳 Billing & Plans", "📬 Contact & Feedback"]
 if st.session_state.is_admin:
     _tab_labels.append("🛡️ Audit Trail")
     _tab_labels.append("📢 B2B Agency Acquisition")
@@ -829,13 +575,11 @@ tab_profile = _tabs[1]
 tab_cases = _tabs[2]
 tab_suspects = _tabs[3]
 tab_evidence = _tabs[4]
-tab_timeline = _tabs[5]
-tab_anomalies = _tabs[6]
-tab_graph = _tabs[7]
-tab_billing = _tabs[8]
-tab_contact = _tabs[9]
-tab_audit = _tabs[10] if st.session_state.is_admin else None
-tab_outreach = _tabs[11] if st.session_state.is_admin else None
+tab_graph = _tabs[5]
+tab_billing = _tabs[6]
+tab_contact = _tabs[7]
+tab_audit = _tabs[8] if st.session_state.is_admin else None
+tab_outreach = _tabs[9] if st.session_state.is_admin else None
 
 with tab_dashboard:
     render_analytics_dashboard()
@@ -864,22 +608,28 @@ with tab_profile:
             st.session_state["behaviors_input"] = "Stalking female victim after marriage proposal rejected. Followed victim across state transit lines to railway station platform. Threw concentrated sulfuric acid from can, causing fatal chemical burn injuries."
             st.rerun()
 
-        p_c4, p_c5, p_c6 = st.columns(3)
-        if p_c4.button("🔨 Raman Raghav", use_container_width=True, key="quick_preset_raman"):
+        p_c4, p_c5, p_c6, p_c7 = st.columns(4)
+        if p_c4.button("💎 Rajesh Kumar", use_container_width=True, key="quick_preset_rajesh"):
+            st.session_state["suspect_name_input"] = "Rajesh Kumar @ Raju"
+            st.session_state["age_input"] = "34"
+            st.session_state["behaviors_input"] = "Late night movements near commercial jewelry shops, using multiple burner phone numbers, disabling CCTV cameras before entry, frequent location changes between Delhi and Ghaziabad."
+            st.rerun()
+        if p_c5.button("🔨 Raman Raghav", use_container_width=True, key="quick_preset_raman"):
             st.session_state["suspect_name_input"] = "Raman Raghav"
             st.session_state["age_input"] = "40"
             st.session_state["behaviors_input"] = "Attacking homeless and impoverished pavement dwellers sleeping along railway tracks and suburban shanties during midnight hours using a blunt iron rod, stealing trivial food items and small change."
             st.rerun()
-        if p_c5.button("🚌 Nirbhaya Assault", use_container_width=True, key="quick_preset_nirbhaya"):
+        if p_c6.button("🚌 Nirbhaya Bus", use_container_width=True, key="quick_preset_nirbhaya"):
             st.session_state["suspect_name_input"] = "Mukesh Singh & Co."
             st.session_state["age_input"] = "32"
             st.session_state["behaviors_input"] = "Operating chartered private bus after hours. Luring passengers under pretext of transit route. Systematic violent assault and grievous hurt using rusted iron rod, destroying evidence and dumping victim on airport road."
             st.rerun()
-        if p_c6.button("🪚 Chandrakant Jha", use_container_width=True, key="quick_preset_chandrakant"):
+        if p_c7.button("🪚 Chandrakant Jha", use_container_width=True, key="quick_preset_chandrakant"):
             st.session_state["suspect_name_input"] = "Chandrakant Jha"
             st.session_state["age_input"] = "39"
             st.session_state["behaviors_input"] = "Befriending migrant laborers, binding and strangling victims, followed by methodical decapitation and anatomical dismemberment. Dumping severed torso in plastic sacks outside central prison gates with taunting handwritten notes."
             st.rerun()
+
 
         with st.form(key="suspect_profiling_form"):
             suspect_name = st.text_input("Suspect Name / Alias", value=st.session_state.get("suspect_name_input", ""), placeholder="e.g. John Doe / Suspect Alpha")
@@ -950,24 +700,43 @@ with tab_profile:
         if st.session_state.latest_results:
             res = st.session_state.latest_results
             st.markdown(f"### Profile: **{res['name']}**")
-            m_col1, m_col2, m_col3 = st.columns(3)
-            m_col1.metric("Risk Indicator Score", str(res["tendency_score"]))
-            m_col2.metric("Risk Category", res["risk_level"])
-            m_col3.metric("Match Quality", res.get("match_quality", "—"))
+
+            # Extract behavioral patterns using NLP for UI summary
+            extracted_patterns = extract_behavioral_patterns(res.get("behaviors", ""))
+            matched_cases = res.get("matched_cases", [])
+            strongest_sim_pct = "None"
+            if matched_cases:
+                max_sim = max(float(c.get("similarity", 0.0)) for c in matched_cases)
+                strongest_sim_pct = f"{max_sim:.0%}"
+
+            # Clean score extraction (numeric 0-100)
+            score_num = 15
+            try:
+                m_score = re.search(r"\d+", str(res.get("tendency_score", "0")))
+                if m_score:
+                    score_num = int(m_score.group(0))
+            except Exception:
+                score_num = 15
+
+            # Required Analysis Summary Card in UI
+            st.success("✅ **ANALYSIS COMPLETE**")
+            
+            c_sum1, c_sum2, c_sum3, c_sum4 = st.columns(4)
+            c_sum1.metric("Model Similarity Indicator", f"{score_num}/100")
+            c_sum2.metric("Records Retrieved", str(len(matched_cases)))
+            c_sum3.metric("Patterns Identified", str(len(extracted_patterns)))
+            c_sum4.metric("Strongest Textual Similarity", strongest_sim_pct)
+
+            st.markdown("""
+            **Evidence Sources:**
+            * **[SOURCE: USER INPUT]** Unverified Investigator Observations
+            * **[SOURCE: RETRIEVED EVIDENCE]** Historical Case Index (52 Landmark Judgments)
+            * **[SOURCE: MODEL INFERENCE]** Analytical Similarity Matching
+            """)
+
+            st.caption("ℹ️ *This value represents similarity/pattern matching within the indexed dataset. It is not a probability of criminal activity or guilt.*")
             st.info(f"**Model Assessment:** {res['summary_text']}")
 
-            # Scoring breakdown (explainable)
-            if res.get("scoring_breakdown"):
-                with st.expander("📊 Scoring Breakdown (how the score was calculated)"):
-                    for item in res["scoring_breakdown"]:
-                        st.markdown(
-                            f"**{item['factor']}** — contribution: `{item['contribution']}` pt(s)  \n"
-                            f"{item['explanation']}"
-                        )
-
-            # Disclaimer
-            if res.get("disclaimer"):
-                st.warning(res["disclaimer"])
 
             st.markdown("#### ⚖️ Retrieved Indian Legal Case Precedents")
             st.caption("SOURCE TYPE: VERIFIED INDIAN LEGAL RECORDS — Retrieved via ChromaDB/Vector Similarity. Never present as proof of guilt.")
@@ -1060,12 +829,6 @@ with tab_suspects:
 
 with tab_evidence:
     render_evidence_management()
-
-with tab_timeline:
-    render_timeline_management()
-
-with tab_anomalies:
-    render_anomaly_dashboard()
 
 with tab_graph:
     render_relationship_graph()

@@ -1,0 +1,51 @@
+{
+  "case_id": "CASE-IND-2001-030",
+  "title": "State (NCT of Delhi) v. Navjot Sandhu @ Afshan Guru & Ors. (Parliament Attack Case)",
+  "status": "Solved",
+  "crime_type": "Attack on Democratic Parliament / Waging War / Falsified Vehicle Movement",
+  "court_or_authority": "Supreme Court of India / High Court of Delhi",
+  "legal_citation": "(2005) 11 SCC 600; AIR 2005 SC 3820; 2005 CriLJ 3950",
+  "judgment_date": "2005-08-04",
+  "source": "Supreme Court of India Judgment & Indian Kanoon (doc/1359141)",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 121 IPC (Waging war against the Government of India)",
+    "Section 302 IPC (Murder)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Sections 3 & 4 POTA (Prevention of Terrorism Act 2002)"
+  ],
+  "location": "Parliament House Complex, New Delhi, India",
+  "timestamp": "2001-12-13T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Mohammed Afzal Guru",
+      "alias": "Logistical Coordinator",
+      "role": "Convicted Conspirator"
+    },
+    {
+      "name": "Shaukat Hussain Guru",
+      "alias": "Accomplice",
+      "role": "Logistical Facilitator"
+    },
+    {
+      "name": "Ghazi Baba",
+      "alias": "Jaish-e-Mohammed Commander",
+      "role": "Cross-Border Mastermind"
+    }
+  ],
+  "evidence": [
+    "White Ambassador car bearing counterfeit Home Ministry VIP security parking stickers and fake sirens",
+    "Five AK-47 rifles, grenade launchers, satellite phone equipment, and unexploded ammonium nitrate car bomb recovered on premise",
+    "Call Detail Records (CDR) matching mobile handsets seized from terrorists to Afzal Guru operational numbers",
+    "Laptop computer recovered with forged identity card templates and Parliament layout schematics"
+  ],
+  "modus_operandi": "Procured a second-hand Ambassador vehicle, fitted it with counterfeit Ministry of Home Affairs VIP entry passes, flashing beacons, and packed boot with explosives. Breached Parliament gates while legislature was in session, opening indiscriminate automatic fire when challenged by security personnel.",
+  "personality_disorder": "Systematic political radicalization, surreptitious logistical deceit, and willingness to enable catastrophic violence.",
+  "common_traits": [
+    "Impersonation of government VIP convoys using fake passes",
+    "Direct kinetic assault on democratic constitutional institutions",
+    "Mobile handset synchronization through compartmentalized handlers",
+    "Use of ammonium nitrate and RDX fuel-air mixtures"
+  ],
+  "summary": "The 2001 Indian Parliament attack brought India and Pakistan to the brink of military conflict. Supreme Court upheld the capital conviction of Afzal Guru under Section 121 and 302, reaffirming jurisprudence on intercepted telecom surveillance in terror conspiracies."
+}

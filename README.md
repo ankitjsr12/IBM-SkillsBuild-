@@ -266,7 +266,7 @@ The admin panel is PIN-protected (3-digit `ADMIN_PIN` from environment).
 4. Under **Settings → Secrets**, add all variables from `.env.example` in TOML format:
 
 ```toml
-ADMIN_PIN = "739"
+ADMIN_PIN = "***"
 SENDER_EMAIL = "you@gmail.com"
 UPI_VPA = "yourname@upi"
 UPI_NAME = "Your Name"

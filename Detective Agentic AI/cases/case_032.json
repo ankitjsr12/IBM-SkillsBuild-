@@ -1,0 +1,51 @@
+{
+  "case_id": "CASE-IND-2002-032",
+  "title": "Vikas Yadav & Vishal Yadav v. State of UP & Anr. (Nitish Katara Murder Case)",
+  "status": "Solved",
+  "crime_type": "Honor Killing / Abduction / Corpse Incineration by Chemical Fuel",
+  "court_or_authority": "Supreme Court of India / High Court of Delhi",
+  "legal_citation": "(2016) 9 SCC 541; AIR 2016 SC 3383; 2016 CriLJ 4668",
+  "judgment_date": "2016-10-03",
+  "source": "Supreme Court of India Judgment & Indian Kanoon (doc/1359141)",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 364 IPC (Kidnapping in order to murder)",
+    "Section 201 IPC (Causing disappearance of evidence)",
+    "Section 34 IPC (Acts done by several persons in furtherance of common intention)"
+  ],
+  "location": "Ghaziabad, Uttar Pradesh & New Delhi, India",
+  "timestamp": "2002-02-17T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Vikas Yadav",
+      "alias": "Politician Son",
+      "role": "Primary Convicted Kidnapper & Murderer"
+    },
+    {
+      "name": "Vishal Yadav",
+      "alias": "Cousin",
+      "role": "Co-Conspirator"
+    },
+    {
+      "name": "Sukhdev Pehalwan",
+      "alias": "Hired Enforcer",
+      "role": "Accomplice"
+    }
+  ],
+  "evidence": [
+    "Tata Safari vehicle seen transporting victim from wedding venue in Ghaziabad by key witness Bharat Divakar",
+    "Charred human wrist watch and single burnt shoe recovered from roadside furnace in Khurja matching victim apparel",
+    "DNA profiling confirming charred unidentifiable skeletal remains matched victim mother Neelam Katara",
+    "Hammer and blunt trauma tools recovered from agricultural tube-well shack"
+  ],
+  "modus_operandi": "Abducted young corporate executive from a friend wedding party under pretext of private conversation due to disapproval of his romantic relationship with their sister. Drove victim to secluded farmland in Khurja, battered his skull with iron hammers, soaked the body in diesel, and set it ablaze to prevent identification.",
+  "personality_disorder": "Feudal entitlement, violent misogynistic honor preservation, and sociopathic contempt for law.",
+  "common_traits": [
+    "Abduction from public celebratory functions",
+    "Brutal blunt force execution based on caste and status honor",
+    "Chemical fuel incineration of corpse to thwart post-mortem DNA",
+    "Prolonged legal delay tactics leveraging political influence"
+  ],
+  "summary": "Supreme Court landmark ruling on honor killings in India. The Court characterized honor killings as rare and cold-blooded acts of barbarity, enhancing sentences to 25 years rigorous imprisonment without remission for Vikas and Vishal Yadav."
+}

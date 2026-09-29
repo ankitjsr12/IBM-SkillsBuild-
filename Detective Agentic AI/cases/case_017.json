@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-IND-1992-017",
+  "title": "Central Bureau of Investigation v. Harshad Shantilal Mehta & Ors. (1992 Securities Scam)",
+  "status": "Solved",
+  "crime_type": "Financial Fraud / Securities Scam / Criminal Breach of Trust",
+  "court_or_authority": "Special Court (Securities Transactions) Bombay / Supreme Court of India",
+  "legal_citation": "(2001) 8 SCC 257; AIR 2001 SC 3868",
+  "judgment_date": "2001-09-14",
+  "source": "Supreme Court of India & Indian Kanoon (doc/1922365)",
+  "source_url": "https://indiankanoon.org/doc/1922365/",
+  "ipc_sections": [
+    "Section 409 IPC (Criminal breach of trust by public servant/banker)",
+    "Section 420 IPC (Cheating and dishonestly inducing delivery of property)",
+    "Section 467 IPC (Forgery of valuable security)",
+    "Section 471 IPC (Using as genuine a forged document)",
+    "Section 120B IPC (Criminal Conspiracy)"
+  ],
+  "location": "Mumbai, Maharashtra, India",
+  "timestamp": "1992-04-23T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Harshad Shantilal Mehta",
+      "alias": "The Big Bull",
+      "role": "Mastermind Broker"
+    },
+    {
+      "name": "Ashwin Mehta",
+      "alias": "Brother / Partner",
+      "role": "Brokerage Partner"
+    }
+  ],
+  "evidence": [
+    "Forged Bank Receipts (BRs) issued without backing government securities from Bank of Karad and Metropolitan Co-operative Bank",
+    "Routing slips tracing thousands of crores from National Housing Bank (NHB) and State Bank of India into broker personal accounts",
+    "Extensive audit trails by the Janakiraman Committee documenting artificial price inflation in targeted stock scripts"
+  ],
+  "modus_operandi": "Exploited structural loopholes in the inter-bank ready-forward (RF) government securities market. Colluded with bank officials to issue fake Bank Receipts (BRs) unsupported by actual securities. Siphoned bank funds into private brokerage accounts to aggressively ramp up and corner stock equity prices on the Bombay Stock Exchange.",
+  "personality_disorder": "Grandiose narcissism, manipulative charisma, hyper-optimistic risk blindness, and corporate hubris.",
+  "common_traits": [
+    "Falsification of inter-bank financial securities",
+    "Suborning senior banking executives and treasury managers",
+    "Aggressive artificial market inflation and pump-and-dump mechanics",
+    "Massive systemic leverage diversion"
+  ],
+  "summary": "The 1992 securities scam involved diversion of over ₹4,000 crore from banking institutions into the stock market. Led to the establishment of SEBI as an empowered regulatory authority and dedicated Special Courts under the 1992 Act."
+}

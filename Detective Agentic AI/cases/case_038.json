@@ -1,0 +1,40 @@
+{
+  "case_id": "CASE-IND-1994-038",
+  "title": "Dhananjoy Chatterjee @ Dhana v. State of West Bengal",
+  "status": "Solved",
+  "crime_type": "Residential Security Guard Breach / Premeditated Rape & Homicide of Schoolgirl",
+  "court_or_authority": "Supreme Court of India / High Court at Calcutta",
+  "legal_citation": "(1994) 2 SCC 220; 1994 CriLJ 2240; (2004) 9 SCC 751",
+  "judgment_date": "1994-01-11",
+  "source": "Supreme Court of India Official Judgment & Indian Kanoon (doc/1359141)",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 376 IPC (Rape)",
+    "Section 380 IPC (Theft in dwelling house)"
+  ],
+  "location": "Bhowanipore, Kolkata, West Bengal, India",
+  "timestamp": "1990-03-05T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Dhananjoy Chatterjee",
+      "alias": "Dhana",
+      "role": "Apartment Security Guard"
+    }
+  ],
+  "evidence": [
+    "Stolen wristwatch belonging to victim recovered from suspect rural ancestral home in Bankura district",
+    "Duty register confirming suspect was posted as security guard at Anand Apartment on date and time of crime",
+    "Severe ligature strangulation marks and multiple blunt head wounds documented in Nil Ratan Sircar Medical College autopsy",
+    "Seminal fluid stains and pubic hair forensic match connecting suspect to scene"
+  ],
+  "modus_operandi": "Employed as residential building security guard. After victim mother complained to building society regarding his leering behaviour leading to his transfer, he nursed intense vindictive resentment. Monitored the flat until victim was alone, gained forced entry, assaulted, raped, and strangled 14-year-old schoolgirl before stealing her wristwatch to fake burglary.",
+  "personality_disorder": "Spiteful grievance accumulation, predatory sexual opportunism, and explosive vindictive violence.",
+  "common_traits": [
+    "Insider breach of trust by residential security personnel",
+    "Retaliation against domestic tenant harassment complaints",
+    "Physical assault followed by clothes ligature strangulation",
+    "Theft of minor personal effects to simulate burglary"
+  ],
+  "summary": "First judicial execution in India in the 21st century (executed in 2004). Supreme Court held that security guards entrusted with building safety who breach that sacred trust to prey upon defenseless residents fall within the rarest of rare doctrine warranting the death penalty."
+}

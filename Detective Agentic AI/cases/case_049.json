@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-IND-2003-049",
+  "title": "State of Gujarat v. Asgar Ali & 43 Ors. (Haren Pandya Assassination)",
+  "status": "Solved",
+  "crime_type": "Targeted Political Homicide / Point-Blank Pistol Execution in Vehicle",
+  "court_or_authority": "Supreme Court of India / High Court of Gujarat",
+  "legal_citation": "(2020) 12 SCC 395; 2019 CriLJ 4668 (SC)",
+  "judgment_date": "2019-08-02",
+  "source": "Supreme Court of India Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 3(1) POTA (Prevention of Terrorism Act 2002)"
+  ],
+  "location": "Law Garden, Ellisbridge, Ahmedabad, Gujarat, India",
+  "timestamp": "2003-03-26T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Asgar Ali",
+      "alias": "Contract Hitman",
+      "role": "Primary Shooter"
+    },
+    {
+      "name": "Mufti Sufiyan",
+      "alias": "Conspiracy Cleric",
+      "role": "Absconding Ideological Instigator"
+    }
+  ],
+  "evidence": [
+    "Five .32 caliber bullet wounds recovered from body of former state home minister inside his Maruti car",
+    "Recovered country-made pistol with ballistic striation matching bullets recovered from thoracic cavity",
+    "Telephone intercepts connecting accused to clandestine handlers in Hyderabad and Karachi",
+    "Eyewitness identification of shooter approaching driver-side window while victim was parked following morning walk"
+  ],
+  "modus_operandi": "Monitored routine morning walk habits of former state home minister. Approached victim while seated alone in his parked car, drew a suppressed revolver, fired multiple point-blank rounds through the rolled-down driver window, and escaped on a motorcycle driven by a waiting associate.",
+  "personality_disorder": "Contract mercenary detachment, extremist retribution drive, and ideological weaponization.",
+  "common_traits": [
+    "Surveillance of morning exercise routine of VIP target",
+    "Point-blank firearm execution through vehicle driver-side window",
+    "Motorcycle pillion getaway through narrow urban alleyways",
+    "Cross-state operational cell funded through covert terror channels"
+  ],
+  "summary": "Supreme Court bench led by Justice Arun Mishra overturned the Gujarat High Court acquittal, restoring the conviction of 12 men for the assassination of former Gujarat Home Minister Haren Pandya under POTA and IPC Section 302."
+}

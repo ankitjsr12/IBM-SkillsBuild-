@@ -1,0 +1,48 @@
+{
+  "case_id": "CASE-IND-2008-027",
+  "title": "State of Maharashtra v. Ajmal Amir Kasab (26/11 Mumbai Terror Attacks)",
+  "status": "Solved",
+  "crime_type": "Waging War Against State / Mass Homicide / Maritime Infiltration / Terror Attack",
+  "court_or_authority": "Supreme Court of India / High Court of Bombay / Special Court Mumbai",
+  "legal_citation": "(2012) 9 SCC 1; AIR 2012 SC 3565; 2012 CriLJ 4770",
+  "judgment_date": "2012-08-29",
+  "source": "Supreme Court of India Judgment & Indian Kanoon (doc/1965342)",
+  "source_url": "https://indiankanoon.org/doc/1965342/",
+  "ipc_sections": [
+    "Section 121 IPC (Waging war against the Government of India)",
+    "Section 302 IPC (Murder)",
+    "Section 307 IPC (Attempt to murder)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Sections 16, 17, 18 Unlawful Activities (Prevention) Act 1967"
+  ],
+  "location": "Chhatrapati Shivaji Terminus, Cama Hospital, Girgaum Chowpatty, Mumbai, India",
+  "timestamp": "2008-11-26T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Ajmal Amir Kasab",
+      "alias": "Sole Surviving Gunman",
+      "role": "Primary Attacker / Convicted Capital Offender"
+    },
+    {
+      "name": "Abu Ismail",
+      "alias": "Team Leader",
+      "role": "Killed in Encounter"
+    }
+  ],
+  "evidence": [
+    "Live apprehension at Girgaum Chowpatty barricade by Assistant Sub-Inspector Tukaram Omble holding rifle barrel",
+    "Seizure of AK-47 assault rifle, 9mm pistols, hand grenades, RDX explosive timers, and satellite GPS receivers",
+    "CCTV footage from CST railway station depicting indiscriminate firing into passenger waiting halls",
+    "VoIP and Thuraya satellite phone intercepts capturing real-time tactical instructions from handlers in Karachi",
+    "DNA profiling matching deceased terrorists to hijacked fishing trawler MV Kuber"
+  ],
+  "modus_operandi": "Ten heavily armed terrorists hijacked an Indian fishing trawler, murdered the crew, and entered Mumbai coast via inflatable dinghies. Deployed in two-man buddy pairs targeting public transit hubs, luxury hotels, and hospitals with assault rifles and grenades to maximize civilian casualties and draw global media attention.",
+  "personality_disorder": "Systematic religious radicalization, indoctrinated fanaticism, and ruthless sociopathic indifference to human life.",
+  "common_traits": [
+    "Maritime cross-border infiltration via hijacked vessels",
+    "Assault rifles and military-grade hand grenades in crowded transit hubs",
+    "Hostage-taking and tactical standoff against elite commandos",
+    "Real-time tactical direction via VoIP satellite intercepts"
+  ],
+  "summary": "The 26/11 Mumbai terror attacks claimed 166 lives. The trial set international standards for digital and forensic evidence handling in mass terror prosecutions. Sole surviving terrorist Ajmal Kasab was convicted under Section 121 and 302 and executed in 2012."
+}

@@ -1,0 +1,39 @@
+{
+  "case_id": "CASE-IND-2017-039",
+  "title": "Central Bureau of Investigation v. Bholu (Ryan International School Murder)",
+  "status": "Solved",
+  "crime_type": "School Premise Stabbing / Premeditated Minor Homicide to Postpone Exams",
+  "court_or_authority": "Special Children Court Gurugram / High Court of Punjab & Haryana / Supreme Court of India",
+  "legal_citation": "(2022) 10 SCC 135; 2022 SCC OnLine SC 863",
+  "judgment_date": "2022-07-13",
+  "source": "Supreme Court of India Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 15 Juvenile Justice (Care and Protection of Children) Act 2015"
+  ],
+  "location": "Bhondsi, Gurugram, Haryana, India",
+  "timestamp": "2017-09-08T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Bholu",
+      "alias": "Class 11 Student",
+      "role": "Primary Accused (Tried as Adult)"
+    }
+  ],
+  "evidence": [
+    "CCTV camera footage showing accused entering school ground-floor washroom shortly before victim child entered and exiting hurriedly",
+    "Serrated hunting knife recovered from commode reservoir following suspect disclosure statement",
+    "Forensic blood DNA analysis connecting knife blade residue to deceased 7-year-old victim Prince",
+    "CBI digital extraction of internet history searching how to commit murder and postpone parent-teacher meetings"
+  ],
+  "modus_operandi": "Senior high school student desperate to defer scheduled parent-teacher meetings and upcoming semester examinations brought a concealed kitchen knife to school. Waited inside the elementary school washroom for a solitary victim, slit the throat of an innocent 7-year-old boy, dumped weapon in the water tank, and informed staff to trigger emergency evacuation.",
+  "personality_disorder": "Severe academic stress maladaptation, pathological egocentrism, and psychopathic lack of victim empathy.",
+  "common_traits": [
+    "Concealment of edged weapon inside educational institution",
+    "Killing random vulnerable younger student to cause institutional shutdown",
+    "Attempted framing of school bus conductor during initial local police probe",
+    "Pre-crime digital search on evading exams via violent disruption"
+  ],
+  "summary": "Landmark Supreme Court jurisprudence on preliminary assessment under Section 15 of Juvenile Justice Act 2015, ruling that an accused aged 16-18 accused of a heinous crime can be tried as an adult based on mental and physical capacity evaluation."
+}

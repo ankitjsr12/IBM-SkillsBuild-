@@ -1,0 +1,52 @@
+{
+  "case_id": "CASE-IND-2016-036",
+  "title": "State of UP v. Bawariya Nomad Highway Robbery Syndicate (Bulandshahr Gang Rape)",
+  "status": "Solved",
+  "crime_type": "Armed Highway Ambush / Axle-Rod Trap / Group Dacoity & Aggravated Assault",
+  "court_or_authority": "Special POCSO & Sessions Court, Bulandshahr / High Court of Judicature at Allahabad",
+  "legal_citation": "Sessions Trial No. 512/2016; 2019 SCC OnLine All 4120",
+  "judgment_date": "2019-07-27",
+  "source": "Allahabad High Court Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/17492018/",
+  "ipc_sections": [
+    "Section 376D IPC (Gang Rape)",
+    "Section 395 IPC (Dacoity)",
+    "Section 397 IPC (Robbery or dacoity, with attempt to cause death or grievous hurt)",
+    "Section 364 IPC (Kidnapping)",
+    "Section 6 POCSO Act"
+  ],
+  "location": "Dostpur, NH-91, Bulandshahr, Uttar Pradesh, India",
+  "timestamp": "2016-07-29T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Saleem Bawariya",
+      "alias": "Gang Kingpin",
+      "role": "Primary Convicted Dacoit"
+    },
+    {
+      "name": "Zubair Bawariya",
+      "alias": "Field Operative",
+      "role": "Dacoit"
+    },
+    {
+      "name": "Sajid",
+      "alias": "Lookout",
+      "role": "Dacoit"
+    }
+  ],
+  "evidence": [
+    "Recovery of heavy curved iron axle thrown across highway lanes to rupture vehicle oil pans and tires",
+    "Recovered gold jewelry and mobile phones belonging to traveling family recovered from forest camps in Mawana",
+    "Positive Test Identification Parade (TIP) by victim survivors identifying suspects under judicial magistrate supervision",
+    "DNA semen profiling matching seized biological evidence from agricultural sugarcane fields"
+  ],
+  "modus_operandi": "Lurked alongside unlit national highways during midnight hours. Threw heavy metal axles or stones at passing family cars to disable tires or undercarriage. Once the disabled vehicle halted, armed gang dragged occupants into nearby sugarcane fields, tied up male members, looted all jewelry and cash, and sexually assaulted female victims.",
+  "personality_disorder": "Antisocial predatory nomadism, thrill dacoity, and uninhibited group sexual sadism.",
+  "common_traits": [
+    "Deliberate vehicle mechanical disabling on unlit national highways",
+    "Dragging victims into tall agricultural crops (sugarcane / mustard)",
+    "Simultaneous armed dacoity and group sexual violence",
+    "Nomadic interstate flight across border district hideouts"
+  ],
+  "summary": "Landmark highway dacoity trial resulting in life sentences for the nomadic Bawariya gang members. Led to widespread deployment of highway patrol cruisers, automated SOS booths, and mandatory GPS tracking on national highways across North India."
+}

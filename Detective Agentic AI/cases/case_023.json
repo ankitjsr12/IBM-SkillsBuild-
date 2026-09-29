@@ -1,0 +1,47 @@
+{
+  "case_id": "CASE-IND-2021-023",
+  "title": "State of Jharkhand v. Pradeep Kumar Mandal & Ors. (Jamtara Phishing Syndicate)",
+  "status": "Solved",
+  "crime_type": "Cyber Vishing / SIM Swapping / Fraudulent UPI Banking Extraction",
+  "court_or_authority": "District & Sessions Court, Jamtara / High Court of Jharkhand",
+  "legal_citation": "Sessions Trial No. 114/2021; 2022 SCC OnLine Jhar 743",
+  "judgment_date": "2022-04-12",
+  "source": "Jharkhand High Court Judgment & Indian Kanoon (doc/18294723)",
+  "source_url": "https://indiankanoon.org/doc/18294723/",
+  "ipc_sections": [
+    "Section 419 IPC (Cheating by personation)",
+    "Section 420 IPC (Cheating and dishonestly inducing delivery of property)",
+    "Section 467 IPC (Forgery of valuable security)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 66C & 66D Information Technology Act 2000"
+  ],
+  "location": "Jamtara & Deoghar, Jharkhand, India",
+  "timestamp": "2021-03-15T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Pradeep Kumar Mandal",
+      "alias": "Call Center Handler",
+      "role": "Primary Vishing Operator"
+    },
+    {
+      "name": "Munna Ansari",
+      "alias": "SIM Vendor",
+      "role": "Fraudulent SIM Supplier"
+    }
+  ],
+  "evidence": [
+    "Recovery of 84 forged SIM cards activated under fake Aadhaar credentials and 47 smart handsets from rural forest hideouts",
+    "Audio recordings of social engineering phone calls impersonating bank KYC verification officers and SBI customer care executives",
+    "Bank passbooks showing micro-transfers to wallet accounts immediately cashed out at rural CSP kiosks",
+    "Call detail logs tracing thousands of unsolicited outbound calls originating from specific mobile BTS towers in Jamtara"
+  ],
+  "modus_operandi": "Purchased thousands of pre-activated SIM cards using counterfeit identity documents. Operated makeshift call centers in forest groves, mass-dialing phone numbers across India posing as banking executives warning of impending debit card or electricity disconnection. Coerced victims into revealing OTPs or downloading remote access applications (AnyDesk/TeamViewer).",
+  "personality_disorder": "Predatory opportunism, emotional detachment from victim suffering, and criminal group conformity.",
+  "common_traits": [
+    "Voice phishing (vishing) posing as official bank managers",
+    "Fabricating false urgency regarding account suspension",
+    "Remote screen-sharing app installation coercion",
+    "Instant dissipation through rural payment banks and wallets"
+  ],
+  "summary": "Key trial establishing systemic cyber enforcement precedents against Jamtara based syndicates. Led to nationwide coordination between state cyber police units and telecom operators for real-time IMEI blacklisting."
+}

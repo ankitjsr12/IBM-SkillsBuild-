@@ -1,0 +1,42 @@
+{
+  "case_id": "CASE-IND-2007-016",
+  "title": "State of Karnataka v. K.D. Kempamma @ Cyanide Mallika",
+  "status": "Solved",
+  "crime_type": "Serial Homicide / Poisoning / Temple Robbery",
+  "court_or_authority": "High Court of Karnataka / Sessions Court Bangalore",
+  "legal_citation": "Criminal Appeal No. 744/2010 (Karnataka HC); 2012 SCC OnLine Kar 8901",
+  "judgment_date": "2012-08-03",
+  "source": "High Court of Karnataka & Indian Kanoon (doc/14101928)",
+  "source_url": "https://indiankanoon.org/doc/14101928/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 328 IPC (Causing hurt by poison)",
+    "Section 392 IPC (Robbery)",
+    "Section 201 IPC (Disappearance of evidence)"
+  ],
+  "location": "Bangalore, Tumkur & Mandya, Karnataka, India",
+  "timestamp": "2007-12-31T00:00:00Z",
+  "suspects": [
+    {
+      "name": "K.D. Kempamma",
+      "alias": "Cyanide Mallika",
+      "role": "Primary Convicted Serial Killer"
+    }
+  ],
+  "evidence": [
+    "Recovery of potassium cyanide vials and empty medicine containers from handbag upon arrest at Bangalore bus station",
+    "Multiple pawn tickets for recovered gold thalis and mangalsutras belonging to deceased female temple devotees",
+    "Witness statements from temple lodge managers identifying suspect checking into guest rooms with victims",
+    "Forensic chemical viscera detection confirming lethal cyanide dosage"
+  ],
+  "modus_operandi": "Targeted wealthy middle-aged women visiting temples who appeared distressed or praying for domestic resolution. Claimed to be an expert in holy rituals (Mandala Pooja). Convinced victims to stay at nearby budget lodges wearing their finest gold jewelry. Instructed them to close eyes and drink consecrated holy water laced with cyanide. Stole all jewelry and money before fleeing.",
+  "personality_disorder": "Psychopathic personality with predatory deceit, clinical lack of remorse, and opportunistic financial predation.",
+  "common_traits": [
+    "Targeting distressed female temple devotees",
+    "False pretense of performing Mandala ritual prayers",
+    "Use of potassium cyanide in holy water or prasadam",
+    "Theft of gold ornaments and mangalsutras",
+    "Lodge room crimes near sacred pilgrimage centers"
+  ],
+  "summary": "Known as India first convicted female serial killer. Convicted of poisoning and robbing at least six women devotees at temple towns across Karnataka between 1999 and 2007. Sentenced to death, later commuted to life imprisonment without remission."
+}

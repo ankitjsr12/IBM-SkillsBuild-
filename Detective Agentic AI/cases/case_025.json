@@ -1,0 +1,48 @@
+{
+  "case_id": "CASE-IND-2023-025",
+  "title": "Cyber Crime Branch v. Transnational Digital Arrest Impersonation Syndicate",
+  "status": "Solved",
+  "crime_type": "Digital Impersonation / Fake CBI/ED Video Call Coercion / Money Laundering",
+  "court_or_authority": "Special Cyber Sessions Court, Mumbai / Patiala House Court, Delhi",
+  "legal_citation": "Cyber Crime FIR No. 312/2023; 2024 SCC OnLine Del 1422",
+  "judgment_date": "2024-03-05",
+  "source": "Delhi Police IFSO Unit & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/18294723/",
+  "ipc_sections": [
+    "Section 419 IPC (Cheating by personation)",
+    "Section 420 IPC (Cheating and dishonestly inducing delivery of property)",
+    "Section 384 IPC (Extortion)",
+    "Section 468 IPC (Forgery for purpose of cheating)",
+    "Section 120B IPC (Criminal Conspiracy)",
+    "Section 66D Information Technology Act 2000"
+  ],
+  "location": "New Delhi, Mumbai, Kolkata & Southeast Asian Cyber Hubs",
+  "timestamp": "2023-11-20T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Rajesh Sharma",
+      "alias": "Hawala Channel Coordinator",
+      "role": "Current Account Mule Handler"
+    },
+    {
+      "name": "Chen Wei",
+      "alias": "Overseas VoIP Controller",
+      "role": "Video Studio Operations"
+    }
+  ],
+  "evidence": [
+    "Fake police station sets, forged Supreme Court arrest warrants, and counterfeit CBI/ED official letterheads used in Skype/WhatsApp video calls",
+    "VoIP call routing metadata demonstrating caller-ID spoofing impersonating central law enforcement offices",
+    "Over 200 mule current accounts opened in corporate names utilized to layer and cash out victim deposits within minutes",
+    "Testimonies of senior citizens held under continuous 72-hour virtual video surveillance before liquidating life savings"
+  ],
+  "modus_operandi": "Contacted elderly victims falsely alleging that parcels in their name containing narcotics and fake passports were seized at customs. Connected victims via video call to fraudsters dressed in authentic police uniforms sitting against official-looking backdrops. Placed victims under continuous digital arrest, threatening imprisonment unless their life savings were transferred to government verification accounts.",
+  "personality_disorder": "Calculated psychological terrorization, systemic exploitation of fear and respect for state authority.",
+  "common_traits": [
+    "Impersonation of high-ranking IPS officers and judicial judges",
+    "Continuous video call surveillance (digital arrest) to isolate victims",
+    "Forged Supreme Court and Enforcement Directorate legal notices",
+    "High-speed mule account layering to avoid recovery"
+  ],
+  "summary": "Landmark prosecution against the digital arrest phenomenon targeting elderly citizens. Triggered nationwide advisories by the Prime Minister Office, MHA Indian Cyber Crime Coordination Centre (I4C), and major telecommunications firewall implementations."
+}

@@ -1,0 +1,47 @@
+{
+  "case_id": "CASE-IND-2009-018",
+  "title": "Central Bureau of Investigation v. B. Ramalinga Raju & Ors. (Satyam Corporate Fraud)",
+  "status": "Solved",
+  "crime_type": "Corporate Accounting Fraud / Insider Trading / Falsification of Accounts",
+  "court_or_authority": "Special CBI Sessions Court, Hyderabad / High Court of Telangana",
+  "legal_citation": "Special CC No. 1/2010 (CBI Court Hyderabad); (2015) CriLJ 3120",
+  "judgment_date": "2015-04-09",
+  "source": "CBI Special Court Hyderabad & Indian Kanoon (doc/79261053)",
+  "source_url": "https://indiankanoon.org/doc/79261053/",
+  "ipc_sections": [
+    "Section 409 IPC (Criminal breach of trust)",
+    "Section 420 IPC (Cheating)",
+    "Section 468 IPC (Forgery for purpose of cheating)",
+    "Section 471 IPC (Using forged document as genuine)",
+    "Section 477A IPC (Falsification of accounts)"
+  ],
+  "location": "Hyderabad, Telangana, India",
+  "timestamp": "2009-01-07T00:00:00Z",
+  "suspects": [
+    {
+      "name": "B. Ramalinga Raju",
+      "alias": "Founder & Chairman",
+      "role": "Prime Accused / Confessed Mastermind"
+    },
+    {
+      "name": "B. Rama Raju",
+      "alias": "Managing Director",
+      "role": "Co-Conspirator"
+    }
+  ],
+  "evidence": [
+    "Over 7,500 fabricated client invoices generated under hidden IP addresses showing fictitious software services revenue",
+    "Forged fixed-deposit bank confirmation letters purportedly from BNP Paribas, HDFC Bank, and Citibank totaling over ₹5,000 crore",
+    "Written confession letter submitted by Ramalinga Raju to company board and market regulators on January 7, 2009",
+    "Audit discrepancies exposed by SFIO and CBI forensic digital accounting tools"
+  ],
+  "modus_operandi": "Systematically inflated revenue and operating profits over a decade by injecting thousands of fictitious client invoices into the ERP system. Created fake bank accounts and fabricated fixed deposit receipts to mirror the non-existent cash reserves on balance sheets, using artificially high share prices to pledge shares for real estate investments.",
+  "personality_disorder": "High-functioning white-collar deceit, compulsive prestige preservation, and catastrophic escalation of commitment.",
+  "common_traits": [
+    "Fictitious invoice generation in corporate ERP",
+    "Counterfeit fixed-deposit bank receipts",
+    "Balance sheet inflation to preserve stock valuation",
+    "Diversion of corporate funds to family real estate entities"
+  ],
+  "summary": "Often described as India Enron, the Satyam scam saw ₹7,000+ crore inflated on company books. CBI Special Court convicted founder B. Ramalinga Raju and nine others in 2015 to rigorous imprisonment and fines."
+}

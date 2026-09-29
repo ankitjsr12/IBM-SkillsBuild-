@@ -1,0 +1,46 @@
+{
+  "case_id": "CASE-IND-2017-048",
+  "title": "CBI v. Gurmeet Ram Rahim Singh (Dera Sacha Sauda Cases)",
+  "status": "Solved",
+  "crime_type": "Spiritual Exploitation / Rape of Devotees / Journalist Homicide / Mass Rioting",
+  "court_or_authority": "Special CBI Court, Panchkula / High Court of Punjab & Haryana",
+  "legal_citation": "RC No. 5(S)/2002/SCB-I/CBI/N.D.; 2017 SCC OnLine P&H 3901",
+  "judgment_date": "2017-08-25",
+  "source": "Special CBI Court Panchkula Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 376 IPC (Rape)",
+    "Section 302 IPC (Murder)",
+    "Section 506 IPC (Criminal Intimidation)",
+    "Section 120B IPC (Criminal Conspiracy)"
+  ],
+  "location": "Dera Sacha Sauda Headquarters, Sirsa & Panchkula, Haryana, India",
+  "timestamp": "2017-08-25T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Gurmeet Ram Rahim Singh",
+      "alias": "Godman / Dera Chief",
+      "role": "Primary Convicted Offender"
+    },
+    {
+      "name": "Honeypreet Insan",
+      "alias": "Adopted Daughter",
+      "role": "Rioting Incitement Coordinator"
+    }
+  ],
+  "evidence": [
+    "Anonymous letter addressed to Prime Minister of India and Chief Justice in 2002 detailing systematic sexual assault of female sadhvis",
+    "Courageous depositions of two female victims identifying the underground subterranean sanctum (Gufa) where assaults occurred",
+    "Corroborating assassination investigation of journalist Ram Chander Chhatrapati who printed the anonymous expose in Poora Sach",
+    "Seizure of coded walkie-talkie transceivers, fuel-laden vehicles, and riot gear used during coordinated Panchkula arson riots"
+  ],
+  "modus_operandi": "Used godman spiritual aura and political clout to coerce female disciples living in secluded ashram dormitories into sexually subservient acts inside his underground cavern. When local journalist published allegations, cult hitmen assassinated him outside his residence. Orchestrated mass mobilization of 100,000 violent followers to storm the courthouse upon verdict.",
+  "personality_disorder": "Grandiose narcissism, predatory sociopathy, theatrical messiah complex, and total coercive control.",
+  "common_traits": [
+    "Exploitation of spiritual faith to execute sexual abuse of devotees",
+    "Subterranean private sanctuary designed for secluded crimes",
+    "Contract assassination of investigative journalists printing exposes",
+    "Armed mass mobilization and urban rioting to intimidate judicial courts"
+  ],
+  "summary": "Landmark CBI prosecution demonstrating judicial bravery against immense political pressure. Special CBI Judge Jagdeep Singh sentenced Gurmeet Ram Rahim to 20 years rigorous imprisonment for rape, followed by life imprisonment for journalist murder."
+}

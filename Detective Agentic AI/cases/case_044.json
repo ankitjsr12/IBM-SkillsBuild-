@@ -1,0 +1,52 @@
+{
+  "case_id": "CASE-IND-2015-044",
+  "title": "CBI v. Indrani Mukerjea, Sanjeev Khanna & Shyamvar Rai (Sheena Bora Murder)",
+  "status": "Solved",
+  "crime_type": "Familial Premeditated Homicide / Chemical Sedation / Forest Incineration",
+  "court_or_authority": "Special CBI Sessions Court Mumbai / High Court of Bombay / Supreme Court of India",
+  "legal_citation": "(2022) 13 SCC 590; Special CBI Case No. 82/2015",
+  "judgment_date": "2022-05-18",
+  "source": "Supreme Court of India Judgment & Indian Kanoon",
+  "source_url": "https://indiankanoon.org/doc/1359141/",
+  "ipc_sections": [
+    "Section 302 IPC (Murder)",
+    "Section 364 IPC (Kidnapping in order to murder)",
+    "Section 201 IPC (Causing disappearance of evidence of offence)",
+    "Section 120B IPC (Criminal Conspiracy)"
+  ],
+  "location": "Bandra, Mumbai & Pen, Raigad, Maharashtra, India",
+  "timestamp": "2012-04-24T00:00:00Z",
+  "suspects": [
+    {
+      "name": "Indrani Mukerjea",
+      "alias": "Media Executive / Mother",
+      "role": "Primary Accused"
+    },
+    {
+      "name": "Sanjeev Khanna",
+      "alias": "Ex-Husband",
+      "role": "Co-Conspirator"
+    },
+    {
+      "name": "Shyamvar Rai",
+      "alias": "Driver",
+      "role": "Approver / Accused"
+    }
+  ],
+  "evidence": [
+    "Confession of driver Shyamvar Rai following arrest with illegal weapon disclosing burial of body in Raigad forest",
+    "Exhumation of skeletal remains from Pen jungle yielding femurs, teeth, and skull fragments",
+    "AIIMS forensic DNA profiling confirming exhumed skeleton was the biological daughter of Indrani Mukerjea",
+    "Purchase receipts for luggage bags, medicines, and petrol cans procured on day of crime",
+    "Forged resignation email sent in Sheena Bora name three months after her death to conceal disappearance"
+  ],
+  "modus_operandi": "High-society media executive lured daughter under pretext of reconciliation. Sedated her with spiked alcoholic beverage in a hired Opel Corsa car, strangled her in the backseat with ex-husband, packed body into a duffel bag, drove to dense forest in Raigad district, doused body in petrol, and burned it in a ravine.",
+  "personality_disorder": "Malignant narcissism, extreme reputation control, status anxiety, and complete absence of maternal empathy.",
+  "common_traits": [
+    "Homicide inside moving passenger vehicle following chemical sedation",
+    "Transporting corpse in luggage bag to rural forest ravine",
+    "Post-mortem electronic impersonation (emails, text messages) to simulate overseas emigration",
+    "Approver confession breaking three-year cold case deadlock"
+  ],
+  "summary": "Sensational high-profile murder trial revealing three years of active deception where the victim was claimed to be living in the United States. Advanced DNA extraction by AIIMS forensic experts played a decisive role in identifying charred skeletal remains."
+}
