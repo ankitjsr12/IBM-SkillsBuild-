@@ -241,3 +241,14 @@ class TestDetectiveAgentIndianRAG:
 
         assert result["confidence_indicator"] == "No sufficiently similar Indian record found."
         assert len(result["matched_precedents"]) == 0
+
+    def test_bns_cross_referencing_mappings(self):
+        """Verify IPC to Bharatiya Nyaya Sanhita (BNS 2023) cross-referencing."""
+        ipc_inputs = ["Section 302 IPC", "Section 307 IPC", "Section 420 IPC", "Section 120B IPC"]
+        refs = IndianLegalConnector.get_bns_cross_references(ipc_inputs)
+        assert len(refs) == 4
+        bns_sections = [r["bns_section"] for r in refs]
+        assert "Section 103 BNS" in bns_sections  # 302 IPC -> 103 BNS
+        assert "Section 109 BNS" in bns_sections  # 307 IPC -> 109 BNS
+        assert "Section 318 BNS" in bns_sections  # 420 IPC -> 318 BNS
+        assert "Section 61 BNS" in bns_sections   # 120B IPC -> 61 BNS

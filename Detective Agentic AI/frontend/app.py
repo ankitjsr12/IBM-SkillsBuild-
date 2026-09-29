@@ -696,6 +696,24 @@ with tab_profile:
             st.session_state["behaviors_input"] = "Befriending migrant laborers, binding and strangling victims, followed by methodical decapitation and anatomical dismemberment. Dumping severed torso in plastic sacks outside central prison gates with taunting handwritten notes."
             st.rerun()
 
+        # Cross-Lingual Hinglish & Vernacular Police Notes Presets
+        st.markdown("**🇮🇳 Cross-Lingual Vernacular / Hinglish Scenarios:**")
+        v_c1, v_c2, v_c3 = st.columns(3)
+        if v_c1.button("💊 Zehar Khilakar Murder", use_container_width=True, key="quick_preset_zehar"):
+            st.session_state["suspect_name_input"] = "Suspect V-01"
+            st.session_state["age_input"] = "42"
+            st.session_state["behaviors_input"] = "Mahilaon ko jhooti shaadi ka vaada karke bus stand bulaya. Dawa ke bahane zehar khila kar murder kiya aur sone ke gehne loot kar farar ho gaya."
+            st.rerun()
+        if v_c2.button("🔓 Taala Todkar Chori", use_container_width=True, key="quick_preset_taala"):
+            st.session_state["suspect_name_input"] = "Nakabjan Gang"
+            st.session_state["age_input"] = "29"
+            st.session_state["behaviors_input"] = "Raat ke andhere me residential building me enter kiya, master chabi aur cutter se taala todkar locker se chori kiya, CCTV camera ghumakar farar ho gaya."
+            st.rerun()
+        if v_c3.button("🔫 Supari Contract Killing", use_container_width=True, key="quick_preset_supari"):
+            st.session_state["suspect_name_input"] = "Shooter Syndicate"
+            st.session_state["age_input"] = "31"
+            st.session_state["behaviors_input"] = "Property vivad me supari lekar contract shooter ne bike par aakar victim par fire khola, qatl karne ke baad hathiyar fek kar farar."
+            st.rerun()
 
         with st.form(key="suspect_profiling_form"):
             suspect_name = st.text_input("Suspect Name / Alias", value=st.session_state.get("suspect_name_input", ""), placeholder="e.g. John Doe / Suspect Alpha")
@@ -742,6 +760,9 @@ with tab_profile:
                             "summary_text": res.get("summary", f"Suspect pattern evaluated for behavior traits: {behaviors[:60]}..."),
                             "scoring_breakdown": res.get("scoring_breakdown", []),
                             "disclaimer": res.get("disclaimer", ""),
+                            "evidence_hash": res.get("evidence_hash", ""),
+                            "legal_compliance": res.get("legal_compliance", {}),
+                            "bias_guardrail": res.get("bias_guardrail", {}),
                             "timestamp": time.time(),
                         }
                         st.session_state.analysis_history.append(st.session_state.latest_results.copy())
@@ -793,6 +814,24 @@ with tab_profile:
             c_sum3.metric("Patterns Identified", str(len(extracted_patterns)))
             c_sum4.metric("Strongest Textual Similarity", strongest_sim_pct)
 
+            # Active Bias Guardrail Warning
+            bias_info = res.get("bias_guardrail", {})
+            if bias_info.get("has_bias_flags"):
+                with st.container():
+                    st.warning("⚠️ **OBJECTIVITY & BIAS GUARDRAIL ALERT (INVESTIGATOR AUDIT)**")
+                    for flag in bias_info.get("flags", []):
+                        st.markdown(f"- 🛑 {flag}")
+                    st.caption(bias_info.get("advisory", ""))
+
+            # Section 65B IEA / Section 63 BSA 2023 Digital Evidence Integrity Certificate
+            legal = res.get("legal_compliance", {})
+            if legal:
+                with st.expander("🔐 **Court Admissibility & Section 65B IEA / Section 63 BSA 2023 Certificate**", expanded=False):
+                    st.markdown(f"**Statutory Compliance:** `{legal.get('statutory_framework')}`")
+                    st.markdown(f"**Cryptographic Hash (SHA-256):** `{legal.get('digital_evidence_hash')}`")
+                    st.markdown(f"**Verification Seal:** `{legal.get('verification_seal')}`")
+                    st.info(f"📋 **Chain of Custody:** {legal.get('chain_of_custody')}  \n*Note:* {legal.get('court_admissibility_notice')}")
+
             st.markdown("""
             **Evidence Sources:**
             * **[SOURCE: USER INPUT]** Unverified Investigator Observations
@@ -834,6 +873,7 @@ with tab_profile:
                     source_url = case.get("source_url") or case.get("metadata", {}).get("source_url", "")
                     ipc_secs = case.get("ipc_sections") or case.get("metadata", {}).get("ipc_sections", [])
                     ipc_str = ", ".join(ipc_secs) if isinstance(ipc_secs, list) else str(ipc_secs)
+                    bns_refs = case.get("bns_cross_references") or []
 
                     with st.expander(
                         f"📌 #{idx+1} [{result_type}] {case.get('case_title','Historical Precedent')} "
@@ -853,7 +893,10 @@ with tab_profile:
                             st.write(f"**Judicial Court / Authority:** {court}")
                             st.write(f"**Legal Citation:** {cite}")
                         with c_m2:
-                            st.write(f"**IPC / Statutory Sections:** {ipc_str or 'General Criminal Law'}")
+                            st.write(f"**IPC Statutory Sections:** {ipc_str or 'General Criminal Law'}")
+                            if bns_refs:
+                                bns_disp = " | ".join([f"{r['bns_section']} ({r['offence_title']})" for r in bns_refs])
+                                st.write(f"**BNS (2023) Alignment:** {bns_disp}")
                             if source_url:
                                 st.write(f"**Official Legal Source:** [{source_desc}]({source_url})")
                             else:
@@ -876,11 +919,13 @@ with tab_profile:
                     scoring_breakdown=res.get("scoring_breakdown", []),
                     disclaimer=res.get("disclaimer", ""),
                     match_quality=res.get("match_quality", ""),
+                    evidence_hash=res.get("evidence_hash"),
+                    legal_compliance=res.get("legal_compliance"),
                 )
                 # Use microseconds to guarantee a unique key even within the same second
                 dynamic_key = f"dl_pdf_{int(res.get('timestamp', time.time()) * 1e6)}"
                 st.download_button(
-                    label="📥 Download Executive PDF Report", data=pdf_bytes,
+                    label="📥 Download Executive PDF Report (Sec. 65B Certified)", data=pdf_bytes,
                     file_name=f"Profile_Report_{res['name'].replace(' ', '_')}.pdf",
                     mime="application/pdf", use_container_width=True, key=dynamic_key
                 )

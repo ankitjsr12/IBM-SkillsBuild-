@@ -179,6 +179,49 @@ class IndianLegalConnector:
         """Return the list of recognized Indian judicial and investigative authorities."""
         return list(SUPPORTED_INDIAN_AUTHORITIES)
 
+    @staticmethod
+    def get_bns_cross_references(ipc_sections: List[str]) -> List[Dict[str, str]]:
+        """
+        Map historical Indian Penal Code (IPC) sections to corresponding
+        modern Bharatiya Nyaya Sanhita (BNS, 2023) provisions.
+        """
+        results: List[Dict[str, str]] = []
+        for raw_sec in ipc_sections:
+            sec_str = str(raw_sec).strip()
+            # Extract section number e.g. "Section 302 IPC" -> "302"
+            m = re.search(r"(\d+[A-Za-z]*)", sec_str)
+            if not m:
+                continue
+            num = m.group(1).upper()
+            mapping = IPC_TO_BNS_MAP.get(num)
+            if mapping:
+                results.append({
+                    "ipc_section": sec_str,
+                    "bns_section": mapping["bns"],
+                    "offence_title": mapping["title"],
+                })
+        return results
+
+
+# Definitive Indian Penal Code (1860) to Bharatiya Nyaya Sanhita (BNS 2023) Mapping Table
+IPC_TO_BNS_MAP: Dict[str, Dict[str, str]] = {
+    "302": {"bns": "Section 103 BNS", "title": "Punishment for murder"},
+    "307": {"bns": "Section 109 BNS", "title": "Attempt to murder"},
+    "376": {"bns": "Section 64 BNS", "title": "Punishment for rape"},
+    "392": {"bns": "Section 309 BNS", "title": "Punishment for robbery"},
+    "395": {"bns": "Section 310 BNS", "title": "Punishment for dacoity"},
+    "420": {"bns": "Section 318 BNS", "title": "Cheating and dishonestly inducing delivery of property"},
+    "120B": {"bns": "Section 61 BNS", "title": "Criminal conspiracy"},
+    "328": {"bns": "Section 123 BNS", "title": "Causing hurt by poison with intent to commit offence"},
+    "326A": {"bns": "Section 124 BNS", "title": "Voluntarily causing grievous hurt by acid"},
+    "364A": {"bns": "Section 140 BNS", "title": "Kidnapping for ransom"},
+    "201": {"bns": "Section 238 BNS", "title": "Disappearance of evidence of offence"},
+    "457": {"bns": "Section 331 BNS", "title": "Lurking house-trespass or house-breaking by night"},
+    "468": {"bns": "Section 336 BNS", "title": "Forgery for purpose of cheating"},
+    "379": {"bns": "Section 303 BNS", "title": "Punishment for theft"},
+    "384": {"bns": "Section 308 BNS", "title": "Punishment for extortion"},
+}
 
 # Class alias for alternative naming
 IndianLegalGatewayConnector = IndianLegalConnector
+

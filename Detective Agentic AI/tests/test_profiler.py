@@ -126,3 +126,41 @@ class TestDetectiveAgentEvaluate:
         )
         score_int = int(result["tendency_score"].rstrip("%"))
         assert score_int == 15
+
+    def test_bias_guardrail_detection(self, agent_with_cases):
+        """Subjective appearance or unverified label should trigger bias warning."""
+        result = agent_with_cases.evaluate_suspect(
+            name="X",
+            behavior="looks like a criminal and belongs to a shady caste",
+            mo_suspected="",
+            personality_notes="",
+        )
+        assert "bias_guardrail" in result
+        assert result["bias_guardrail"]["has_bias_flags"] is True
+        assert len(result["bias_guardrail"]["flags"]) >= 1
+
+    def test_legal_compliance_sec65b_hash(self, agent_with_cases):
+        """Result must contain SHA-256 evidence hash for Section 65B / BSA 2023 compliance."""
+        result = agent_with_cases.evaluate_suspect(
+            name="Alpha",
+            behavior="breaking locks at night",
+            mo_suspected="forced entry",
+            personality_notes="",
+        )
+        assert "legal_compliance" in result
+        assert "evidence_hash" in result
+        assert len(result["evidence_hash"]) == 64  # Valid SHA-256 hex string
+        assert "SHA256:" in result["legal_compliance"]["verification_seal"]
+
+    def test_bns_cross_referencing_in_precedents(self, agent_with_cases):
+        """Matched cases with IPC sections must be augmented with BNS provisions."""
+        result = agent_with_cases.evaluate_suspect(
+            name="Burglar Beta",
+            behavior="Breaking into residential houses at night, forcing locks.",
+            mo_suspected="",
+            personality_notes="",
+        )
+        assert "similar_cases" in result
+        # Check that similar_cases have bns_cross_references key
+        for c in result["similar_cases"]:
+            assert "bns_cross_references" in c

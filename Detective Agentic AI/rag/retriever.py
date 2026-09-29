@@ -53,6 +53,32 @@ RESULT_SOURCE_LABEL: str = "RETRIEVED EVIDENCE (similarity match)"
 
 NO_MATCH_SENTINEL: str = "NO_MATCH"
 
+# Indian Vernacular (Hinglish/Hindi) & Forensic Synonym Expansion
+VERNACULAR_CRIME_MAP: Dict[str, List[str]] = {
+    "zehar": ["poison", "cyanide", "toxicity", "chemical", "substance", "328"],
+    "zahar": ["poison", "cyanide", "toxicity", "chemical", "328"],
+    "dhatura": ["poison", "datura", "stupefying", "sedative", "328"],
+    "taala": ["lock", "padlock", "breaker", "trespass", "burglary", "457"],
+    "chabi": ["key", "master", "duplicate", "lock-picking"],
+    "nakabjani": ["housebreaking", "burglary", "night", "trespass", "457"],
+    "chori": ["theft", "stolen", "larceny", "379"],
+    "loot": ["robbery", "dacoity", "extortion", "392"],
+    "dakaiti": ["dacoity", "armed", "robbery", "gang", "395"],
+    "supari": ["contract", "killing", "homicide", "mercenary", "conspiracy", "120b"],
+    "shooter": ["firearm", "contract", "weapon", "arms"],
+    "khun": ["murder", "homicide", "fatal", "302"],
+    "khoon": ["murder", "homicide", "fatal", "302"],
+    "qatl": ["murder", "homicide", "fatal", "302"],
+    "laash": ["corpse", "deceased", "body", "victim", "post-mortem", "autopsy"],
+    "tezaab": ["acid", "corrosive", "chemical", "burn", "326a"],
+    "tezab": ["acid", "corrosive", "chemical", "326a"],
+    "apaharan": ["kidnapping", "abduction", "hostage", "ransom", "364a"],
+    "firauti": ["ransom", "extortion", "blackmail", "demand", "364a"],
+    "hafta": ["extortion", "protection", "blackmail", "demand", "384"],
+    "farar": ["absconding", "fugitive", "evading", "hideout"],
+    "cctv": ["surveillance", "camera", "footage", "digital", "counter-measures"],
+}
+
 
 class CaseRetriever:
 
@@ -212,10 +238,15 @@ class CaseRetriever:
         except (TypeError, ValueError):
             threshold = SIMILARITY_THRESHOLD
 
-        # Normalize query text
-        query_tokens = _tokenize(query_clean)
-        if not query_tokens:
+        # Normalize query text and apply Vernacular Legal Synonym Expansion
+        raw_tokens = _tokenize(query_clean)
+        if not raw_tokens:
             return []
+
+        query_tokens = list(raw_tokens)
+        for t in raw_tokens:
+            if t in VERNACULAR_CRIME_MAP:
+                query_tokens.extend(VERNACULAR_CRIME_MAP[t])
 
         query_tf = _tf(query_tokens)
         unique_q = set(query_tokens)

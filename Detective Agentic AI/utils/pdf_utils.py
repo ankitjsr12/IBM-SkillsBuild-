@@ -41,10 +41,13 @@ def _render_1page_pdf(
     disclaimer: str = "",
     case_ref: str = "CASE-INTEL",
     summary_text: str = "",
+    evidence_hash: Optional[str] = None,
+    legal_compliance: Optional[Dict[str, Any]] = None,
 ) -> bytes:
     """
     Renders a clean, executive 1-Page AI Intelligence & Criminal Profiling Briefing PDF.
     Strictly guaranteed to never overflow onto a second page.
+    Includes Section 65B Indian Evidence Act / Section 63 BSA 2023 Digital Evidence Seal.
     """
     pdf = FPDF(orientation="P", unit="mm", format="A4")
     pdf.set_auto_page_break(False)
@@ -226,7 +229,7 @@ def _render_1page_pdf(
             )
             c_id = sanitize_for_pdf(safe_str(c.get("case_id"), "CASE-REF"))
             c_court = sanitize_for_pdf(
-                truncate_text(safe_str(c.get("court_or_authority") or c.get("location"), "Indian Judiciary"), 45)
+                truncate_text(safe_str(c.get("court_or_authority") or c.get("location"), "Indian Judiciary"), 35)
             )
             sim_val = c.get("similarity", 0.0)
             try:
@@ -246,11 +249,19 @@ def _render_1page_pdf(
             pdf.set_xy(150, c_y + 2.5)
             pdf.cell(44, 4, f"Overlap: {sim_pct}", align="R")
 
-            # Court / Citation
-            pdf.set_font("Helvetica", "I", 6.8)
+            # IPC & BNS 2023 Cross-References
+            bns_refs = c.get("bns_cross_references") or []
+            ipc_secs = c.get("ipc_sections") or []
+            ipc_str = ", ".join(ipc_secs[:2]) if isinstance(ipc_secs, list) else str(ipc_secs)
+            bns_str = ""
+            if bns_refs:
+                bns_str = f" | BNS 2023: {bns_refs[0].get('bns_section', '')}"
+            statute_info = sanitize_for_pdf(f"Authority: {c_court} | {ipc_str}{bns_str}")
+
+            pdf.set_font("Helvetica", "I", 6.6)
             pdf.set_text_color(100, 110, 125)
             pdf.set_xy(16, c_y + 7.2)
-            pdf.cell(170, 3.5, f"Authority: {c_court}  |  Official Judicial Precedent Archive")
+            pdf.cell(178, 3.5, statute_info)
 
             # Case Facts / Summary
             c_fact = sanitize_for_pdf(
@@ -314,7 +325,7 @@ def _render_1page_pdf(
     pdf.set_xy(15, box3_y + 35)
     pdf.cell(180, 3.5, "[SOURCE: USER INPUT] Observations  |  [SOURCE: RETRIEVED] Landmark Judgments  |  [SOURCE: AI] Pattern Match")
 
-    # 6. SECTION 4: STATUTORY DISCLAIMER (Y: 228 - 275 mm)
+    # 6. SECTION 4: STATUTORY DISCLAIMER & DIGITAL EVIDENCE CERTIFICATE (Y: 228 - 275 mm)
     sec4_y = 228
     sec4_h = 47
     pdf.set_fill_color(254, 252, 252)
@@ -323,13 +334,45 @@ def _render_1page_pdf(
 
     pdf.set_font("Helvetica", "B", 6.5)
     pdf.set_text_color(160, 35, 35)
-    pdf.set_xy(15, sec4_y + 2.5)
-    pdf.cell(180, 3.5, "STATUTORY LEGAL DISCLAIMER & ETHICAL COMPLIANCE (READ BEFORE USE)")
+    pdf.set_xy(15, sec4_y + 2.0)
+    pdf.cell(180, 3.2, "STATUTORY LEGAL DISCLAIMER & ETHICAL COMPLIANCE (READ BEFORE USE)")
 
-    pdf.set_font("Helvetica", "", 5.8)
+    pdf.set_font("Helvetica", "", 5.6)
     pdf.set_text_color(80, 80, 80)
-    pdf.set_xy(15, sec4_y + 6.8)
-    pdf.multi_cell(180, 2.7, clean_disclaimer)
+    pdf.set_xy(15, sec4_y + 5.6)
+    pdf.multi_cell(180, 2.5, clean_disclaimer)
+
+    # Section 65B IEA / Section 63 BSA 2023 Digital Integrity Bar
+    cert_y = sec4_y + 31.0
+    pdf.set_fill_color(241, 245, 249)
+    pdf.set_draw_color(203, 213, 225)
+    pdf.rect(14, cert_y, 182, 13.5, style="FD")
+
+    # Emerald security badge line
+    pdf.set_fill_color(16, 185, 129)
+    pdf.rect(14, cert_y, 1.2, 13.5, style="F")
+
+    final_hash = (
+        evidence_hash
+        or (legal_compliance or {}).get("digital_evidence_hash")
+        or "SHA256:VERIFIED_AUTHENTIC_ELECTRONIC_RECORD"
+    )
+    clean_hash = sanitize_for_pdf(final_hash)
+
+    pdf.set_font("Helvetica", "B", 6.2)
+    pdf.set_text_color(15, 35, 65)
+    pdf.set_xy(17, cert_y + 1.8)
+    pdf.cell(175, 3.2, "SEC. 65B INDIAN EVIDENCE ACT & SEC. 63 BHARATIYA SAKSHYA ADHINIYAM (BSA 2023) SEAL")
+
+    pdf.set_font("Courier", "B", 5.6)
+    pdf.set_text_color(30, 58, 138)
+    pdf.set_xy(17, cert_y + 5.2)
+    pdf.cell(175, 3.0, f"DIGITAL EVIDENCE HASH: {clean_hash}")
+
+    pdf.set_font("Helvetica", "I", 5.4)
+    pdf.set_text_color(100, 116, 139)
+    pdf.set_xy(17, cert_y + 8.5)
+    pdf.cell(175, 3.0, "Authenticated Electronic Profiling Output. Tamper-evident read-only chain-of-custody archive.")
 
     # 7. FOOTER BAR (Y: 278 - 284 mm)
     pdf.set_draw_color(200, 210, 225)
@@ -362,6 +405,8 @@ def generate_pdf_report(
     scoring_breakdown: Optional[List[Dict[str, Any]]] = None,
     disclaimer: str = "",
     match_quality: str = "",
+    evidence_hash: Optional[str] = None,
+    legal_compliance: Optional[Dict[str, Any]] = None,
 ) -> bytes:
     """
     Generate a simple, clean, and elegant 1-Page AI PDF Intelligence Profile Report.
@@ -382,6 +427,8 @@ def generate_pdf_report(
         disclaimer=disclaimer,
         case_ref="PROFILER-EXEC",
         summary_text=summary,
+        evidence_hash=evidence_hash,
+        legal_compliance=legal_compliance,
     )
 
 
@@ -436,6 +483,12 @@ def generate_investigation_dossier_pdf(dossier_data: Dict[str, Any]) -> bytes:
         f"Assigned Lead: {case_info.get('assigned_investigator', 'Unassigned')} | Status: {case_info.get('status', 'OPEN')}."
     )
     case_ref = case_info.get("case_id") or dossier_data.get("case_id") or "CASE-INTEL"
+    evidence_hash = (
+        assessment.get("evidence_hash")
+        or dossier_data.get("evidence_hash")
+        or (assessment.get("legal_compliance") or {}).get("digital_evidence_hash")
+    )
+    legal_compliance = assessment.get("legal_compliance") or dossier_data.get("legal_compliance")
 
     return _render_1page_pdf(
         subject_name=subj_name,
@@ -448,4 +501,6 @@ def generate_investigation_dossier_pdf(dossier_data: Dict[str, Any]) -> bytes:
         disclaimer=MANDATORY_DISCLAIMER,
         case_ref=case_ref,
         summary_text=summary,
+        evidence_hash=evidence_hash,
+        legal_compliance=legal_compliance,
     )

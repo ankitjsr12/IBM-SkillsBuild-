@@ -127,3 +127,10 @@ class TestCaseRetrieverSearch:
         # Very high threshold should return nothing or only perfect matches
         results = retriever.search_similar_cases("completely unrelated topic xyz abc def", threshold=0.99)
         assert results == []
+
+    def test_vernacular_query_expansion(self, cases_dir):
+        retriever = CaseRetriever(cases_dir=cases_dir)
+        # Hinglish query: "taala" (lock) and "chori" (theft) should match Burglary case
+        results = retriever.search_similar_cases("taala todkar chori kiya")
+        assert len(results) >= 1
+        assert results[0]["case_id"] == "TEST-001"
