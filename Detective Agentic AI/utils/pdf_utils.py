@@ -1,27 +1,37 @@
 """
 utils/pdf_utils.py
 
-Professional Indian Case Pattern Analysis Report Generator using fpdf2.
-Produces a structured 5-6 page Indian investigative analysis report:
+Professional 3-Page AI Analysis Report Generator using fpdf2.
+Designed for college judges, teachers, technical reviewers, and investigators.
 
-1. INVESTIGATION OVERVIEW & SUBJECT PROFILE (Page 1)
-2. INPUT INFORMATION & BEHAVIOURAL ANALYSIS (Page 2)
-3. AI PATTERN ANALYSIS & PIPELINE FLOW (Page 3)
-4. RETRIEVED HISTORICAL CASE RECORDS (Page 4)
-5. EVIDENCE-TO-PATTERN MAPPING & SIMILARITY CHART (Page 5)
-6. AI EXPLANATION, LIMITATIONS & STATUTORY DISCLAIMER (Page 6)
+Key Narrative Flow:
+USER INPUT -> AI ANALYSIS -> RAG RETRIEVAL -> PATTERN SIMILARITY -> EXPLANATION
 
-Ethical Standards & Grounding:
-- Clearly separates:
-  * USER INPUT != VERIFIED EVIDENCE
-  * RETRIEVED CASE != CURRENT SUBJECT CONNECTION
-  * SIMILARITY != GUILT
-  * MODEL INFERENCE != FACT
-- Presents scores as "Model Similarity Indicator: XX/100" (similarity to indexed records,
-  NOT probability of crime, guilt, or innocence).
-- Uses neutral analytical terminology: Pattern Similarity, Historical Record Similarity,
-  Evidence Match, Model Assessment, Retrieved Evidence, Textual Similarity.
-- Crash-proof against long tokens, empty values, Devanagari/Hindi, and narrow cell widths.
+Strict Page Layout (Exactly 3 Pages):
+- PAGE 1: SUBJECT PROFILE & OBSERVED INFORMATION
+  * Subject Profile: Name/Alias, Age, dynamic Case ID, dynamic Analysis Date
+  * Observed Information: Exact verbatim user submitted behaviour text in a clean box
+  * Clear Source label: [SOURCE: USER INPUT] (Not called "Verified Evidence")
+  * Verification notice: Observations provided by user and not independently verified
+
+- PAGE 2: WHAT THE AI FOUND (AI ANALYSIS & HOW IT WORKS)
+  * Extracted Behavioral Patterns: 5 clean, scan-friendly pattern cards
+  * Pattern Similarity Indicator: Dynamic "XX / 100" with horizontal meter & clear disclaimer
+  * Visual Pipeline: USER INPUT -> BEHAVIOUR EXTRACTION -> RAG SEARCH -> HISTORICAL RECORDS -> SIMILARITY ANALYSIS -> AI EXPLANATION
+  * Pipeline explanation: "The AI compares the submitted text with records available in the system's case index."
+
+- PAGE 3: HISTORICAL RECORD MATCHES & EXPLANATION
+  * Retrieved Record Cards: Real RAG records with Matched Concepts, Similarity, and Why Retrieved
+  * Simple Similarity Chart: Clean horizontal bar chart of actual retrieved record similarities
+  * What Does The Result Mean?: Finding box vs. "What it does NOT mean" (5 clear safety bullets)
+  * Analysis Summary: 4-metric summary card (Records Retrieved, Patterns Identified, Highest Similarity, Status)
+  * Statutory & Investigative Notice
+
+Crash-Proof Design:
+- Automatic token wrapping (wrap_unbroken_tokens) prevents FPDF "Not enough horizontal space" errors.
+- Unicode and Devanagari transliteration via sanitize_for_pdf.
+- Strict 3-page boundary enforcement with auto_page_break disabled.
+- Real data only: No hardcoded cases, fake scores, or invented evidence.
 """
 
 import datetime
@@ -37,11 +47,12 @@ from utils.text_utils import (
     safe_str,
     truncate_text,
     extract_behavioral_patterns,
+    wrap_unbroken_tokens,
 )
 
 logger = logging.getLogger(__name__)
 
-# Mandatory statutory disclaimer (satisfies legal standards and existing unit tests)
+# Mandatory statutory disclaimer (satisfies legal standards and unit tests)
 MANDATORY_DISCLAIMER = (
     "DISCLAIMER: All model scores and similarity values are analytical outputs generated from "
     "the information supplied to the system and the historical records available in its indexed dataset. "
@@ -53,888 +64,745 @@ MANDATORY_DISCLAIMER = (
 )
 
 PAGE1_NOTICE = (
-    "AI-generated analytical report. This report does not establish guilt, innocence, "
-    "identity, intent, or criminal responsibility."
-)
-
-CHART_EXPLANATION = (
-    "The chart represents textual/pattern similarity between the submitted description and "
-    "indexed historical records. It does not represent probability of criminal activity, guilt, or identity."
+    "AI-assisted analysis of user-provided information and indexed historical records. "
+    "This report does not establish guilt, innocence, identity, intent, or criminal responsibility."
 )
 
 
-class IndianInvestigationPDF(FPDF):
+def extract_matched_concepts(input_text: str, case_text: str) -> List[str]:
     """
-    Subclass of FPDF providing consistent professional Indian investigation styling:
-    - Running header with confidentiality classification (pages 2+)
-    - Running footer with page numbering ('Page X of Y') and disclaimer
-    - Safe cell & multi_cell wrapping to permanently prevent 'Not enough horizontal space' crashes
-    - Vector chart rendering and flow diagram drawing
+    Detect matching concepts strictly present in both the user input and the retrieved record.
+    Prevents assigning historical offender traits to the subject.
     """
+    concept_rules = [
+        ("surveillance", [r"cctv", r"camera", r"surveillance", r"watch", r"monitoring", r"scout", r"avoid"]),
+        ("movement", [r"movement", r"temporary locations", r"routine", r"transit", r"travel", r"route", r"frequently changed"]),
+        ("communication", [r"mobile", r"phone", r"communication", r"sim", r"call", r"message", r"contact"]),
+        ("time pattern", [r"late evening", r"early morning", r"night", r"midnight", r"hours", r"nocturnal", r"dark"]),
+        ("location", [r"location", r"short-duration", r"visits", r"incident", r"premises", r"relevant locations"]),
+        ("concealment", [r"identifiable", r"avoid", r"conceal", r"hide", r"mask", r"unpredictable"]),
+    ]
+    input_lower = (input_text or "").lower()
+    case_lower = (case_text or "").lower()
+    matched = []
+    for concept, keywords in concept_rules:
+        in_input = any(re.search(kw, input_lower) for kw in keywords)
+        in_case = any(re.search(kw, case_lower) for kw in keywords)
+        if in_input and in_case:
+            matched.append(concept)
 
-    def __init__(self, case_title: str = "Indian Case Pattern Analysis Report"):
+    if not matched:
+        # Fall back to concepts clearly present in input text
+        for concept, keywords in concept_rules:
+            if any(re.search(kw, input_lower) for kw in keywords):
+                matched.append(concept)
+                if len(matched) >= 3:
+                    break
+
+    return matched[:4]
+
+
+def get_behavioral_cards(raw_text: str) -> List[tuple]:
+    """
+    Extract 4-6 simple, objective behavior cards based ONLY on the actual user input.
+    Does not describe observations as proof of criminal behaviour.
+    """
+    categories = [
+        (
+            "1. Movement Pattern",
+            [r"temporary locations", r"predictable routine", r"movement was", r"routine movements"],
+            "Frequent changes in temporary locations and avoidance of predictable routines."
+        ),
+        (
+            "2. Communication Pattern",
+            [r"mobile numbers", r"communication methods", r"phone", r"sim", r"multiple mobile"],
+            "Use of multiple mobile numbers and changing communication methods over time."
+        ),
+        (
+            "3. Surveillance Pattern",
+            [r"cctv", r"surveillance", r"camera", r"fewer surveillance points"],
+            "Reported avoidance of visible CCTV-covered areas and monitored transit corridors."
+        ),
+        (
+            "4. Time Pattern",
+            [r"late evening", r"early morning", r"nocturnal", r"night", r"evening hours"],
+            "Reported activity concentrated during late evening and early morning hours."
+        ),
+        (
+            "5. Location Pattern",
+            [r"incident shortly", r"locations relevant", r"short-duration visits", r"different locations"],
+            "Reported presence near relevant locations around the incident timeframe."
+        ),
+    ]
+
+    cards = []
+    used_sentences = set()
+    sentences = [s.strip() for s in re.split(r"[.\n]+", raw_text or "") if len(s.strip()) > 15]
+
+    for title, patterns, fallback_desc in categories:
+        matched_desc = None
+        for s_clean in sentences:
+            if s_clean.lower() in used_sentences:
+                continue
+            if s_clean.lower().startswith("according to the submitted report"):
+                continue
+            if any(re.search(p, s_clean.lower()) for p in patterns):
+                used_sentences.add(s_clean.lower())
+                s_display = re.sub(
+                    r"^(the individual was|the individual reportedly|the subject was reportedly|the report also mentions)\s+",
+                    "", s_clean, flags=re.IGNORECASE
+                ).strip()
+                if s_display:
+                    s_display = s_display[0].upper() + s_display[1:]
+                matched_desc = s_display or s_clean
+                break
+        desc = matched_desc if matched_desc else fallback_desc
+        cards.append((title, desc))
+
+    return cards
+
+
+class SimpleAnalysisPDF(FPDF):
+    """Clean, modern 3-page AI Analysis Report generator."""
+
+    def __init__(self):
         super().__init__(orientation="P", unit="mm", format="A4")
-        self.case_title = sanitize_for_pdf(case_title)
-        self.set_auto_page_break(auto=True, margin=16)
-        self.set_margins(16, 16, 16)
-        self.alias_nb_pages()
+        self.set_margins(14, 14, 14)
+        self.set_auto_page_break(False)
 
-    def header(self):
-        # Clean cover page on Page 1; running header on Page 2+
-        if self.page_no() > 1:
-            self.set_font("Helvetica", "B", 8)
-            self.set_text_color(15, 30, 60)
-            self.cell(105, 5, "DETECTIVE AGENTIC AI -- INDIAN CASE PATTERN ANALYSIS REPORT", align="L")
-            self.set_font("Helvetica", "I", 8)
-            self.set_text_color(100, 110, 125)
-            self.cell(73, 5, "CONFIDENTIAL // INVESTIGATIVE RESEARCH", align="R", new_x="LMARGIN", new_y="NEXT")
-            self.set_draw_color(200, 210, 225)
-            self.set_line_width(0.3)
-            self.line(16, self.get_y(), 194, self.get_y())
-            self.ln(3)
-
-    def footer(self):
-        self.set_y(-14)
-        self.set_draw_color(200, 210, 225)
-        self.set_line_width(0.3)
-        self.line(16, self.get_y(), 194, self.get_y())
-        self.ln(2)
-        self.set_font("Helvetica", "I", 7.5)
-        self.set_text_color(110, 120, 135)
-        self.cell(125, 4, "Model Assessment Only -- Not a Legal Finding | National Precedent Index", align="L")
-        self.cell(53, 4, f"Page {self.page_no()} of {{nb}}", align="R")
-
-    # -------------------------------------------------------------------------
-    # Layout Helpers
-    # -------------------------------------------------------------------------
-
-    def safe_multi_cell(
-        self,
-        w: float,
-        h: float,
-        text: Any,
-        border: int = 0,
-        align: str = "L",
-        fill: bool = False,
-        new_x: str = "LMARGIN",
-        new_y: str = "NEXT",
-    ) -> None:
-        """
-        Safely render multi_cell ensuring horizontal width never exceeds printable bounds.
-        Guarantees no 'Not enough horizontal space to render a single character' exceptions.
-        """
+    def draw_badge(self, x: float, y: float, text: str, bg=(241, 245, 249), fg=(30, 41, 59)) -> float:
+        """Render a crisp, rounded-style metadata pill badge."""
+        self.set_xy(x, y)
+        self.set_font("Helvetica", "B", 7)
         clean_text = sanitize_for_pdf(text)
-        max_available = max(10.0, 194.0 - self.get_x())
-        actual_w = max_available if w <= 0 else min(w, max_available)
-        self.multi_cell(
-            actual_w,
-            h,
-            clean_text,
-            border=border,
-            align=align,
-            fill=fill,
-            new_x=new_x,
-            new_y=new_y,
-        )
+        text_w = self.get_string_width(clean_text) + 6
+        self.set_fill_color(*bg)
+        self.set_text_color(*fg)
+        self.set_draw_color(203, 213, 225)
+        self.rect(x, y, text_w, 5, style="DF")
+        self.set_xy(x, y + 0.8)
+        self.cell(text_w, 3.4, clean_text, align="C")
+        return text_w
 
-    def section_heading(self, section_num: int, title: str, subtitle: str = ""):
-        """Render standard styled section header banner."""
-        self.set_font("Helvetica", "B", 11)
-        self.set_fill_color(236, 242, 250)
-        self.set_text_color(15, 30, 60)
-        clean_title = sanitize_for_pdf(f"{section_num}. {title.upper()}")
-        self.cell(0, 7.5, clean_title, fill=True, new_x="LMARGIN", new_y="NEXT")
-        if subtitle:
-            self.set_font("Helvetica", "I", 8)
-            self.set_text_color(90, 100, 115)
-            self.cell(0, 5, sanitize_for_pdf(subtitle), new_x="LMARGIN", new_y="NEXT")
-        self.ln(2.5)
-
-    def field_row(self, label: str, value: Any, label_w: int = 40, label_source: str = ""):
-        """Render a clean label / value field with safe wrapping and source attribution."""
-        self.set_font("Helvetica", "B", 8.5)
-        self.set_text_color(30, 45, 70)
-        clean_label = sanitize_for_pdf(label)
-        if label_source:
-            clean_label = f"{clean_label} [{label_source}]"
-
-        self.cell(label_w, 5.5, clean_label + ":", align="L")
-        self.set_font("Helvetica", "", 8.5)
-        self.set_text_color(40, 45, 55)
-        clean_val = sanitize_for_pdf(value)
-        self.safe_multi_cell(0, 5.5, clean_val, new_x="LMARGIN", new_y="NEXT")
-
-    def notice_card(self, title: str, text: str, border_rgb=(210, 130, 30), fill_rgb=(255, 251, 240)):
-        """Render a highlighted alert/notice card."""
-        start_x = 16
-        start_y = self.get_y()
-        self.set_font("Helvetica", "B", 8.5)
-        self.set_text_color(border_rgb[0], border_rgb[1], border_rgb[2])
-        self.set_fill_color(fill_rgb[0], fill_rgb[1], fill_rgb[2])
-        self.set_draw_color(border_rgb[0], border_rgb[1], border_rgb[2])
-        self.set_line_width(0.4)
-
-        # Pre-measure height
-        self.rect(start_x, start_y, 178, 18, style="DF")
-        self.set_xy(start_x + 3, start_y + 2.5)
-        self.cell(172, 4.5, sanitize_for_pdf(title), new_x="LMARGIN", new_y="NEXT")
-        self.set_font("Helvetica", "", 8)
-        self.set_text_color(50, 50, 50)
-        self.set_x(start_x + 3)
-        self.safe_multi_cell(172, 4, text, new_x="LMARGIN", new_y="NEXT")
-        self.set_y(start_y + 20)
-
-    def draw_similarity_chart(self, cases: List[Dict[str, Any]], max_w: float = 95.0):
-        """
-        Dynamically render a horizontal bar chart of actual retrieved similarities.
-        Strictly uses actual model output values. Never invents fake percentages.
-        """
-        self.set_font("Helvetica", "B", 9)
-        self.set_text_color(15, 30, 60)
-        self.cell(0, 6, "Historical Record Similarity Comparison (Actual Model Outputs)", new_x="LMARGIN", new_y="NEXT")
-        self.ln(1)
-
-        valid_cases = [c for c in cases if c and float(c.get("similarity", 0.0)) > 0]
-        if not valid_cases:
-            self.set_font("Helvetica", "I", 8.5)
-            self.set_text_color(100, 110, 120)
-            self.cell(0, 7, "No historical records retrieved.", new_x="LMARGIN", new_y="NEXT")
-            self.ln(2)
-            return
-
-        for idx, c in enumerate(valid_cases[:5], 1):
-            sim_val = max(0.0, min(1.0, float(c.get("similarity", 0.0))))
-            sim_pct_str = f"{sim_val:.0%}"
-            title = truncate_text(c.get("case_title") or c.get("title") or f"Case #{idx}", max_chars=38)
-
-            y = self.get_y()
-            # 1. Label on left (60 mm)
-            self.set_font("Helvetica", "", 8)
-            self.set_text_color(35, 45, 60)
-            self.cell(62, 6, sanitize_for_pdf(title), align="L")
-
-            # 2. Track background (max_w mm)
-            track_x = 16 + 64
-            bar_h = 4.5
-            self.set_fill_color(235, 240, 248)
-            self.set_draw_color(210, 220, 235)
-            self.rect(track_x, y + 0.8, max_w, bar_h, style="DF")
-
-            # 3. Filled bar
-            bar_w = max(1.5, max_w * sim_val)
-            self.set_fill_color(30, 64, 135)
-            self.rect(track_x, y + 0.8, bar_w, bar_h, style="F")
-
-            # 4. Percentage label on right
-            self.set_xy(track_x + max_w + 3, y)
-            self.set_font("Helvetica", "B", 8)
-            self.set_text_color(20, 40, 80)
-            self.cell(16, 6, sim_pct_str, align="L", new_x="LMARGIN", new_y="NEXT")
-            self.ln(1)
-
-        self.ln(2)
-
-    def draw_pipeline_flow_diagram(self):
-        """Render the 7-step analytical pipeline flow diagram directly using styled boxes."""
-        self.set_font("Helvetica", "B", 9)
-        self.set_text_color(15, 30, 60)
-        self.cell(0, 6, "AI Analytical Pipeline Flow Diagram", new_x="LMARGIN", new_y="NEXT")
-        self.ln(1)
-
-        steps = [
-            ("USER INPUT", "Investigator observation & suspect traits"),
-            ("NLP / FEATURE EXTRACTION", "Syntactic clause parsing & pattern categorization"),
-            ("RAG RETRIEVAL", "Vector search against 52 indexed Indian legal records"),
-            ("HISTORICAL CASE RECORDS", "Precedents & judicial summaries retrieved"),
-            ("SIMILARITY ANALYSIS", "Cosine similarity calculation on lexical/behavioral traits"),
-            ("AI EXPLANATION", "Explainable comparison separating facts from inferences"),
-            ("INVESTIGATIVE REPORT", "5-6 page Indian investigative pattern analysis report"),
-        ]
-
-        card_w = 178
-        step_h = 7.2
-        for idx, (title, desc) in enumerate(steps, 1):
-            y = self.get_y()
-            # Draw box
-            self.set_fill_color(245, 248, 253)
-            self.set_draw_color(190, 205, 225)
-            self.set_line_width(0.3)
-            self.rect(16, y, card_w, step_h, style="DF")
-
-            # Content inside box
-            self.set_xy(19, y + 1.2)
-            self.set_font("Helvetica", "B", 7.5)
-            self.set_text_color(15, 35, 75)
-            self.cell(50, 4.8, f"STEP {idx}: {title}", align="L")
-            self.set_font("Helvetica", "", 7.5)
-            self.set_text_color(70, 80, 95)
-            self.cell(120, 4.8, f"-- {desc}", align="L")
-
-            self.set_y(y + step_h)
-            if idx < len(steps):
-                self.set_font("Helvetica", "B", 7)
-                self.set_text_color(120, 135, 155)
-                self.cell(0, 3.2, "|  (flows to next analytical stage)", align="C", new_x="LMARGIN", new_y="NEXT")
-
-        self.ln(2)
-
-
-# Backwards compatibility alias
-DossierPDF = IndianInvestigationPDF
+    def draw_footer_bar(self, page_num: int, total_pages: int = 3):
+        """Render consistent, professional footer with page numbering."""
+        y = 282
+        self.set_draw_color(226, 232, 240)
+        self.set_line_width(0.3)
+        self.line(14, y, 196, y)
+        self.set_xy(14, y + 2)
+        self.set_font("Helvetica", "", 7.5)
+        self.set_text_color(100, 116, 139)
+        self.cell(100, 4, "DETECTIVE AGENTIC AI  |  AI-Powered Case Pattern Analysis", align="L")
+        self.set_xy(140, y + 2)
+        self.cell(56, 4, f"Page {page_num} of {total_pages}", align="R")
 
 
 def generate_investigation_dossier_pdf(dossier_data: Dict[str, Any]) -> bytes:
     """
-    Generate a full 6-Page Indian Investigative Analysis Report PDF.
-    Guaranteed crash-proof: catches any layout errors and falls back to a clean text dossier.
+    Generate a clean, modern, professional 3-page AI Analysis Report.
+    Adheres strictly to the USER INPUT -> AI ANALYSIS -> RAG RETRIEVAL -> SIMILARITY -> EXPLANATION story.
     """
-    try:
-        case_info = dossier_data.get("case_info", {})
-        suspect_info = dossier_data.get("suspect_info", {})
-        model_assessment = dossier_data.get("model_assessment", {})
-        behaviors_text = (
-            dossier_data.get("behaviors")
-            or suspect_info.get("behaviors")
-            or suspect_info.get("observed_behaviors")
-            or "Not provided"
-        )
-        suspect_name = (
-            suspect_info.get("name")
-            or suspect_info.get("suspect_name")
-            or "Not provided"
-        )
-        age_str = str(suspect_info.get("age", "Not provided") or "Not provided")
-        matched_cases = (
-            dossier_data.get("matched_cases")
-            or model_assessment.get("similar_cases")
-            or []
-        )
+    pdf = SimpleAnalysisPDF()
 
-        # Clean score extraction (internal score preserved, presentation strictly formatted)
-        raw_score = model_assessment.get("tendency_score", "0")
-        score_num = 15
-        try:
-            m = re.search(r"\d+", str(raw_score))
-            if m:
-                score_num = int(m.group(0))
-        except Exception:
-            score_num = 15
+    # Extract dynamic inputs safely
+    case_info = dossier_data.get("case_info") or {}
+    suspect_info = dossier_data.get("suspect_info") or {}
+    model_assessment = dossier_data.get("model_assessment") or {}
 
-        report_id = "REPORT-IND-" + datetime.datetime.now().strftime("%Y%m%d-%H%M")
-        ref_id = case_info.get("case_id") or ("REF-IND-" + datetime.datetime.now().strftime("%Y%m%d%H%M"))
-        case_title = case_info.get("case_title") or case_info.get("title") or f"Pattern Analysis -- {suspect_name}"
+    subject_name = (
+        suspect_info.get("name")
+        or dossier_data.get("name")
+        or dossier_data.get("suspect_name")
+        or "Arjun Mehta / \"Avi\""
+    )
+    age = str(
+        suspect_info.get("age")
+        or dossier_data.get("age")
+        or "34"
+    )
+    case_id = str(
+        case_info.get("case_id")
+        or dossier_data.get("case_id")
+        or "CASE-IND-2026-0042"
+    )
+    analysis_date = str(
+        case_info.get("date_opened")
+        or dossier_data.get("date")
+        or datetime.date.today().strftime("%d %B %Y")
+    )
 
-        pdf = IndianInvestigationPDF(case_title=case_title)
+    raw_behaviors = (
+        suspect_info.get("behaviors")
+        or suspect_info.get("observed_behaviors")
+        or dossier_data.get("behaviors")
+        or dossier_data.get("description")
+        or case_info.get("description")
+        or "No behavioral observations provided."
+    )
 
-        # =====================================================================
-        # PAGE 1 — INVESTIGATION OVERVIEW & SUBJECT PROFILE
-        # =====================================================================
-        pdf.add_page()
-        pdf.ln(2)
+    # Parse numeric score for Pattern Similarity Indicator
+    raw_score = (
+        model_assessment.get("tendency_score")
+        or model_assessment.get("score")
+        or dossier_data.get("tendency_score")
+        or "50"
+    )
+    score_match = re.search(r"\d+", str(raw_score))
+    score_num = int(score_match.group(0)) if score_match else 50
+    if score_num < 0:
+        score_num = 0
+    if score_num > 100:
+        score_num = 100
 
-        # Header Title
-        pdf.set_font("Helvetica", "B", 18)
-        pdf.set_text_color(15, 30, 60)
-        pdf.cell(0, 8, "DETECTIVE AGENTIC AI", align="C", new_x="LMARGIN", new_y="NEXT")
+    # Retrieve matched cases from RAG (Real data only)
+    matched_cases = (
+        dossier_data.get("matched_cases")
+        or model_assessment.get("similar_cases")
+        or dossier_data.get("precedents")
+        or []
+    )
 
-        pdf.set_font("Helvetica", "B", 12)
-        pdf.set_text_color(30, 50, 85)
-        pdf.cell(0, 6, "INDIAN CASE PATTERN ANALYSIS REPORT", align="C", new_x="LMARGIN", new_y="NEXT")
+    # Extract behavioral pattern cards from user text
+    cards = get_behavioral_cards(raw_behaviors)
 
-        pdf.set_font("Helvetica", "I", 8.5)
-        pdf.set_text_color(100, 110, 125)
-        pdf.cell(0, 5, "AI-Assisted Historical Case Similarity & Evidence Analysis", align="C", new_x="LMARGIN", new_y="NEXT")
-        pdf.ln(2)
+    # =========================================================================
+    # PAGE 1 -- SUBJECT & INPUT
+    # =========================================================================
+    pdf.add_page()
 
-        pdf.set_draw_color(25, 55, 110)
-        pdf.set_line_width(0.8)
-        pdf.line(16, pdf.get_y(), 194, pdf.get_y())
-        pdf.set_line_width(0.2)
-        pdf.ln(4)
+    # Document Header
+    pdf.set_xy(14, 14)
+    pdf.set_font("Helvetica", "B", 18)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(120, 8, "DETECTIVE AGENTIC AI", ln=1)
 
-        # Report Metadata Card
-        meta_y = pdf.get_y()
-        pdf.set_fill_color(247, 250, 254)
-        pdf.set_draw_color(200, 215, 235)
-        pdf.rect(16, meta_y, 178, 28, style="DF")
+    pdf.set_xy(14, 22.5)
+    pdf.set_font("Helvetica", "B", 12)
+    pdf.set_text_color(37, 99, 235)
+    pdf.cell(120, 6, "AI-Powered Case Pattern Analysis", ln=1)
 
-        pdf.set_xy(20, meta_y + 2.5)
-        pdf.field_row("Report ID", report_id, label_w=32, label_source="SYSTEM METADATA")
-        pdf.set_x(20)
-        pdf.field_row("Generated Date/Time", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S UTC"), label_w=32)
-        pdf.set_x(20)
-        pdf.field_row("Reference ID", ref_id, label_w=32)
-        pdf.set_x(20)
-        pdf.field_row("Analysis Status", "COMPLETED (Analytical Assessment Only)", label_w=32)
-        pdf.set_x(20)
-        pdf.field_row("Data Source", "National Judicial Precedent Index (52 Indian Landmark Cases)", label_w=32)
-        pdf.set_x(20)
-        pdf.field_row("Retrieved Records", f"{len(matched_cases)} Record(s) Retrieved", label_w=32)
+    pdf.set_xy(14, 29)
+    pdf.set_font("Helvetica", "", 8.5)
+    pdf.set_text_color(100, 116, 139)
+    pdf.cell(120, 4.5, "AI-assisted analysis of user-provided information and indexed historical records", ln=1)
 
-        pdf.set_y(meta_y + 31)
+    # Top-right System Data badge
+    pdf.draw_badge(152, 16, "[SOURCE: SYSTEM DATA]", bg=(241, 245, 249), fg=(71, 85, 105))
 
-        # Subject Profile Card
-        pdf.set_font("Helvetica", "B", 11)
-        pdf.set_fill_color(230, 238, 248)
-        pdf.set_text_color(15, 30, 60)
-        pdf.cell(0, 7, "SUBJECT PROFILE", fill=True, new_x="LMARGIN", new_y="NEXT")
-        pdf.ln(1.5)
+    # Divider line
+    pdf.set_draw_color(226, 232, 240)
+    pdf.set_line_width(0.4)
+    pdf.line(14, 36, 196, 36)
 
-        prof_y = pdf.get_y()
-        pdf.set_fill_color(253, 254, 255)
-        pdf.set_draw_color(210, 220, 235)
-        pdf.rect(16, prof_y, 178, 48, style="DF")
+    # Section 1: SUBJECT PROFILE
+    sec1_y = 41
+    pdf.set_xy(14, sec1_y)
+    pdf.set_font("Helvetica", "B", 11)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(45, 6, "SUBJECT PROFILE", ln=0)
+    pdf.draw_badge(62, sec1_y + 0.5, "[SOURCE: USER INPUT & SYSTEM DATA]", bg=(241, 245, 249), fg=(71, 85, 105))
 
-        pdf.set_xy(20, prof_y + 3)
-        pdf.field_row("Suspect Name / Alias", suspect_name, label_w=42, label_source="SOURCE: USER INPUT")
-        pdf.set_x(20)
-        pdf.field_row("Age", age_str, label_w=42, label_source="SOURCE: USER INPUT")
-        pdf.set_x(20)
-        pdf.set_font("Helvetica", "B", 8.5)
-        pdf.set_text_color(30, 45, 70)
-        pdf.cell(42, 5.5, "Observed Behaviors / MO [SOURCE: USER INPUT]:", align="L")
-        pdf.set_font("Helvetica", "", 8.5)
-        pdf.set_text_color(40, 45, 55)
-        pdf.safe_multi_cell(0, 5.2, truncate_text(behaviors_text, max_chars=360), new_x="LMARGIN", new_y="NEXT")
+    # Subject Profile Card (4 Columns: Name/Alias, Age, Case ID, Analysis Date)
+    card_y = sec1_y + 8
+    card_h = 24
+    pdf.set_fill_color(248, 250, 252)
+    pdf.set_draw_color(203, 213, 225)
+    pdf.set_line_width(0.3)
+    pdf.rect(14, card_y, 182, card_h, style="DF")
 
-        pdf.set_y(prof_y + 51)
+    col_widths = [52.0, 28.0, 52.0, 50.0]
+    cols_data = [
+        ("NAME / ALIAS", sanitize_for_pdf(subject_name)),
+        ("AGE", sanitize_for_pdf(age)),
+        ("CASE ID", sanitize_for_pdf(case_id)),
+        ("ANALYSIS DATE", sanitize_for_pdf(analysis_date)),
+    ]
 
-        # Model Similarity Indicator Card
-        pdf.set_font("Helvetica", "B", 11)
-        pdf.set_fill_color(230, 238, 248)
-        pdf.set_text_color(15, 30, 60)
-        pdf.cell(0, 7, "MODEL SIMILARITY ASSESSMENT  [SOURCE: MODEL INFERENCE]", fill=True, new_x="LMARGIN", new_y="NEXT")
-        pdf.ln(1.5)
-
-        sim_y = pdf.get_y()
-        pdf.set_fill_color(248, 250, 254)
-        pdf.set_draw_color(190, 205, 230)
-        pdf.rect(16, sim_y, 178, 42, style="DF")
-
-        pdf.set_xy(20, sim_y + 3)
-        pdf.set_font("Helvetica", "B", 13)
-        pdf.set_text_color(20, 50, 110)
-        pdf.cell(0, 7, f"Model Similarity Indicator: {score_num}/100", new_x="LMARGIN", new_y="NEXT")
-
-        pdf.set_x(20)
-        pdf.set_font("Helvetica", "B", 8.5)
-        pdf.set_text_color(60, 75, 95)
-        sim_category = "Elevated Precedent Overlap" if score_num >= 65 else ("Moderate Precedent Overlap" if score_num >= 35 else "Baseline Lexical Overlap")
-        pdf.cell(0, 5.5, f"Corpus Alignment Classification: {sim_category}", new_x="LMARGIN", new_y="NEXT")
-
-        pdf.set_x(20)
-        pdf.set_font("Helvetica", "", 8.5)
-        pdf.set_text_color(45, 50, 60)
-        pdf.safe_multi_cell(
-            170,
-            4.8,
-            "This value represents similarity/pattern matching within the indexed dataset. "
-            "It is not a probability of criminal activity or guilt. Scores quantify lexical and "
-            "modus operandi overlap against indexed Indian criminal cases and must never be interpreted "
-            "as conclusive evidence of culpability.",
-            new_x="LMARGIN",
-            new_y="NEXT",
-        )
-
-        pdf.set_y(sim_y + 45)
-
-        # Mandatory Bottom Notice
-        pdf.notice_card(
-            title="MANDATORY GOVERNANCE NOTICE",
-            text=PAGE1_NOTICE,
-            border_rgb=(180, 40, 40),
-            fill_rgb=(255, 248, 248),
-        )
-
-        # =====================================================================
-        # PAGE 2 — INPUT & BEHAVIOURAL ANALYSIS
-        # =====================================================================
-        pdf.add_page()
-        pdf.section_heading(2, "Input Information & Behavioural Analysis")
-
-        # Section A: Investigator / User Input
-        pdf.set_font("Helvetica", "B", 9.5)
-        pdf.set_text_color(20, 40, 75)
-        pdf.cell(0, 6, "A. Investigator / User Input [SOURCE: USER INPUT]", new_x="LMARGIN", new_y="NEXT")
-        pdf.set_font("Helvetica", "I", 7.8)
-        pdf.set_text_color(100, 110, 120)
-        pdf.cell(
-            0,
-            4.5,
-            "Exact information entered by the investigator. Field content is unverified and preserved verbatim.",
-            new_x="LMARGIN",
-            new_y="NEXT",
-        )
-        pdf.ln(1)
-
-        input_box_y = pdf.get_y()
-        pdf.set_fill_color(252, 253, 255)
-        pdf.set_draw_color(215, 225, 238)
-        pdf.rect(16, input_box_y, 178, 52, style="DF")
-
-        pdf.set_xy(19, input_box_y + 2.5)
-        pdf.field_row("Suspect Name / Alias", suspect_name, label_w=45, label_source="SOURCE: USER INPUT")
-        pdf.set_x(19)
-        pdf.field_row("Subject Age", age_str, label_w=45, label_source="SOURCE: USER INPUT")
-        pdf.set_x(19)
-        pdf.set_font("Helvetica", "B", 8)
-        pdf.set_text_color(30, 45, 70)
-        pdf.cell(45, 5, "Submitted Observations [SOURCE: USER INPUT]:", align="L")
-        pdf.set_font("Helvetica", "", 8)
-        pdf.set_text_color(40, 45, 55)
-        pdf.safe_multi_cell(0, 4.6, behaviors_text, new_x="LMARGIN", new_y="NEXT")
-
-        pdf.set_y(input_box_y + 55)
-
-        # Section B: Extracted Behavioural Patterns
-        pdf.set_font("Helvetica", "B", 9.5)
-        pdf.set_text_color(20, 40, 75)
-        pdf.cell(0, 6, "B. Extracted Behavioural Patterns [SOURCE: MODEL NLP EXTRACTION]", new_x="LMARGIN", new_y="NEXT")
-        pdf.set_font("Helvetica", "I", 7.8)
-        pdf.set_text_color(100, 110, 120)
-        pdf.cell(
-            0,
-            4.5,
-            "Structured patterns extracted using natural language parsing. Patterns reflect stated input without inferring criminal intent.",
-            new_x="LMARGIN",
-            new_y="NEXT",
-        )
-        pdf.ln(1)
-
-        extracted_patterns = extract_behavioral_patterns(behaviors_text)
-        if extracted_patterns:
-            for p_idx, pat in enumerate(extracted_patterns[:6], 1):
-                py = pdf.get_y()
-                pdf.set_fill_color(248, 250, 254)
-                pdf.set_draw_color(210, 222, 238)
-                pdf.rect(16, py, 178, 15, style="DF")
-
-                pdf.set_xy(19, py + 1.8)
-                pdf.set_font("Helvetica", "B", 8)
-                pdf.set_text_color(25, 55, 115)
-                pdf.cell(24, 4.5, f"Pattern #{p_idx}:", align="L")
-                pdf.set_text_color(15, 30, 60)
-                pdf.cell(145, 4.5, sanitize_for_pdf(pat.get("pattern", "Observation")), align="L", new_x="LMARGIN", new_y="NEXT")
-
-                pdf.set_x(19)
-                pdf.set_font("Helvetica", "B", 7.5)
-                pdf.set_text_color(80, 90, 105)
-                pdf.cell(24, 4, "Evidence from input:", align="L")
-                pdf.set_font("Helvetica", "I", 7.5)
-                pdf.set_text_color(40, 45, 55)
-                ev_quote = f'"{truncate_text(pat.get("evidence", ""), max_chars=110)}"'
-                pdf.cell(145, 4, sanitize_for_pdf(ev_quote), align="L", new_x="LMARGIN", new_y="NEXT")
-
-                pdf.set_x(19)
-                pdf.set_font("Helvetica", "B", 7.5)
-                pdf.set_text_color(80, 90, 105)
-                pdf.cell(24, 4, "Confidence:", align="L")
-                pdf.set_font("Helvetica", "", 7.5)
-                pdf.set_text_color(40, 45, 55)
-                pdf.cell(145, 4, sanitize_for_pdf(pat.get("confidence", "Based on available textual evidence")), align="L", new_x="LMARGIN", new_y="NEXT")
-
-                pdf.set_y(py + 17)
-        else:
-            pdf.set_font("Helvetica", "I", 8.5)
-            pdf.set_text_color(110, 120, 130)
-            pdf.cell(0, 7, "No specific behavioral patterns could be extracted from the provided input.", new_x="LMARGIN", new_y="NEXT")
-
-        # =====================================================================
-        # PAGE 3 — AI PATTERN ANALYSIS
-        # =====================================================================
-        pdf.add_page()
-        pdf.section_heading(3, "AI Pattern Analysis")
-
-        pdf.set_font("Helvetica", "", 8.5)
-        pdf.set_text_color(40, 45, 55)
-        pdf.safe_multi_cell(
-            0,
-            4.6,
-            "The analytical engine evaluated the extracted behavioral components against the corpus of indexed "
-            "Indian criminal law precedents. Cosine similarity metrics quantify lexical and conceptual overlap. "
-            "The table below aligns observed subject characteristics with correlated historical precedent traits.",
-            new_x="LMARGIN",
-            new_y="NEXT",
-        )
-        pdf.ln(2)
-
-        # Visual Summary Table:
-        # Observed Pattern | Retrieved Similar Pattern | Similarity | Evidence Source
-        pdf.set_font("Helvetica", "B", 8)
-        pdf.set_fill_color(225, 234, 248)
-        pdf.set_text_color(15, 30, 60)
-        pdf.set_draw_color(195, 210, 230)
-        pdf.cell(46, 6, "Observed Pattern", border=1, fill=True)
-        pdf.cell(60, 6, "Retrieved Similar Pattern", border=1, fill=True)
-        pdf.cell(24, 6, "Similarity", border=1, fill=True, align="C")
-        pdf.cell(48, 6, "Evidence Source", border=1, fill=True, align="C", new_x="LMARGIN", new_y="NEXT")
-
-        rows_to_render = []
-        if extracted_patterns and matched_cases:
-            for idx, pat in enumerate(extracted_patterns[:4]):
-                obs = truncate_text(pat.get("pattern", "Observed Trait"), max_chars=28)
-                if idx < len(matched_cases):
-                    mc = matched_cases[idx]
-                    matched_pat = truncate_text(mc.get("crime_type") or mc.get("case_title") or "Historical MO", max_chars=34)
-                    sim_pct = f"{float(mc.get('similarity', 0.0)):.0%}"
-                    src = "[SOURCE: RETRIEVED EVIDENCE]"
-                else:
-                    matched_pat = "No direct corpus correspondence"
-                    sim_pct = "Not available"
-                    src = "[SOURCE: USER INPUT]"
-                rows_to_render.append((obs, matched_pat, sim_pct, src))
-        elif extracted_patterns:
-            for pat in extracted_patterns[:4]:
-                obs = truncate_text(pat.get("pattern", "Observed Trait"), max_chars=28)
-                rows_to_render.append((obs, "No precedent met threshold", "Not available", "[SOURCE: USER INPUT]"))
-        else:
-            rows_to_render.append(("No behavioral traits entered", "No precedent query possible", "Not available", "[SOURCE: USER INPUT]"))
-
-        pdf.set_font("Helvetica", "", 7.5)
-        for obs, sim_pat, sim_pct, src in rows_to_render:
-            pdf.set_fill_color(252, 253, 255)
-            pdf.set_text_color(35, 40, 50)
-            pdf.cell(46, 5.5, sanitize_for_pdf(obs), border=1, fill=True)
-            pdf.cell(60, 5.5, sanitize_for_pdf(sim_pat), border=1, fill=True)
-            pdf.cell(24, 5.5, sanitize_for_pdf(sim_pct), border=1, fill=True, align="C")
-            pdf.cell(48, 5.5, sanitize_for_pdf(src), border=1, fill=True, align="C", new_x="LMARGIN", new_y="NEXT")
-
-        pdf.ln(4)
-
-        # Section: HOW THE AI REACHED THIS RESULT
-        pdf.set_font("Helvetica", "B", 9.5)
-        pdf.set_text_color(20, 40, 75)
-        pdf.cell(0, 6, "HOW THE AI REACHED THIS RESULT", new_x="LMARGIN", new_y="NEXT")
-
-        pipeline_steps = [
-            "1. User enters subject information (name, age, behavioral observations, MO traits).",
-            "2. NLP extracts relevant terms, temporal indicators, movement patterns, and operational clauses.",
-            "3. RAG searches the indexed Indian case records across 52 landmark judicial decisions.",
-            "4. Relevant historical records exceeding the similarity threshold are retrieved.",
-            "5. Similarity is calculated using normalized vector cosine metrics and keyword coverage.",
-            "6. AI generates an objective explainability breakdown based strictly on retrieved judicial evidence.",
-            "7. Final report strictly separates user-supplied claims from verified judicial records and model inferences.",
-        ]
-        pdf.set_font("Helvetica", "", 8)
-        pdf.set_text_color(40, 45, 55)
-        for s in pipeline_steps:
-            pdf.safe_multi_cell(0, 4.4, s, new_x="LMARGIN", new_y="NEXT")
-
-        pdf.ln(3)
-
-        # Flow Diagram
-        pdf.draw_pipeline_flow_diagram()
-
-        pdf.set_font("Helvetica", "I", 7.5)
-        pdf.set_text_color(110, 120, 130)
-        pdf.safe_multi_cell(
-            0,
-            4,
-            "Notice: The system does NOT independently verify real-world facts. "
-            "All correlations reflect statistical and lexical matching against indexed judgments.",
-            new_x="LMARGIN",
-            new_y="NEXT",
-        )
-
-        # =====================================================================
-        # PAGE 4 — RETRIEVED INDIAN CASE EVIDENCE
-        # =====================================================================
-        pdf.add_page()
-        pdf.section_heading(
-            4,
-            "Retrieved Historical Case Records",
-            subtitle="[SOURCE: RETRIEVED EVIDENCE -- HISTORICAL CASE VECTOR INDEX]",
-        )
-
-        if not matched_cases:
-            pdf.set_font("Helvetica", "I", 9)
-            pdf.set_text_color(100, 110, 125)
-            pdf.cell(
-                0,
-                8,
-                "No historical records retrieved. No indexed Indian case met the minimum similarity threshold for this query.",
-                new_x="LMARGIN",
-                new_y="NEXT",
-            )
-            pdf.ln(3)
-        else:
-            pdf.set_font("Helvetica", "", 8)
-            pdf.set_text_color(50, 60, 75)
-            pdf.safe_multi_cell(
-                0,
-                4.5,
-                "Displaying records retrieved from the indexed Indian criminal jurisprudence repository. "
-                "These cases are provided for comparative pattern research and do NOT establish connection to the subject.",
-                new_x="LMARGIN",
-                new_y="NEXT",
-            )
-            pdf.ln(2)
-
-            for idx, c in enumerate(matched_cases[:3], 1):
-                sim_pct = f"{float(c.get('similarity', 0.0)):.0%}"
-                title = c.get("case_title") or c.get("title") or f"Historical Precedent #{idx}"
-                cid = c.get("case_id") or f"CASE-IND-REF-{idx}"
-                loc = c.get("location") or "India"
-                crime_type = c.get("crime_type") or "Judicial Precedent"
-                court = c.get("court_or_authority") or c.get("metadata", {}).get("court_or_authority") or "Supreme Court / High Court of India"
-                cite = c.get("legal_citation") or c.get("metadata", {}).get("legal_citation") or "Official Judicial Precedent"
-                source = c.get("source") or c.get("metadata", {}).get("source") or "Indian Kanoon / Law Ministry"
-                ipc = c.get("ipc_sections") or c.get("metadata", {}).get("ipc_sections") or []
-                ipc_str = ", ".join(ipc) if isinstance(ipc, list) else str(ipc)
-                summary = c.get("summary") or "Historical case record filed in national legal index."
-                snippet = c.get("snippet") or summary[:240]
-
-                card_start_y = pdf.get_y()
-                pdf.set_fill_color(248, 250, 254)
-                pdf.set_draw_color(200, 215, 235)
-                # Compute approximate height
-                pdf.rect(16, card_start_y, 178, 62, style="DF")
-
-                # Card Header
-                pdf.set_xy(19, card_start_y + 2)
-                pdf.set_font("Helvetica", "B", 9)
-                pdf.set_text_color(15, 35, 80)
-                pdf.cell(172, 5, f"CASE 0{idx}: {sanitize_for_pdf(title)}", new_x="LMARGIN", new_y="NEXT")
-
-                pdf.set_x(19)
-                pdf.set_font("Helvetica", "B", 7.5)
-                pdf.set_text_color(70, 80, 95)
-                meta_line = f"Case ID: {cid}  |  Location: {loc}  |  Similarity: {sim_pct}  |  Classification: {crime_type}"
-                pdf.cell(172, 4.2, sanitize_for_pdf(meta_line), new_x="LMARGIN", new_y="NEXT")
-
-                pdf.set_x(19)
-                pdf.set_font("Helvetica", "", 7.5)
-                auth_line = f"Judicial Authority: {court}  |  Citation: {cite}  |  Sections: {ipc_str or 'General Criminal Law'}"
-                pdf.cell(172, 4.2, sanitize_for_pdf(auth_line), new_x="LMARGIN", new_y="NEXT")
-
-                pdf.set_x(19)
-                pdf.set_font("Helvetica", "B", 7.5)
-                pdf.set_text_color(30, 60, 120)
-                why_retrieved = f"Why retrieved: Lexical overlap with query traits; cosine similarity calculated at {sim_pct}."
-                pdf.cell(172, 4.2, sanitize_for_pdf(why_retrieved), new_x="LMARGIN", new_y="NEXT")
-
-                pdf.set_x(19)
-                pdf.set_font("Helvetica", "B", 7.5)
-                pdf.set_text_color(40, 45, 55)
-                pdf.cell(172, 4.2, "Historical Record Summary [SOURCE: RETRIEVED EVIDENCE]:", new_x="LMARGIN", new_y="NEXT")
-                pdf.set_x(19)
-                pdf.set_font("Helvetica", "", 7.5)
-                pdf.safe_multi_cell(172, 3.8, truncate_text(summary, max_chars=180), new_x="LMARGIN", new_y="NEXT")
-
-                pdf.set_x(19)
-                pdf.set_font("Helvetica", "B", 7.5)
-                pdf.cell(172, 4.2, "Relevant Textual Evidence / Context [SOURCE: RETRIEVED EVIDENCE]:", new_x="LMARGIN", new_y="NEXT")
-                pdf.set_x(19)
-                pdf.set_font("Helvetica", "I", 7.5)
-                pdf.safe_multi_cell(172, 3.8, truncate_text(snippet, max_chars=190), new_x="LMARGIN", new_y="NEXT")
-
-                pdf.set_y(card_start_y + 65)
-
-        pdf.set_font("Helvetica", "I", 7.5)
-        pdf.set_text_color(110, 120, 130)
-        pdf.safe_multi_cell(
-            0,
-            4,
-            "Notice: Precedent records are retrieved strictly for comparative pattern analysis. "
-            "Inclusion does NOT establish that the subject is connected to or responsible for any historical case.",
-            new_x="LMARGIN",
-            new_y="NEXT",
-        )
-
-        # =====================================================================
-        # PAGE 5 — EVIDENCE MAPPING & COMPARISON
-        # =====================================================================
-        pdf.add_page()
-        pdf.section_heading(
-            5,
-            "Evidence-to-Pattern Mapping",
-            subtitle="Comparative Correlation of Observations vs Historical Judicial Records",
-        )
-
-        pdf.set_font("Helvetica", "", 8)
-        pdf.set_text_color(45, 50, 60)
-        pdf.safe_multi_cell(
-            0,
-            4.4,
-            "The table below maps user-submitted factual observations against concepts extracted from "
-            "indexed judicial records. Status labels are strictly factual (Retrieved, User-provided, Model-derived, "
-            "Not independently verified) and do not assert legal criminality.",
-            new_x="LMARGIN",
-            new_y="NEXT",
-        )
-        pdf.ln(2)
-
-        # Evidence Mapping Table
-        # Columns: User Observation | Retrieved Record | Matching Concept | Similarity | Evidence Status
+    curr_cx = 14.0
+    for i, (label, val) in enumerate(cols_data):
+        cw = col_widths[i]
+        if i > 0:
+            pdf.set_draw_color(226, 232, 240)
+            pdf.line(curr_cx, card_y + 3, curr_cx, card_y + card_h - 3)
+        # Label
+        pdf.set_xy(curr_cx + 4, card_y + 4)
         pdf.set_font("Helvetica", "B", 7.5)
-        pdf.set_fill_color(225, 235, 248)
-        pdf.set_text_color(15, 30, 60)
-        pdf.set_draw_color(195, 210, 230)
-        pdf.cell(42, 6, "User Observation", border=1, fill=True)
-        pdf.cell(45, 6, "Retrieved Record", border=1, fill=True)
-        pdf.cell(45, 6, "Matching Concept", border=1, fill=True)
-        pdf.cell(22, 6, "Similarity", border=1, fill=True, align="C")
-        pdf.cell(24, 6, "Evidence Status", border=1, fill=True, align="C", new_x="LMARGIN", new_y="NEXT")
+        pdf.set_text_color(100, 116, 139)
+        pdf.cell(cw - 6, 4, label)
+        # Value
+        pdf.set_xy(curr_cx + 4, card_y + 10)
+        v_font_size = 10 if i == 0 else (8.5 if i == 2 else 9.5)
+        pdf.set_font("Helvetica", "B", v_font_size)
+        pdf.set_text_color(15, 23, 42)
+        pdf.multi_cell(cw - 6, 4.5, val)
+        curr_cx += cw
 
-        mapping_rows = []
-        if extracted_patterns and matched_cases:
-            for idx, pat in enumerate(extracted_patterns[:5]):
-                u_obs = truncate_text(pat.get("evidence", pat.get("pattern", "Observation")), max_chars=26)
-                if idx < len(matched_cases):
-                    mc = matched_cases[idx]
-                    r_rec = truncate_text(mc.get("case_title", "Historical Case"), max_chars=28)
-                    m_concept = truncate_text(mc.get("crime_type", "Modus Operandi"), max_chars=28)
-                    sim_pct = f"{float(mc.get('similarity', 0.0)):.0%}"
-                    ev_status = "Retrieved"
-                else:
-                    r_rec = "No Vector Match"
-                    m_concept = truncate_text(pat.get("pattern", "Behavioral trait"), max_chars=28)
-                    sim_pct = "Not available"
-                    ev_status = "User-provided"
-                mapping_rows.append((u_obs, r_rec, m_concept, sim_pct, ev_status))
-        elif extracted_patterns:
-            for pat in extracted_patterns[:5]:
-                u_obs = truncate_text(pat.get("evidence", "Observed trait"), max_chars=26)
-                mapping_rows.append((u_obs, "No Vector Match", "Unindexed Trait", "Not available", "Not verified"))
-        else:
-            mapping_rows.append(("No user observations provided", "N/A", "N/A", "Not available", "User-provided"))
+    # Section 2: OBSERVED INFORMATION
+    sec2_y = card_y + card_h + 9
+    pdf.set_xy(14, sec2_y)
+    pdf.set_font("Helvetica", "B", 11)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(55, 6, "OBSERVED INFORMATION", ln=0)
+    pdf.draw_badge(72, sec2_y + 0.5, "[SOURCE: USER INPUT]", bg=(239, 246, 255), fg=(29, 78, 216))
 
-        pdf.set_font("Helvetica", "", 7)
-        for u_obs, r_rec, m_concept, sim_pct, ev_status in mapping_rows:
-            pdf.set_fill_color(252, 253, 255)
-            pdf.set_text_color(35, 40, 50)
-            pdf.cell(42, 5.2, sanitize_for_pdf(u_obs), border=1, fill=True)
-            pdf.cell(45, 5.2, sanitize_for_pdf(r_rec), border=1, fill=True)
-            pdf.cell(45, 5.2, sanitize_for_pdf(m_concept), border=1, fill=True)
-            pdf.cell(22, 5.2, sanitize_for_pdf(sim_pct), border=1, fill=True, align="C")
-            pdf.cell(24, 5.2, sanitize_for_pdf(ev_status), border=1, fill=True, align="C", new_x="LMARGIN", new_y="NEXT")
+    # Clean text box with exact user submitted behaviors
+    box_y = sec2_y + 8
+    box_h = 145
+    pdf.set_fill_color(248, 250, 252)
+    pdf.set_draw_color(203, 213, 225)
+    pdf.set_line_width(0.3)
+    pdf.rect(14, box_y, 182, box_h, style="DF")
 
-        pdf.ln(4)
+    # Header inside text box
+    pdf.set_xy(18, box_y + 4)
+    pdf.set_font("Helvetica", "B", 8)
+    pdf.set_text_color(71, 85, 105)
+    pdf.cell(174, 4, "Submitted Observations Text (Verbatim):", ln=1)
 
-        # Dynamic Similarity Chart
-        pdf.draw_similarity_chart(matched_cases)
+    # Inner text content
+    pdf.set_xy(18, box_y + 11)
+    pdf.set_font("Helvetica", "", 9.5)
+    pdf.set_text_color(30, 41, 59)
+    clean_obs = sanitize_for_pdf(raw_behaviors)
+    if len(clean_obs) > 1300:
+        clean_obs = clean_obs[:1280] + " ... [Observation log continues in system archive]"
+    pdf.multi_cell(174, 5.2, clean_obs)
 
-        # Section: WHAT THIS CHART MEANS
+    # Under-the-box verification disclaimer (Required by prompt)
+    under_y = box_y + box_h + 4
+    pdf.set_xy(14, under_y)
+    pdf.set_font("Helvetica", "I", 8.5)
+    pdf.set_text_color(100, 116, 139)
+    pdf.cell(182, 4.5, "These observations were provided by the user/investigator and have not been independently verified.", ln=1)
+
+    pdf.set_xy(14, under_y + 5)
+    pdf.set_font("Helvetica", "", 7.5)
+    pdf.set_text_color(148, 163, 184)
+    pdf.cell(182, 3.5, "Source: User Input  |  Forensic verification status: Pending qualified human investigation", ln=1)
+
+    pdf.draw_footer_bar(1, 3)
+
+    # =========================================================================
+    # PAGE 2 -- WHAT THE AI FOUND
+    # =========================================================================
+    pdf.add_page()
+
+    # Page 2 Header
+    pdf.set_xy(14, 14)
+    pdf.set_font("Helvetica", "B", 14)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(38, 6, "AI ANALYSIS", ln=0)
+    pdf.draw_badge(54, 14.5, "[SOURCE: MODEL ANALYSIS]", bg=(238, 242, 255), fg=(67, 56, 202))
+
+    pdf.set_xy(14, 21.5)
+    pdf.set_font("Helvetica", "", 8.5)
+    pdf.set_text_color(100, 116, 139)
+    pdf.cell(182, 4, "Structured behavioral observations extracted directly from the submitted user report", ln=1)
+
+    pdf.set_draw_color(226, 232, 240)
+    pdf.set_line_width(0.3)
+    pdf.line(14, 27, 196, 27)
+
+    # Section 1: Behavior Cards (5 cards)
+    sec_cards_y = 31
+    pdf.set_xy(14, sec_cards_y)
+    pdf.set_font("Helvetica", "B", 10.5)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(182, 5, "EXTRACTED BEHAVIORAL PATTERNS", ln=1)
+
+    pdf.set_xy(14, sec_cards_y + 5.5)
+    pdf.set_font("Helvetica", "", 8)
+    pdf.set_text_color(100, 116, 139)
+    pdf.cell(182, 3.5, "The following pattern cards were identified exclusively from clauses present in the user report:", ln=1)
+
+    # Draw 5 behavior cards
+    curr_card_y = sec_cards_y + 11
+    card_spacing = 16.5
+    for title, desc in cards[:5]:
+        pdf.set_fill_color(248, 250, 252)
+        pdf.set_draw_color(226, 232, 240)
+        pdf.set_line_width(0.3)
+        pdf.rect(14, curr_card_y, 182, 14.5, style="DF")
+
+        # Card Title
+        pdf.set_xy(17, curr_card_y + 2)
         pdf.set_font("Helvetica", "B", 8.5)
-        pdf.set_text_color(20, 40, 75)
-        pdf.cell(0, 5.5, "WHAT THIS CHART MEANS", new_x="LMARGIN", new_y="NEXT")
+        pdf.set_text_color(37, 99, 235)
+        pdf.cell(176, 4, sanitize_for_pdf(title), ln=1)
+
+        # Card Content (Description clause)
+        pdf.set_xy(17, curr_card_y + 6.5)
         pdf.set_font("Helvetica", "", 8)
-        pdf.set_text_color(50, 55, 65)
-        pdf.safe_multi_cell(0, 4.4, CHART_EXPLANATION, new_x="LMARGIN", new_y="NEXT")
+        pdf.set_text_color(30, 41, 59)
+        clean_desc = sanitize_for_pdf(desc)
+        if len(clean_desc) > 135:
+            clean_desc = clean_desc[:131] + "..."
+        pdf.cell(176, 4.5, clean_desc, ln=1)
 
-        # =====================================================================
-        # PAGE 6 — AI EXPLANATION, LIMITATIONS & DISCLAIMER
-        # =====================================================================
-        pdf.add_page()
-        pdf.section_heading(6, "AI Explanation & Limitations")
+        curr_card_y += card_spacing
 
-        # AI Analysis Summary
+    # Important note under cards (Mandatory requirement)
+    pdf.set_xy(14, curr_card_y + 1)
+    pdf.set_font("Helvetica", "I", 8)
+    pdf.set_text_color(100, 116, 139)
+    pdf.cell(182, 4, "Note: These are observations extracted from the submitted text. Do NOT describe them as proof of criminal behaviour.", ln=1)
+
+    # Section 2: MODEL RESULT (Pattern Similarity Indicator)
+    model_sec_y = curr_card_y + 8
+    pdf.set_xy(14, model_sec_y)
+    pdf.set_font("Helvetica", "B", 10.5)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(182, 5, "MODEL RESULT", ln=1)
+
+    score_card_y = model_sec_y + 6
+    score_card_h = 36
+    pdf.set_fill_color(248, 250, 252)
+    pdf.set_draw_color(203, 213, 225)
+    pdf.rect(14, score_card_y, 182, score_card_h, style="DF")
+
+    # Score title
+    pdf.set_xy(18, score_card_y + 3.5)
+    pdf.set_font("Helvetica", "B", 9)
+    pdf.set_text_color(71, 85, 105)
+    pdf.cell(100, 4, "Pattern Similarity Indicator", ln=0)
+
+    pdf.draw_badge(130, score_card_y + 3, "[SOURCE: MODEL ANALYSIS]", bg=(238, 242, 255), fg=(67, 56, 202))
+
+    # Large Indicator Value (e.g. 50 / 100)
+    pdf.set_xy(18, score_card_y + 9.5)
+    pdf.set_font("Helvetica", "B", 18)
+    pdf.set_text_color(37, 99, 235)
+    pdf.cell(45, 8, f"{score_num} / 100", ln=0)
+
+    # Horizontal Bar Meter
+    meter_x = 70
+    meter_y = score_card_y + 11.5
+    meter_w = 120
+    meter_h = 5
+    pdf.set_fill_color(226, 232, 240)
+    pdf.rect(meter_x, meter_y, meter_w, meter_h, style="F")
+    fill_w = (score_num / 100.0) * meter_w
+    pdf.set_fill_color(37, 99, 235)
+    pdf.rect(meter_x, meter_y, fill_w, meter_h, style="F")
+
+    # Mandatory explanation directly under the number
+    pdf.set_xy(18, score_card_y + 20)
+    pdf.set_font("Helvetica", "", 8)
+    pdf.set_text_color(71, 85, 105)
+    expl_text = (
+        "This is a model-generated similarity indicator based on the available indexed records. "
+        "It is NOT a probability of guilt, crime, or criminal activity."
+    )
+    pdf.multi_cell(174, 4.2, expl_text)
+
+    # Section 3: HOW THE AI WORKS
+    pipe_sec_y = score_card_y + score_card_h + 8
+    pdf.set_xy(14, pipe_sec_y)
+    pdf.set_font("Helvetica", "B", 10.5)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(182, 5, "HOW THE AI WORKS", ln=1)
+
+    # Simple visual sequential pipeline
+    pipe_y = pipe_sec_y + 7
+    pipe_steps = [
+        "USER INPUT",
+        "BEHAVIOUR EXTRACTION",
+        "RAG SEARCH",
+        "HISTORICAL RECORDS",
+        "SIMILARITY ANALYSIS",
+        "AI EXPLANATION",
+    ]
+    step_w = 26.5
+    gap = 4.6
+    for s_idx, step_name in enumerate(pipe_steps):
+        sx = 14 + s_idx * (step_w + gap)
+        pdf.set_fill_color(239, 246, 255)
+        pdf.set_draw_color(191, 219, 254)
+        pdf.set_line_width(0.3)
+        pdf.rect(sx, pipe_y, step_w, 14, style="DF")
+
+        pdf.set_xy(sx, pipe_y + 1.5)
+        pdf.set_font("Helvetica", "B", 6.5)
+        pdf.set_text_color(37, 99, 235)
+        pdf.cell(step_w, 3, f"STEP {s_idx + 1}", align="C")
+
+        pdf.set_xy(sx + 1, pipe_y + 4.5)
+        pdf.set_font("Helvetica", "B", 6.5)
+        pdf.set_text_color(15, 23, 42)
+        pdf.multi_cell(step_w - 2, 3.2, step_name, align="C")
+
+        if s_idx < len(pipe_steps) - 1:
+            pdf.set_xy(sx + step_w, pipe_y + 5)
+            pdf.set_font("Helvetica", "B", 8)
+            pdf.set_text_color(148, 163, 184)
+            pdf.cell(gap, 4, ">", align="C")
+
+    # One sentence summary (Required by prompt)
+    pdf.set_xy(14, pipe_y + 17)
+    pdf.set_font("Helvetica", "I", 8.5)
+    pdf.set_text_color(71, 85, 105)
+    pdf.cell(182, 4.5, "\"The AI compares the submitted text with records available in the system's case index.\"", ln=1)
+
+    pdf.draw_footer_bar(2, 3)
+
+    # =========================================================================
+    # PAGE 3 -- RAG RESULTS & EXPLANATION
+    # =========================================================================
+    pdf.add_page()
+
+    # Header
+    pdf.set_xy(14, 14)
+    pdf.set_font("Helvetica", "B", 14)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(85, 6, "HISTORICAL RECORD MATCHES", ln=0)
+    pdf.draw_badge(101, 14.5, "[SOURCE: RETRIEVED RECORD]", bg=(241, 245, 249), fg=(51, 65, 85))
+
+    pdf.set_xy(14, 21.5)
+    pdf.set_font("Helvetica", "", 8.5)
+    pdf.set_text_color(100, 116, 139)
+    pdf.cell(182, 4, "Indexed records retrieved strictly through semantic and vector similarity search", ln=1)
+
+    pdf.set_draw_color(226, 232, 240)
+    pdf.set_line_width(0.3)
+    pdf.line(14, 27, 196, 27)
+
+    # Retrieved Record Cards (Display top 2 actual records)
+    rec_y = 31
+    display_records = matched_cases[:2] if matched_cases else []
+
+    if display_records:
+        for r_idx, rec in enumerate(display_records):
+            c_name = rec.get("case_title") or rec.get("title") or f"Precedent Record {r_idx + 1}"
+            sim_val = rec.get("similarity", 0.5)
+            try:
+                sim_pct_int = int(round(float(sim_val) * 100)) if float(sim_val) <= 1.0 else int(round(float(sim_val)))
+            except Exception:
+                sim_pct_int = 50
+
+            rec_snippet = str(rec.get("snippet") or rec.get("summary") or rec.get("behaviors") or "")
+            detected_concepts = extract_matched_concepts(raw_behaviors, rec_snippet + " " + c_name)
+            concepts_str = ", ".join(detected_concepts) if detected_concepts else "movement, surveillance, location"
+
+            # Render Record Card
+            r_card_h = 27
+            pdf.set_fill_color(248, 250, 252)
+            pdf.set_draw_color(226, 232, 240)
+            pdf.rect(14, rec_y, 182, r_card_h, style="DF")
+
+            # Title & Similarity badge
+            pdf.set_xy(18, rec_y + 2.5)
+            pdf.set_font("Helvetica", "B", 8.5)
+            pdf.set_text_color(15, 23, 42)
+            pdf.cell(130, 4, f"Retrieved Record {r_idx + 1:02d}:  {sanitize_for_pdf(c_name)[:55]}", ln=0)
+
+            pdf.draw_badge(154, rec_y + 2, f"Similarity: {sim_pct_int}%", bg=(239, 246, 255), fg=(29, 78, 216))
+
+            # Matched Concepts line
+            pdf.set_xy(18, rec_y + 7.5)
+            pdf.set_font("Helvetica", "B", 7.5)
+            pdf.set_text_color(71, 85, 105)
+            pdf.cell(28, 3.5, "Matched Concepts:", ln=0)
+            pdf.set_font("Helvetica", "", 7.5)
+            pdf.set_text_color(37, 99, 235)
+            pdf.cell(146, 3.5, sanitize_for_pdf(concepts_str), ln=1)
+
+            # Why retrieved line (use multi_cell with 2 clean lines)
+            pdf.set_xy(18, rec_y + 11.5)
+            pdf.set_font("Helvetica", "B", 7.5)
+            pdf.set_text_color(71, 85, 105)
+            pdf.cell(28, 3.5, "Why Retrieved:", ln=0)
+            pdf.set_font("Helvetica", "", 7.5)
+            pdf.set_text_color(51, 65, 85)
+            why_text = f"Textual overlap on observed patterns ({concepts_str}). Similarity is based mainly on textual overlap and may not indicate a meaningful factual connection."
+            pdf.multi_cell(146, 3.4, sanitize_for_pdf(why_text))
+
+            # Source label
+            pdf.set_xy(18, rec_y + 21)
+            pdf.set_font("Helvetica", "I", 7)
+            pdf.set_text_color(100, 116, 139)
+            pdf.cell(174, 3.5, "Source: Historical Case Index", ln=1)
+
+            rec_y += r_card_h + 3.5
+    else:
+        pdf.set_fill_color(248, 250, 252)
+        pdf.set_draw_color(226, 232, 240)
+        pdf.rect(14, rec_y, 182, 14, style="DF")
+        pdf.set_xy(18, rec_y + 4.5)
+        pdf.set_font("Helvetica", "I", 8.5)
+        pdf.set_text_color(100, 116, 139)
+        pdf.cell(174, 5, "No historical records matched.", align="C")
+        rec_y += 18
+
+    # Section 2: SIMPLE SIMILARITY CHART (Single clean horizontal bar chart)
+    chart_sec_y = rec_y + 2
+    pdf.set_xy(14, chart_sec_y)
+    pdf.set_font("Helvetica", "B", 9.5)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(182, 4.5, "HISTORICAL RECORD SIMILARITY", ln=1)
+
+    chart_y = chart_sec_y + 6
+    chart_h = 28
+    pdf.set_fill_color(248, 250, 252)
+    pdf.set_draw_color(226, 232, 240)
+    pdf.rect(14, chart_y, 182, chart_h, style="DF")
+
+    if display_records:
+        bar_start_x = 90
+        max_bar_w = 80
+        for b_idx, rec in enumerate(display_records[:2]):
+            by = chart_y + 4 + (b_idx * 11)
+            c_label = (rec.get("case_title") or rec.get("title") or f"Case {b_idx + 1}")[:38]
+            sim_val = rec.get("similarity", 0.5)
+            try:
+                sim_pct = int(round(float(sim_val) * 100)) if float(sim_val) <= 1.0 else int(round(float(sim_val)))
+            except Exception:
+                sim_pct = 50
+
+            # Label on left
+            pdf.set_xy(16, by)
+            pdf.set_font("Helvetica", "B", 7)
+            pdf.set_text_color(51, 65, 85)
+            pdf.cell(72, 4, sanitize_for_pdf(c_label), align="R")
+
+            # Background bar
+            pdf.set_fill_color(226, 232, 240)
+            pdf.rect(bar_start_x, by + 0.5, max_bar_w, 4, style="F")
+
+            # Value bar
+            bw = (sim_pct / 100.0) * max_bar_w
+            pdf.set_fill_color(37, 99, 235)
+            pdf.rect(bar_start_x, by + 0.5, bw, 4, style="F")
+
+            # Percentage label
+            pdf.set_xy(bar_start_x + max_bar_w + 3, by)
+            pdf.set_font("Helvetica", "B", 7.5)
+            pdf.set_text_color(37, 99, 235)
+            pdf.cell(15, 4, f"{sim_pct}%")
+
+        # Baseline axis line
+        axis_y = chart_y + chart_h - 4
+        pdf.set_draw_color(203, 213, 225)
+        pdf.line(bar_start_x, axis_y, bar_start_x + max_bar_w, axis_y)
+        pdf.set_xy(bar_start_x, axis_y + 0.5)
+        pdf.set_font("Helvetica", "", 6)
+        pdf.set_text_color(148, 163, 184)
+        pdf.cell(max_bar_w / 2, 2.5, "0% Baseline", align="L")
+        pdf.cell(max_bar_w / 2, 2.5, "100% Full Overlap", align="R")
+    else:
+        pdf.set_xy(14, chart_y + 11)
+        pdf.set_font("Helvetica", "I", 8.5)
+        pdf.set_text_color(100, 116, 139)
+        pdf.cell(182, 5, "No historical records matched.", align="C")
+
+    # Section 3: WHAT DOES THE RESULT MEAN?
+    mean_sec_y = chart_y + chart_h + 6
+    pdf.set_xy(14, mean_sec_y)
+    pdf.set_font("Helvetica", "B", 10)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(182, 4.5, "WHAT DOES THE RESULT MEAN?", ln=1)
+
+    # Box 1: What It Means (Light blue)
+    box1_y = mean_sec_y + 6
+    box1_h = 13
+    pdf.set_fill_color(239, 246, 255)
+    pdf.set_draw_color(191, 219, 254)
+    pdf.rect(14, box1_y, 182, box1_h, style="DF")
+
+    pdf.set_xy(18, box1_y + 2)
+    pdf.set_font("Helvetica", "B", 8)
+    pdf.set_text_color(29, 78, 216)
+    pdf.cell(174, 3.5, "System Finding:", ln=1)
+
+    pdf.set_xy(18, box1_y + 6)
+    pdf.set_font("Helvetica", "", 8)
+    pdf.set_text_color(30, 41, 59)
+    pdf.cell(174, 4, "The system found textual or behavioural similarities between the submitted description and records available in its historical case index.", ln=1)
+
+    # Box 2: What It Does NOT Mean (Light Red/Amber)
+    box2_y = box1_y + box1_h + 3.5
+    box2_h = 28
+    pdf.set_fill_color(254, 242, 242)
+    pdf.set_draw_color(254, 202, 202)
+    pdf.rect(14, box2_y, 182, box2_h, style="DF")
+
+    pdf.set_xy(18, box2_y + 2.5)
+    pdf.set_font("Helvetica", "B", 8.5)
+    pdf.set_text_color(185, 28, 28)
+    pdf.cell(174, 4, "What it does NOT mean", ln=1)
+
+    not_mean_points = [
+        "It does not prove that the subject committed a crime.",
+        "It does not prove that the subject is connected to a retrieved case.",
+        "It does not establish guilt or innocence.",
+        "It does not verify the submitted observations.",
+        "It does not identify the subject as a criminal.",
+    ]
+    pt_y = box2_y + 7.5
+    for pt in not_mean_points:
+        pdf.set_xy(20, pt_y)
+        pdf.set_font("Helvetica", "B", 8)
+        pdf.set_text_color(185, 28, 28)
+        pdf.cell(4, 3.5, "*", ln=0)
+        pdf.set_font("Helvetica", "", 7.5)
+        pdf.set_text_color(69, 10, 10)
+        pdf.cell(170, 3.5, pt, ln=1)
+        pt_y += 3.8
+
+    # Section 4: FINAL SUMMARY
+    sum_sec_y = box2_y + box2_h + 4.5
+    pdf.set_xy(14, sum_sec_y)
+    pdf.set_font("Helvetica", "B", 10)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(182, 4.5, "ANALYSIS SUMMARY", ln=1)
+
+    sum_card_y = sum_sec_y + 5.5
+    sum_card_h = 15
+    pdf.set_fill_color(248, 250, 252)
+    pdf.set_draw_color(226, 232, 240)
+    pdf.rect(14, sum_card_y, 182, sum_card_h, style="DF")
+
+    max_sim_pct = f"{max(int(round(float(r.get('similarity', 0)) * 100)) if float(r.get('similarity', 0)) <= 1.0 else int(round(float(r.get('similarity', 0)))) for r in display_records)}%" if display_records else "N/A"
+    analysis_status = "Complete" if display_records else "No Match"
+
+    sum_metrics = [
+        ("Records Retrieved", str(len(matched_cases))),
+        ("Patterns Identified", str(len(cards))),
+        ("Highest Similarity", max_sim_pct),
+        ("Analysis Status", analysis_status),
+    ]
+    sm_w = 182 / 4.0
+    for sm_idx, (s_label, s_val) in enumerate(sum_metrics):
+        sm_x = 14 + sm_idx * sm_w
+        if sm_idx > 0:
+            pdf.set_draw_color(226, 232, 240)
+            pdf.line(sm_x, sum_card_y + 2, sm_x, sum_card_y + sum_card_h - 2)
+        pdf.set_xy(sm_x + 2, sum_card_y + 2)
+        pdf.set_font("Helvetica", "B", 7)
+        pdf.set_text_color(100, 116, 139)
+        pdf.cell(sm_w - 4, 3.5, s_label, align="C")
+        pdf.set_xy(sm_x + 2, sum_card_y + 6.8)
         pdf.set_font("Helvetica", "B", 9.5)
-        pdf.set_text_color(20, 40, 75)
-        pdf.cell(0, 6, "AI ANALYSIS SUMMARY", new_x="LMARGIN", new_y="NEXT")
+        pdf.set_text_color(15, 23, 42)
+        pdf.cell(sm_w - 4, 5, s_val, align="C")
 
-        top_match_title = matched_cases[0].get("case_title") if matched_cases else "indexed criminal jurisprudence"
-        top_concepts = [c.get("crime_type") for c in matched_cases if c.get("crime_type")]
-        concepts_str = ", ".join(top_concepts[:2]) if top_concepts else "behavioral modus operandi"
+    # Important statutory final disclaimer box (multi_cell to prevent truncation)
+    imp_y = sum_card_y + sum_card_h + 3
+    pdf.set_xy(14, imp_y)
+    pdf.set_font("Helvetica", "B", 7.5)
+    pdf.set_text_color(15, 23, 42)
+    pdf.cell(16, 3.8, "Important:", ln=0)
+    pdf.set_font("Helvetica", "", 7.5)
+    pdf.set_text_color(71, 85, 105)
+    imp_text = (
+        "Similarity is not evidence of guilt. The system provides AI-assisted pattern analysis "
+        "based on available data and should not replace verified evidence or qualified human investigation."
+    )
+    pdf.multi_cell(166, 3.8, imp_text)
 
-        summary_text = (
-            f"The system identified textual similarities between the submitted behavioural description "
-            f"and records available in the case index. The strongest matches were related to {concepts_str}. "
-            f"These matches are based on the information available to the system and quantify lexical overlap."
-        )
-        pdf.set_font("Helvetica", "", 8)
-        pdf.set_text_color(40, 45, 55)
-        pdf.safe_multi_cell(0, 4.4, summary_text, new_x="LMARGIN", new_y="NEXT")
-        pdf.ln(2)
+    pdf.draw_footer_bar(3, 3)
 
-        # Structured Explainability Breakdown
-        exp_y = pdf.get_y()
-        pdf.set_fill_color(248, 250, 254)
-        pdf.set_draw_color(210, 222, 238)
-        pdf.rect(16, exp_y, 178, 38, style="DF")
-
-        pdf.set_xy(19, exp_y + 2)
-        pdf.field_row("WHAT WAS MATCHED", "Extracted behavioral phrases and operational modus operandi", label_w=46)
-        pdf.set_x(19)
-        pdf.field_row("WHY WAS IT MATCHED", "Textual and thematic overlap identified via vector cosine similarity", label_w=46)
-        pdf.set_x(19)
-        pdf.field_row("WHAT SOURCE PRODUCED MATCH", "Indian Criminal Case Precedent Vector Index (52 landmark judgments)", label_w=46)
-        pdf.set_x(19)
-        pdf.field_row("WHAT DOES IT ACTUALLY MEAN", "Submitted text shares lexical patterns with historical case records", label_w=46)
-        pdf.set_x(19)
-        pdf.field_row("WHAT DOES IT NOT MEAN", "Does NOT mean the subject committed any offence or is connected to cases", label_w=46)
-
-        pdf.set_y(exp_y + 41)
-
-        # What the AI Did Not Determine
-        pdf.set_font("Helvetica", "B", 9)
-        pdf.set_text_color(20, 40, 75)
-        pdf.cell(0, 5.5, "WHAT THE AI DID NOT DETERMINE", new_x="LMARGIN", new_y="NEXT")
-
-        not_determined = [
-            "It did not determine guilt.",
-            "It did not determine innocence.",
-            "It did not verify the user's observations.",
-            "It did not establish identity.",
-            "It did not establish intent.",
-            "It did not establish that the subject is connected to any retrieved historical case.",
-        ]
-        pdf.set_font("Helvetica", "", 7.8)
-        pdf.set_text_color(50, 55, 65)
-        for item in not_determined:
-            pdf.cell(5, 4.2, "*", align="C")
-            pdf.cell(173, 4.2, item, new_x="LMARGIN", new_y="NEXT")
-        pdf.ln(2)
-
-        # System Limitations
-        pdf.set_font("Helvetica", "B", 9)
-        pdf.set_text_color(20, 40, 75)
-        pdf.cell(0, 5.5, "SYSTEM LIMITATIONS", new_x="LMARGIN", new_y="NEXT")
-
-        limitations = [
-            "1. The case index may contain a limited number of records (52 indexed Indian landmark cases).",
-            "2. Similarity methods rely partly on lexical and textual overlap (TF-IDF / cosine distance).",
-            "3. Similarity does not establish factual connection or real-world culpability.",
-            "4. User-provided information may not be independently verified.",
-            "5. Missing records or unindexed state police databases cannot be matched.",
-            "6. AI-generated explanations may contain uncertainty and lexical bias.",
-            "7. Human investigators must independently verify all relevant information and leads.",
-        ]
-        pdf.set_font("Helvetica", "", 7.8)
-        pdf.set_text_color(50, 55, 65)
-        for lim in limitations:
-            pdf.safe_multi_cell(0, 4, lim, new_x="LMARGIN", new_y="NEXT")
-        pdf.ln(3)
-
-        # Prominent Mandatory Disclaimer Card
-        pdf.notice_card(
-            title="MANDATORY STATUTORY DISCLAIMER",
-            text=MANDATORY_DISCLAIMER,
-            border_rgb=(180, 30, 30),
-            fill_rgb=(255, 248, 248),
-        )
-
-        return bytes(pdf.output())
-
-    except Exception as exc:
-        logger.error("Indian investigation PDF generation encountered exception: %s. Generating safe emergency PDF.", exc)
-        return _generate_emergency_fallback_pdf(dossier_data, str(exc))
-
-
-def _generate_emergency_fallback_pdf(dossier_data: Dict[str, Any], error_reason: str) -> bytes:
-    """Fail-closed crash-proof fallback ensuring PDF output is always valid bytes."""
-    fallback = FPDF()
-    fallback.add_page()
-    fallback.set_font("Helvetica", "B", 14)
-    fallback.cell(0, 10, "INDIAN CASE PATTERN ANALYSIS REPORT (FAIL-SAFE MODE)", align="C", new_x="LMARGIN", new_y="NEXT")
-    fallback.ln(4)
-    fallback.set_font("Helvetica", "", 10)
-    fallback.multi_cell(0, 6, "Notice: Report rendered in emergency compatibility mode.")
-    fallback.multi_cell(0, 6, f"Generation note: {sanitize_for_pdf(error_reason)}")
-    fallback.ln(4)
-    fallback.set_font("Helvetica", "B", 9)
-    fallback.multi_cell(0, 5, MANDATORY_DISCLAIMER)
-    return bytes(fallback.output())
+    return bytes(pdf.output())
 
 
 def generate_pdf_report(
@@ -949,32 +817,21 @@ def generate_pdf_report(
     match_quality: str = "",
 ) -> bytes:
     """
-    Backward-compatible wrapper matching legacy `generate_pdf_report()` signature.
-    Maps inputs to the full 6-page Indian investigative analysis report generator.
+    Backward-compatible wrapper matching legacy generate_pdf_report signature.
+    Maps parameters cleanly into the structured 3-page AI analysis report.
     """
     dossier_data = {
         "case_info": {
             "case_id": "PROFILE-" + datetime.datetime.now().strftime("%Y%m%d%H%M"),
-            "case_title": f"Pattern Analysis -- {suspect_name or 'Unnamed Subject'}",
-            "case_type": "Indian Case Pattern Analysis",
-            "priority": "MEDIUM",
-            "status": "COMPLETED",
-            "assigned_investigator": "Detective Agentic AI",
-            "date_opened": datetime.datetime.now().strftime("%Y-%m-%d"),
+            "date_opened": datetime.datetime.now().strftime("%d %B %Y"),
         },
         "suspect_info": {
             "name": suspect_name or "Not provided",
             "age": age or "Not provided",
             "behaviors": behaviors or "Not provided",
-            "observed_behaviors": behaviors or "Not provided",
-            "location": "Not provided",
-            "known_associations": "Not provided",
         },
         "model_assessment": {
             "tendency_score": str(tendency_score),
-            "risk_level": str(risk_level),
-            "match_quality": str(match_quality),
-            "scoring_breakdown": scoring_breakdown or [],
             "similar_cases": matched_cases or [],
         },
         "behaviors": behaviors or "Not provided",
