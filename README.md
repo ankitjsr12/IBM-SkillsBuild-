@@ -131,7 +131,7 @@ Investigators enter suspect observations (name/alias, age, behaviours, MO, and t
 
 ---
 
-## Getting Started
+## Getting Started.
 
 ### Prerequisites
 
