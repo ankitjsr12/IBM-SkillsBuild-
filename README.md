@@ -308,7 +308,7 @@ CMD ["streamlit", "run", "Detective Agentic AI/frontend/app.py", \
 2. Follow the existing code style (type hints, module-level docstrings, `logging` over `print`).
 3. Add or update tests in `Detective Agentic AI/tests/` for any changed behaviour.
 4. Ensure all tests pass: `python -m pytest tests/ -v`
-5. Open a pull request with a clear description of the change and why it is needed.
+5. Open a pull request with a clear description of the change and why it is needed..
 
 ---
 
