@@ -315,4 +315,5 @@ CMD ["streamlit", "run", "Detective Agentic AI/frontend/app.py", \
 ## License
 
 This project was built for the **IBM SkillUp Hackathon 2026**. All rights reserved by the authors.
-Development was assisted by **IBM Bob** (IBM SkillsBuild AI Assistant) for code generation, architecture design, module refactoring, and Streamlit state management.
+Development was assisted by **IBM Bob** (IBM SkillsBuild AI Assistant) for code generation, architecture design, module refactoring, and Streamlit state management..
+
