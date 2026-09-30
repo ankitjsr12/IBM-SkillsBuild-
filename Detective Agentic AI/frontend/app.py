@@ -644,8 +644,8 @@ tab_evidence = _tabs[4]
 tab_graph = _tabs[5]
 tab_billing = _tabs[6]
 tab_contact = _tabs[7]
-tab_audit = _tabs[8] if st.session_state.is_admin else None
-tab_outreach = _tabs[9] if st.session_state.is_admin else None
+tab_audit = _tabs[8] if st.session_state.is_admin and len(_tabs) > 8 else None
+tab_outreach = _tabs[9] if st.session_state.is_admin and len(_tabs) > 9 else None
 
 with tab_dashboard:
     render_analytics_dashboard()
@@ -1056,10 +1056,7 @@ with tab_contact:
         st.markdown("### 🔒 Privacy & Data")
         st.markdown("All suspect profiling data is processed locally in your session.  \nNo case data is stored on our servers without your explicit upload.  \nPayments are verified manually — we never store card details.")
     st.divider()
-    st.info(
-        "⏱️ **Response time:** Typically within 24 hours on weekdays.  \n"
-        #f"🌐 **Platform:** {PLATFORM_URL}"
-    )
+    st.info("⏱️ **Response time:** Typically within 24 hours on weekdays.")
 
 if st.session_state.is_admin:
     if tab_audit:

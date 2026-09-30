@@ -6,3 +6,4 @@ qrcode[pil]>=7.4.2
 Pillow>=10.0.0
 requests>=2.31.0
 yagmail>=0.15.293
+python-dotenv>=1.0.0

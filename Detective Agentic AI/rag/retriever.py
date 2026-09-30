@@ -275,11 +275,14 @@ class CaseRetriever:
         # Highest similarity = best match.
         scored.sort(key=lambda item: item[0], reverse=True)
 
+        # Filter by threshold first, then take top_k — avoids missing valid
+        # matches that rank below low-similarity candidates.
         results: List[Dict[str, Any]] = []
-        for similarity, distance, doc in scored[:top_k]:
-            # Only include results above the similarity threshold
+        for similarity, distance, doc in scored:
             if similarity < threshold:
-                continue
+                break  # list is sorted descending; no need to scan further
+            if len(results) >= top_k:
+                break
             metadata = dict(doc["metadata"])
             results.append({
                 "case_id": doc["case_id"],

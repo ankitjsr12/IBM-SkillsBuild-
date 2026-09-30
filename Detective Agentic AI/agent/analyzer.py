@@ -145,7 +145,7 @@ class DetectiveAgent:
         if retrieved_cases:
             similarities = [float(c.get("similarity", 0.0)) for c in retrieved_cases]
             strongest = max(similarities)
-            average = sum(similarities) / len(similarities)
+            average = sum(similarities) / len(similarities) if similarities else 0.0
 
             strongest_contrib = round(strongest * 60)
             average_contrib = round(average * 25)
@@ -246,7 +246,7 @@ class DetectiveAgent:
             )
 
         scoring_breakdown.append({
-            "factor": "Final score",
+            "factor": "Final score (capped 15–95)",
             "contribution": score,
             "explanation": (
                 f"Score {score}/100 → Risk category: {risk_level}. "

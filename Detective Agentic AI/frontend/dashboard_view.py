@@ -22,11 +22,13 @@ def render_analytics_dashboard():
     kpis = analytics_engine.get_kpi_summary()
 
     # Headline KPI Cards
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
     col1.metric("🇮🇳 Indian Cases", kpis["total_cases"])
     col2.metric("🟢 Active (Open)", kpis["open_cases"])
-    col3.metric("🔬 Evidence Vault", f"{kpis['total_evidence_items']} items ({kpis['storage_mb']} MB)")
-    col4.metric("🧠 AI Analyses Run", kpis.get("total_ai_evals", 0))
+    col3.metric("👤 Suspects", kpis.get("total_suspects", 0))
+    col4.metric("🔬 Evidence Vault", f"{kpis['total_evidence_items']} items ({kpis['storage_mb']} MB)")
+    col5.metric("⏱️ Timeline Events", kpis.get("total_timeline_events", 0))
+    col6.metric("🧠 AI Analyses Run", kpis.get("total_ai_evals", 0))
 
     st.divider()
 

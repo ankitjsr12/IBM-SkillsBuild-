@@ -44,8 +44,10 @@ class AnalyticsEngine:
         total_evidence = ev_counts.get("total", 0) if isinstance(ev_counts, dict) else ev_counts
         total_events = self.timeline_repo.count_events()
 
-        evidence_items = self.evidence_repo.list_evidence()
-        total_storage_bytes = sum(e.file_size_bytes for e in evidence_items)
+        evidence_items = self.evidence_repo.list_evidence() or []
+        total_storage_bytes = sum(
+            (e.file_size_bytes or 0) for e in evidence_items
+        )
         storage_mb = round(total_storage_bytes / (1024 * 1024), 2)
 
         # Count total AI evaluations recorded

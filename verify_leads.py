@@ -203,7 +203,12 @@ def score_lead(row):
             sources.append(f"profession:{profession}")
     elif website:
         try:
-            h = requests.head(website if website.startswith('http') else ('http://' + website), timeout=6, headers={"User-Agent": USER_AGENT})
+            _url = website if website.startswith("http") else ("http://" + website)
+            h = requests.head(
+                _url, timeout=6,
+                headers={"User-Agent": USER_AGENT},
+                allow_redirects=True,
+            )
             if h.status_code < 400:
                 score += 10
                 sources.append("website_exists")
